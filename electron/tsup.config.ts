@@ -21,6 +21,12 @@ const options: Options = {
 };
 
 export default defineConfig([
-  { ...options, entry: ['src/**/*.ts', '!src/preload/**'], outDir: 'dist', bundle: false },
-  { ...options, entry: ['src/preload/index.ts'], outDir: 'dist/preload', esbuildPlugins: [electronPreloadPlugin] }
+  { ...options, entry: ['src/preload/index.ts'], outDir: 'dist/preload', esbuildPlugins: [electronPreloadPlugin] },
+  {
+    ...options,
+    entry: ['src/**/*.ts', '!src/preload/**'],
+    outDir: 'dist',
+    bundle: false,
+    onSuccess: 'npx electron .'
+  }
 ]);

@@ -5,7 +5,7 @@
   "main": "./dist/main/index.js",
   "scripts": {
     "start": "NODE_ENV=production npx electron .",
-    "dev": "NODE_ENV=development tsup --watch --onSuccess='NODE_ENV=development npx electron .'",
+    "dev": "NODE_ENV=development tsup --watch",
     "build": "tsc --noEmit && NODE_ENV=production tsup",
     "pre-commit": "npx lint-staged --config .lintstagedrc.json"
   },
