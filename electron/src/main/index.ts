@@ -29,7 +29,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 let win: BrowserWindow | null = null;
 // Here, you can also use other preload
 const preload = path.join(electronDir, 'preload', 'index.js');
-const url = `http://localhost:3000`;
+const url = `http://localhost:5173`;
 const indexHtml = path.join(rendererDir, 'index.html');
 
 function createWindow() {
