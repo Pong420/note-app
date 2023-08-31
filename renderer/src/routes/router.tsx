@@ -28,7 +28,7 @@ const routes = [
             Component: HomePage
           },
           {
-            path: '/editor/:type/:name' as const,
+            path: '/editor/:type?/:name?' as const,
             Component: EditorPage
           },
           {

@@ -10,7 +10,8 @@
     "pre-commit": "npx lint-staged --config .lintstagedrc.json"
   },
   "dependencies": {
-    "electron-updater": "^6.1.1"
+    "electron-updater": "^6.1.1",
+    "file-type": "^18.5.0"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
