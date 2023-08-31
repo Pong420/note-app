@@ -1,5 +1,5 @@
-import { Button, Group } from '@mantine/core';
-import { IconChevronRight, IconDatabase, IconMenu2, IconMoon } from '@tabler/icons-react';
+import { Button } from '@mantine/core';
+import { IconMenu2, IconMoon } from '@tabler/icons-react';
 import { MenuModal, type MenuModalProps, MenuModalRow, MenuModalSection } from '@/components/MenuModal';
 import { createModalHandler } from '@/utils/modals';
 import { preferences } from '@/hooks/usePreferences';
@@ -15,16 +15,6 @@ export function PreferencesMenu(props: MenuModalProps) {
       <MenuModalSection>
         <MenuModalRow title="Dark Mode" icon={IconMoon} rightSection={<BooleanOption path="theme.darkMode" />} />
         <ThemeSelection />
-        <MenuModalRow
-          title="Storage"
-          icon={IconDatabase}
-          rightSection={
-            <Group spacing={0}>
-              <IconChevronRight size="1.2rem" />
-            </Group>
-          }
-          onClick={() => void adapter.openTemplateRootDir()}
-        />
       </MenuModalSection>
 
       <MenuModalSection>

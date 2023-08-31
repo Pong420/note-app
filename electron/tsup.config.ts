@@ -1,6 +1,6 @@
 import { Options, defineConfig } from 'tsup';
 import { electronPreloadPlugin } from './plugins/electronPreloadPlugin';
-import { env, isEnvProduction } from './env';
+import { env, isEnvDevelopment, isEnvProduction } from './env';
 
 const options: Options = {
   splitting: false,
@@ -27,6 +27,6 @@ export default defineConfig([
     entry: ['src/**/*.ts', '!src/preload/**'],
     outDir: 'dist',
     bundle: false,
-    onSuccess: 'npx electron .'
+    onSuccess: isEnvDevelopment && 'npx electron .'
   }
 ]);
