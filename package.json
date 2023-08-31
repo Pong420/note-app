@@ -1,0 +1,19 @@
+{
+  "name": "electron-starter",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./electron/dist/main/index.js",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "build": "pnpm run -r --workspace-concurrency=1 build && npm run build:clean",
+    "build:clean": "rm -rf electron/build && cp -r renderer/build/ electron/build",
+    "package": "npm run build && rm -rf release && electron-builder",
+    "pre-commit": "pnpm -r --workspace-concurrency=1  pre-commit",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.2"
+  }
+}

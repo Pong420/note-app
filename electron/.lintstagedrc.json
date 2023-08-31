@@ -1,0 +1,6 @@
+{
+  "*.{ts,tsx}": [
+    "eslint --rule 'no-console: [\"error\", { allow: [\"warn\", \"error\", \"debug\"] }]' --rule 'no-debugger: [\"error\"]' --max-warnings=0",
+    "prettier --write"
+  ]
+}

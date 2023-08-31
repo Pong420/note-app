@@ -1,0 +1,26 @@
+{
+  "name": "@electron-starter/electron",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./dist/main/index.js",
+  "scripts": {
+    "start": "NODE_ENV=production npx electron .",
+    "dev": "NODE_ENV=development tsup --watch --onSuccess='NODE_ENV=development npx electron .'",
+    "build": "tsc --noEmit && NODE_ENV=production tsup",
+    "pre-commit": "npx lint-staged --config .lintstagedrc.json"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.1"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^20.5.3",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "dotenv": "^16.3.1",
+    "electron": "26.1.0",
+    "electron-builder": "^24.6.3",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  }
+}
