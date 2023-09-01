@@ -1,5 +1,4 @@
 import { createHashRouter, RouteObject } from 'react-router-dom';
-import { RootLayout } from '@/components/RootLayout';
 import { MainLayout } from '@/components/MainLayout';
 import { HomePage } from '@/pages/HomePage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
@@ -17,25 +16,19 @@ export type StaticPaths = '/' | Exclude<PathPatterns, `${string}/:${string}`>;
 const routes = [
   {
     path: '' as const,
-    Component: RootLayout,
+    Component: MainLayout,
     children: [
       {
         path: '' as const,
-        Component: MainLayout,
-        children: [
-          {
-            path: '' as const,
-            Component: HomePage
-          },
-          {
-            path: '/editor/:type?/:name?' as const,
-            Component: EditorPage
-          },
-          {
-            path: '*' as const,
-            element: <NotFoundPage />
-          }
-        ]
+        Component: HomePage
+      },
+      {
+        path: '/editor/:type?/:name?' as const,
+        Component: EditorPage
+      },
+      {
+        path: '*' as const,
+        element: <NotFoundPage />
       }
     ]
   }

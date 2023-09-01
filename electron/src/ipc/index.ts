@@ -1,5 +1,6 @@
 import { Args, BroadcastReceiver, BroadcastSender } from './ipcCreator';
 import { windowHandlers } from './window';
+import { pdfHandlers } from './pdf';
 
 export type Handlers = {
   [K in keyof typeof handlers]: (
@@ -14,7 +15,8 @@ export type BroadcastReceivers = BroadcastReceiver<typeof broadcasts>;
 export interface ElectronIPC extends Handlers, BroadcastSenders, BroadcastReceivers {}
 
 export const handlers = {
-  ...windowHandlers
+  ...windowHandlers,
+  ...pdfHandlers
 };
 
 export const broadcasts = {};

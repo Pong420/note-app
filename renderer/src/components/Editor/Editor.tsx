@@ -1,14 +1,19 @@
-import { createStyles } from '@mantine/core';
+import { Container, createStyles } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
 import { Editor as TipTapEditor } from '@tiptap/react';
 import { TableBubbleMenu, tableMenuRefId } from './Table/TableBubbleMenu';
 import { EditorStyles } from './EditorStyles';
+import { useEffect } from 'react';
+import { APP_REGION_HEIGHT } from '@/constants';
 
 export interface EditorProps {
   editor?: TipTapEditor | null;
 }
 
-const useStyles = createStyles(theme => {
+const useStyles = createStyles(() => {
+  const paddingX = 30;
+  const paddingY = APP_REGION_HEIGHT;
+
   return {
     root: {
       display: 'flex',
@@ -20,12 +25,17 @@ const useStyles = createStyles(theme => {
       flex: '1 1 auto',
       display: 'flex',
       flexDirection: 'column',
-      padding: 0
+
+      paddingTop: paddingY,
+      paddingBottom: paddingY,
+      paddingLeft: paddingX,
+      paddingRight: paddingX,
+
+      minHeight: '100vh'
     },
     content: {
       width: `100%`,
       flex: '1 1 auto',
-      padding: `${theme.spacing.xs} ${theme.spacing.xs}`,
       display: 'flex',
       flexDirection: 'column',
 
@@ -36,7 +46,8 @@ const useStyles = createStyles(theme => {
       },
 
       '.ProseMirror': {
-        flex: '1 1 auto'
+        flex: '1 1 auto',
+        appRegion: 'no-drag'
       }
     }
   };
@@ -45,8 +56,12 @@ const useStyles = createStyles(theme => {
 export function Editor({ editor = null }: EditorProps) {
   const { classes } = useStyles();
 
+  useEffect(() => {
+    editor?.chain().focus().run();
+  }, [editor]);
+
   return (
-    <div className={classes.root}>
+    <Container w="100%">
       <RichTextEditor className={classes.editor} editor={editor}>
         <RichTextEditor.Content className={classes.content}>
           <div id={tableMenuRefId}></div>
@@ -54,6 +69,6 @@ export function Editor({ editor = null }: EditorProps) {
         {editor && <TableBubbleMenu editor={editor} />}
         <EditorStyles />
       </RichTextEditor>
-    </div>
+    </Container>
   );
 }

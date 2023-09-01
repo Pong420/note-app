@@ -4,7 +4,6 @@ import { Notifications } from '@mantine/notifications';
 import { ModalAnchor } from './components/ModalAnchor';
 import { usePreferences } from './hooks/usePreferences';
 import { router } from './routes';
-import { TITLE_BAR_HEIGHT } from './constants';
 
 const components: MantineThemeOverride['components'] = {
   Card: {
@@ -24,7 +23,7 @@ export function App() {
   return (
     <MantineProvider withCSSVariables theme={{ colorScheme, components }}>
       <RouterProvider router={router} />
-      <Notifications containerWidth={400} position="top-right" top={TITLE_BAR_HEIGHT + 10} />
+      <Notifications containerWidth={400} position="top-right" />
       <ModalAnchor />
     </MantineProvider>
   );

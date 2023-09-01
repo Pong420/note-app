@@ -1,3 +1,1 @@
-export const isElectron = true;
-
-export const TITLE_BAR_HEIGHT = 33;
+export const APP_REGION_HEIGHT = 40;
