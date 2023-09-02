@@ -11,11 +11,12 @@ import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import Image from '@tiptap/extension-image';
+import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
 
 export type { EditorOptions };
 
 export const defaultExtensions: Extensions = [
-  StarterKit,
+  StarterKit.configure({}),
   Underline,
   Link,
   Highlight,
@@ -30,7 +31,8 @@ export const defaultExtensions: Extensions = [
   Table.configure({ resizable: false }),
   TableRow,
   TableHeader,
-  TableCell
+  TableCell,
+  CodeBlockPrism
 ];
 
 export const useEditor = (

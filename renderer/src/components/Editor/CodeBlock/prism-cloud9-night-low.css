@@ -1,0 +1,121 @@
+/* https://prism.dotenv.dev/ */
+
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #e7e7e2;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection {
+  text-shadow: none;
+  background: #424242;
+}
+
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection,
+code[class*='language-']::selection,
+code[class*='language-'] ::selection {
+  text-shadow: none;
+  background: #424242;
+}
+
+@media print {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    text-shadow: none;
+  }
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  color: white;
+  background: #161616;
+}
+
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+.token.comment {
+  color: #6d737d;
+}
+
+.token.string {
+  color: #aebd4d;
+}
+
+.token.attr-name {
+  color: #aebd4d;
+}
+
+.token.selector {
+  color: #aebd4d;
+}
+
+.token.number {
+  color: #cb9d3d;
+}
+
+.token.keyword {
+  color: #b790c9;
+}
+
+.token.tag {
+  color: #b790c9;
+}
+
+.token.operator {
+  color: #b790c9;
+}
+
+.token.punctuation {
+  color: #b790c9;
+}
+
+.token.variable {
+  color: #d1d1d1;
+}
+
+.token.builtin {
+  color: #ebebeb;
+}
+
+.token.property {
+  color: #d8be5d;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}

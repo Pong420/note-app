@@ -35,6 +35,8 @@
     "@tiptap/react": "^2.1.7",
     "@tiptap/starter-kit": "^2.1.7",
     "@tiptap/suggestion": "^2.1.7",
+    "hast-util-from-html": "^2.0.1",
+    "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
@@ -42,6 +44,7 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
+    "@types/prismjs": "^1.26.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
