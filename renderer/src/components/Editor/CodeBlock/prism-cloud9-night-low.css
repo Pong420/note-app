@@ -119,3 +119,7 @@ pre[class*='language-'] {
 .token.italic {
   font-style: italic;
 }
+
+code {
+  padding-top: 30px;
+}

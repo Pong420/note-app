@@ -51,10 +51,8 @@ function getDecorations({
 
   findChildren(doc, node => node.type.name === name).forEach(block => {
     let from = block.pos + 1;
-    let language = block.node.attrs.language || defaultLanguage;
+    const language = block.node.attrs.language || defaultLanguage;
     let html: string = '';
-
-    if (language === 'ts') language = 'typescript';
 
     try {
       if (!registeredLang(language)) {
@@ -85,6 +83,19 @@ function getDecorations({
 
       from = to;
     });
+
+    if (typeof language === 'string' && language) {
+      decorations.push(
+        Decoration.widget(0, () => {
+          const node = document.createElement('div');
+          node.className = 'language';
+          node.textContent = language;
+          node.style.position = 'absolute';
+          node.style.visibility = 'hidden';
+          return node;
+        })
+      );
+    }
   });
 
   return DecorationSet.create(doc, decorations);
