@@ -1,18 +1,8 @@
-# Electron Starter
+# Note Taking App
 
-Electron starter template that should support different frontend SPA template
+> :warning: Working In Progress
 
-1. Make sure [pnpm](https://pnpm.io/) cli installed
-2. Copy your frontend starter template to the `renderer` directory
-3. Install dependencies and make sure `dev` & `build` scripts exist in `renderer/package.json``
-4. If the output directory of the frontend template is not `build`. Repalce `build` in root `/package.json` and `electron/constants.ts`
-5. Change the localhost port number in `electron/src/main/index.ts`
-6. To use ipc api, make sure `electron-env.d.ts` is included in `renderer/tsconfig.json`
-   ```json
-   {
-     "include": ["../electron/electron-env.d.ts"]
-   }
-   ```
+![screenshot](./screenshot.png)
 
 ## Development
 
@@ -23,7 +13,7 @@ npm run dev
 
 ## Build and Release
 
-1. Upgrade the version number of all `package.json``
+1. Upgrade the version number of all `package.json`
    ```sh
    # sh scripts/version.sh [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
    sh scripts/version.sh patch
@@ -35,3 +25,12 @@ npm run dev
    ```
 
    For other platforms, please check [electron-builder](https://www.electron.build/index.html) for more details
+
+## TODO:
+
+- [ ] Saving file
+- [ ] Task List
+- [ ] Table
+- [ ] Resizeable Image, drop to upload
+- [ ] Bubble Menu
+- [ ] Export pdf
