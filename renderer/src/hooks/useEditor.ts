@@ -1,5 +1,6 @@
 import { DependencyList } from 'react';
 import { Link } from '@mantine/tiptap';
+import { EditorProps } from '@tiptap/pm/view';
 import { Extensions, EditorOptions, useEditor as useDefaultEditor } from '@tiptap/react';
 import Highlight from '@tiptap/extension-highlight';
 import StarterKit from '@tiptap/starter-kit';
@@ -12,11 +13,14 @@ import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import Image from '@tiptap/extension-image';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
+import { clipboardTextParser } from '@/components/Editor/clipboardTextParser';
 
 export type { EditorOptions };
 
 export const defaultExtensions: Extensions = [
-  StarterKit.configure({}),
+  StarterKit.configure({
+    codeBlock: false
+  }),
   Underline,
   Link,
   Highlight,
@@ -35,6 +39,10 @@ export const defaultExtensions: Extensions = [
   CodeBlockPrism
 ];
 
+const editorProps: EditorProps = {
+  clipboardTextParser
+};
+
 export const useEditor = (
   { extensions = defaultExtensions, ...options }: Partial<EditorOptions> = {},
   deps?: DependencyList
@@ -42,7 +50,8 @@ export const useEditor = (
   return useDefaultEditor(
     {
       extensions,
-      ...options
+      ...options,
+      editorProps
     },
     deps
   );

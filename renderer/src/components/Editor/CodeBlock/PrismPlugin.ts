@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Copy from
 // https://github.com/Hebmor/tiptap-extension-code-block-prism/tree/master
-// https://github.com/ueberdosis/tiptap
-
+// https://github.com/ueberdosis/tiptap/blob/develop/packages/extension-code-block-lowlight/src/lowlight-plugin.ts
 import { findChildren } from '@tiptap/core';
 import { Step } from '@tiptap/pm/transform';
 import { Node as ProsemirrorNode } from '@tiptap/pm/model';
@@ -10,6 +9,10 @@ import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { Decoration, DecorationSet } from '@tiptap/pm/view';
 import { fromHtml } from 'hast-util-from-html';
 import Prism from 'prismjs';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-javascript';
 import './prism-cloud9-night-low.css';
 
 function parseNodes(nodes: any[], className: string[] = []): { text: string; classes: string[] }[] {
@@ -33,15 +36,10 @@ function getHighlightNodes(html: string) {
   return fromHtml(html, { fragment: true }).children;
 }
 
-function registeredLang(aliasOrLanguage: string) {
-  const allSupportLang = Object.keys(Prism.languages).filter(id => typeof Prism.languages[id] === 'object');
-  return Boolean(allSupportLang.find(x => x === aliasOrLanguage));
-}
-
 function getDecorations({
   doc,
   name,
-  defaultLanguage = 'markdown'
+  defaultLanguage = 'plain'
 }: {
   doc: ProsemirrorNode;
   name: string;
@@ -51,20 +49,16 @@ function getDecorations({
 
   findChildren(doc, node => node.type.name === name).forEach(block => {
     let from = block.pos + 1;
-    const language = block.node.attrs.language || defaultLanguage;
     let html: string = '';
 
+    const code = block.node.textContent;
+    const language = block.node.attrs.language || defaultLanguage;
+
     try {
-      if (!registeredLang(language)) {
-        if (language === 'tsx') {
-          import('prismjs/components/prism-jsx');
-        }
-        import(`../../../../../node_modules/prismjs/components/prism-${language}.js`);
-      }
-      html = Prism.highlight(block.node.textContent, Prism.languages[language], language);
-    } catch (err: any) {
+      html = Prism.highlight(code, Prism.languages[language], language);
+    } catch (error) {
       // console.error(err.message + ': "' + language + '"');
-      html = Prism.highlight(block.node.textContent, Prism.languages.javascript, defaultLanguage);
+      html = Prism.highlight(code, Prism.languages[defaultLanguage], defaultLanguage);
     }
 
     const nodes = getHighlightNodes(html);
@@ -102,7 +96,7 @@ function getDecorations({
 }
 
 export function PrismPlugin({ name, defaultLanguage }: { name: string; defaultLanguage?: string }) {
-  const prismjsPlugin: Plugin<any> = new Plugin({
+  const prismjsPlugin: Plugin = new Plugin({
     key: new PluginKey('prism'),
 
     state: {

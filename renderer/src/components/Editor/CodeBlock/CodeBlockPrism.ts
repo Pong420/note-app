@@ -1,21 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Copy from
 // https://github.com/Hebmor/tiptap-extension-code-block-prism/tree/master
 // https://github.com/ueberdosis/tiptap
 
-import CodeBlock, { CodeBlockOptions, backtickInputRegex, tildeInputRegex } from '@tiptap/extension-code-block';
-import { ReactNodeViewRenderer, textblockTypeInputRule } from '@tiptap/react';
+import CodeBlock, { CodeBlockOptions } from '@tiptap/extension-code-block';
+import { ReactNodeViewRenderer } from '@tiptap/react';
 import { PrismPlugin } from './PrismPlugin';
 import { CodeBlockView } from './CodeBlockView';
+import { codeblockInputRegex, codeblockFullInputRegex, codeblockTypeInputRule } from './codeblockTypeInputRule';
 
 export interface CodeBlockPrismOptions extends CodeBlockOptions {
   defaultLanguage?: string;
 }
-
-const languageMap: Record<string, string> = {
-  ts: 'typescript',
-  js: 'javascript',
-  md: 'markdown'
-};
 
 export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
   addOptions() {
@@ -31,7 +27,13 @@ export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
         ...parent,
         language: {
           ...parent['language'],
-          default: 'markdown'
+          default: 'plain'
+        },
+        title: {
+          default: null
+        },
+        lineHighlight: {
+          default: []
         }
       };
     }
@@ -65,15 +67,16 @@ export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
   },
 
   addInputRules() {
-    return [backtickInputRegex, tildeInputRegex].map(find =>
-      textblockTypeInputRule({
-        find,
-        type: this.type,
-        getAttributes: match => ({
-          language: languageMap[match[1]] || match[1]
-        })
+    return [
+      codeblockTypeInputRule({
+        find: codeblockInputRegex,
+        type: this.type
+      }),
+      codeblockTypeInputRule({
+        find: codeblockFullInputRegex,
+        type: this.type
       })
-    );
+    ];
   },
 
   addNodeView() {

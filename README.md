@@ -29,8 +29,32 @@ npm run dev
 ## TODO:
 
 - [ ] Saving file
+- [ ] Code Block
+  - [ ] bubble menu to configure title, line-highlight etc
 - [ ] Task List
 - [ ] Table
 - [ ] Resizeable Image, drop to upload
 - [ ] Bubble Menu
-- [ ] Export pdf
+- [ ] Export PDF
+- [ ] Context menu
+- [ ] Spotlight
+- [ ] Export static HTML
+
+## Features
+
+### Code Block
+
+- language
+  ````
+  ```ts
+  ```tsx
+  ```javascript
+  ````
+- line highlight
+  ````
+  ```ts {1,2,5-10}
+  ````
+- filename
+  ````
+  ```ts title="test.ts"
+  ````
