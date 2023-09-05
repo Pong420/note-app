@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import crypto from 'crypto';
+import { nanoid } from 'nanoid';
 import { createIpcHandlers } from './ipcCreator';
 import { FileJSON, files, filesDir } from '../files';
 
@@ -10,7 +10,7 @@ export type SaveChanges = {
 };
 
 export const filesHandlers = createIpcHandlers({
-  async saveChanges(_event, { id = crypto.randomUUID(), title, content }: SaveChanges) {
+  async saveChanges(_event, { id = nanoid(), title, content }: SaveChanges) {
     const filepath = filesDir(id, 'data.json');
     const file: FileJSON = { id, title, content };
     await fs.outputFile(filepath, JSON.stringify(file));
