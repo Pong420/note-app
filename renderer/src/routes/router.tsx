@@ -23,7 +23,7 @@ const routes = [
         Component: HomePage
       },
       {
-        path: '/editor/:title/:id?' as const,
+        path: '/editor/:title/:id' as const,
         Component: EditorPage
       },
       {

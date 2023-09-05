@@ -16,7 +16,6 @@ import Image from '@tiptap/extension-image';
 import { Editor } from '@/components/Editor';
 import { clipboardTextParser } from '@/components/Editor/clipboardTextParser';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
-import { fileManager } from '@/utils/FileManager';
 
 const extensions: Extensions = [
   StarterKit.configure({
@@ -45,12 +44,12 @@ const editorProps: EditorProps = {
 };
 
 export function EditorPage() {
-  const { id, title } = useParams() as { id?: string; title: string };
+  const { id, title } = useParams() as { id: string; title: string };
   const [loaded, setLoaded] = useState(false);
 
   const onUpdate: EditorOptions['onUpdate'] = useCallback(
     ({ editor }) => {
-      fileManager.save({ id, title, content: editor.getJSON() });
+      adapter.emitFileChanged({ id, title, content: editor.getJSON() });
     },
     [id, title]
   );
@@ -62,18 +61,20 @@ export function EditorPage() {
   });
 
   useEffect(() => {
-    const run = async () => {
+    const loadFile = async () => {
       if (id) {
         const file = await adapter.getFile({ id });
         if (file) {
           editor?.commands.setContent(file.content);
-          await adapter.updateLastVisits({ id });
+          adapter.emitLastVisitUpdated({ id });
+          // with delay ui without blinking when app at initial / refersh
+          await new Promise(resolve => setTimeout(resolve));
         }
       }
       return true;
     };
 
-    run()
+    loadFile()
       .then(setLoaded)
       .catch(() => void 0);
   }, [editor, id, title]);

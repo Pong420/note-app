@@ -1,4 +1,3 @@
 export * from './types';
-export type { LastVisit } from '../../../electron/src/system';
-export type { FileJSON } from '../../../electron/src/files';
-export type { SaveChanges } from '../../../electron/src/ipc/files';
+export type { LastVisit } from '../../../electron/src/ipc/system';
+export type { FileJSON, SaveChanges } from '../../../electron/src/ipc/files';

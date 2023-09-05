@@ -1,8 +1,8 @@
 import { Args, BroadcastReceiver, BroadcastSender } from './ipcCreator';
 import { windowHandlers } from './window';
 import { pdfHandlers } from './pdf';
-import { filesHandlers } from './files';
-import { systemHandlers } from './system';
+import { filesHandlers, filesBroadcasts } from './files';
+import { systemHandlers, systemBroadcasts } from './system';
 
 export type Handlers = {
   [K in keyof typeof handlers]: (
@@ -23,4 +23,7 @@ export const handlers = {
   ...systemHandlers
 };
 
-export const broadcasts = {};
+export const broadcasts = {
+  ...filesBroadcasts,
+  ...systemBroadcasts
+};
