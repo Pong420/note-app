@@ -3,3 +3,5 @@ build
 node_modules
 
 tsconfig.tsbuildinfo
+
+.temp

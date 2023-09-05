@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from '@mantine/tiptap';
 import { EditorProps } from '@tiptap/pm/view';
@@ -16,6 +16,7 @@ import Image from '@tiptap/extension-image';
 import { Editor } from '@/components/Editor';
 import { clipboardTextParser } from '@/components/Editor/clipboardTextParser';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
+import { fileManager } from '@/utils/FileManager';
 
 const extensions: Extensions = [
   StarterKit.configure({
@@ -45,10 +46,11 @@ const editorProps: EditorProps = {
 
 export function EditorPage() {
   const { id, title } = useParams() as { id?: string; title: string };
+  const [loaded, setLoaded] = useState(false);
 
   const onUpdate: EditorOptions['onUpdate'] = useCallback(
     ({ editor }) => {
-      adapter.saveChanges({ id, title, content: editor.getJSON() });
+      fileManager.save({ id, title, content: editor.getJSON() });
     },
     [id, title]
   );
@@ -58,6 +60,25 @@ export function EditorPage() {
     editorProps,
     onUpdate
   });
+
+  useEffect(() => {
+    const run = async () => {
+      if (id) {
+        const file = await adapter.getFile({ id });
+        if (file) {
+          editor?.commands.setContent(file.content);
+          await adapter.updateLastVisits({ id });
+        }
+      }
+      return true;
+    };
+
+    run()
+      .then(setLoaded)
+      .catch(() => void 0);
+  }, [editor, id, title]);
+
+  if (!loaded) return null;
 
   return <Editor editor={editor} />;
 }

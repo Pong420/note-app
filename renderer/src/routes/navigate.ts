@@ -15,13 +15,13 @@ export function generatePath<AP extends PathPatterns, PS extends Params<AP>>(
   return defaultGeneratePath<string>(pathname, params) as GeneratedPath;
 }
 
-export function navigate(to: number): void;
-export function navigate(to: StaticPaths): void;
-export function navigate(to: GeneratedPath): void;
+export function navigate(to: number): Promise<void>;
+export function navigate(to: StaticPaths): Promise<void>;
+export function navigate(to: GeneratedPath): Promise<void>;
 export function navigate<AP extends PathPatterns, PS extends Params<AP>>(
   to: TP<AP>,
   ...[params, options]: PS extends never ? [Record<string, string | null>?, NOpts?] : [PS, NOpts?]
-): void;
+): Promise<void>;
 export function navigate<AP extends PathPatterns, PS extends Params<AP>>(
   to: number | GeneratedPath | TP<AP>,
   ...[params, options]: PS extends never ? [Record<string, string | null>?, NOpts?] : [PS, NOpts?]

@@ -12,14 +12,15 @@ export interface SystemData {
   lastVisits: LastVisit[];
 }
 
-let appPath = '';
+let rootDir = '';
 try {
-  appPath = app.getAppPath();
+  rootDir = app.getPath('userData');
 } catch {
   //
 }
 
-export const systemDataPath = path.join(appPath, 'system.json');
+export const systemDataPath = path.join(rootDir, 'system.json');
+
 const defaultValue: SystemData = {
   lastVisits: []
 };
@@ -27,7 +28,7 @@ const defaultValue: SystemData = {
 export const system = new Proxy((fs.readJsonSync(systemDataPath, { throws: false }) as SystemData) || defaultValue, {
   set: (target, prop, newValue) => {
     target[prop as keyof typeof target] = newValue;
-    fs.writeFileSync(systemDataPath, JSON.stringify(defaultValue, null, 2));
+    fs.outputFileSync(systemDataPath, JSON.stringify(target, null, 2));
     return true;
   }
 });

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { RouterProvider } from 'react-router-dom';
 import { ColorScheme, MantineProvider, MantineThemeOverride } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { ModalAnchor } from './components/ModalAnchor';
