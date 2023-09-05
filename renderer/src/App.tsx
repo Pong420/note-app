@@ -1,9 +1,10 @@
-import { RouterProvider } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { ColorScheme, MantineProvider, MantineThemeOverride } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { ModalAnchor } from './components/ModalAnchor';
 import { usePreferences } from './hooks/usePreferences';
 import { router } from './routes';
+import { fileManager } from './utils/FileManager';
 
 const components: MantineThemeOverride['components'] = {
   Card: {
@@ -17,12 +18,26 @@ const components: MantineThemeOverride['components'] = {
 };
 
 export function App() {
+  const primaryColor = usePreferences('theme.color');
   const darkMode = usePreferences('theme.darkMode');
   const colorScheme: ColorScheme = darkMode ? 'dark' : 'light';
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    fileManager
+      .load()
+      .then(() => setReady(true))
+      .catch(() => void 0);
+  }, []);
 
   return (
-    <MantineProvider withCSSVariables theme={{ colorScheme, components }}>
-      <RouterProvider router={router} />
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      withCSSVariables
+      theme={{ colorScheme, primaryColor, components }}
+    >
+      {ready && <RouterProvider router={router} />}
       <Notifications containerWidth={400} position="top-right" />
       <ModalAnchor />
     </MantineProvider>

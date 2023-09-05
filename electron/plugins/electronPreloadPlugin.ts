@@ -13,14 +13,14 @@ export const electronPreloadPlugin: NonNullable<Options['esbuildPlugins']>[numbe
   name: `electronPreloadPlugin`,
   setup(build) {
     build.onLoad({ filter: /ipc/ }, async args => {
-      const { mod } = await bundleRequire({
+      const { mod } = await bundleRequire<{ handlers: unknown; broadcasts: unknown }>({
         filepath: args.path,
         format: 'cjs'
       });
 
       const contents = JSON.stringify({
-        handlers: Object.keys(mod.handlers).reduce<Object>((p, c) => ({ ...p, [c]: {} }), {}),
-        broadcasts: Object.keys(mod.broadcasts).reduce<Object>((p, c) => ({ ...p, [c]: {} }), {})
+        handlers: Object.keys(mod.handlers).reduce<Record<string, unknown>>((p, c) => ({ ...p, [c]: {} }), {}),
+        broadcasts: Object.keys(mod.broadcasts).reduce<Record<string, unknown>>((p, c) => ({ ...p, [c]: {} }), {})
       });
 
       return {

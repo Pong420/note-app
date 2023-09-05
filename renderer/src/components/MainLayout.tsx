@@ -1,18 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { ColorScheme, MantineProvider, MantineThemeOverride, createStyles } from '@mantine/core';
-import { usePreferences } from '@/hooks/usePreferences';
+import { createStyles } from '@mantine/core';
 import { APP_REGION_HEIGHT } from '@/constants';
-
-const components: MantineThemeOverride['components'] = {
-  Card: {
-    defaultProps(theme) {
-      return {
-        withBorder: theme.colorScheme === 'light',
-        shadow: 'sm'
-      };
-    }
-  }
-};
 
 const useStyles = createStyles((_theme, { appRegionSize }: { appRegionSize: 'fixed' | 'fullpage' }) => {
   return {
@@ -34,22 +22,14 @@ const useStyles = createStyles((_theme, { appRegionSize }: { appRegionSize: 'fix
 });
 
 export function MainLayout() {
-  const darkMode = usePreferences('theme.darkMode');
-  const primaryColor = usePreferences('theme.color');
-  const colorScheme: ColorScheme = darkMode ? 'dark' : 'light';
   const { classes } = useStyles({ appRegionSize: 'fixed' });
 
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      withCSSVariables
-      theme={{ colorScheme, primaryColor, components }}
-    >
+    <>
       <div className={classes.appRegion} />
       <div className={classes.content}>
         <Outlet />
       </div>
-    </MantineProvider>
+    </>
   );
 }
