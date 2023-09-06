@@ -20,7 +20,7 @@ export const closeAllModals = createEvent('closeAllModals');
 
 export const createModalHandler = <T extends ModalProps>(c: React.ComponentType<T>) => {
   const component = c as React.ComponentType<Partial<ModalProps>>;
-  const open = (props?: T) => openModal({ props, component });
+  const open = (props?: Omit<T, 'opened' | 'onClose'> & Partial<ModalProps>) => openModal({ props, component });
   const close = () => closeModal(component);
   return [open, close];
 };

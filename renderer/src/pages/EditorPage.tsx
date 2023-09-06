@@ -16,6 +16,8 @@ import Image from '@tiptap/extension-image';
 import { Editor } from '@/components/Editor';
 import { clipboardTextParser } from '@/components/Editor/clipboardTextParser';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
+import { Spotlight } from '@/components/Editor/Spotlight';
+import { FileJSON } from '../../../electron/src/ipc/files';
 
 const extensions: Extensions = [
   StarterKit.configure({
@@ -36,7 +38,8 @@ const extensions: Extensions = [
   TableRow,
   TableHeader,
   TableCell,
-  CodeBlockPrism
+  CodeBlockPrism,
+  Spotlight
 ];
 
 const editorProps: EditorProps = {
@@ -62,15 +65,29 @@ export function EditorPage() {
 
   useEffect(() => {
     const loadFile = async () => {
-      if (id) {
-        const file = await adapter.getFile({ id });
-        if (file) {
-          editor?.commands.setContent(file.content);
-          adapter.emitLastVisitUpdated({ id });
-          // with delay ui without blinking when app at initial / refersh
-          await new Promise(resolve => setTimeout(resolve));
-        }
+      let file = await adapter.getFile({ id });
+
+      if (!file) {
+        file = await new Promise<FileJSON>(resolve => {
+          const unsubscribe = adapter.subscribeFileChanged(file => {
+            if (file.id === id) {
+              unsubscribe();
+              resolve(file);
+            }
+          });
+          adapter.emitFileChanged({ id, title });
+        });
       }
+
+      editor
+        ?.chain()
+        .focus()
+        .setContent(file.content || null)
+        .run();
+
+      adapter.emitLastVisitUpdated({ id });
+      // with delay ui without blinking when app at initial / refersh
+      await new Promise(resolve => setTimeout(resolve));
       return true;
     };
 

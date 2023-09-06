@@ -8,13 +8,15 @@ import { rootDir as projectRootDir } from '../constants';
 export interface FileJSON {
   id: string; // unique
   title: string;
-  content: Record<string, unknown>;
+  content?: Record<string, unknown>;
+  createdAt: number;
+  updatedAt: number;
 }
 
 export type SaveChanges = {
   id: string;
   title: string;
-  content: Record<string, unknown>;
+  content?: Record<string, unknown>;
 };
 
 let rootDir = '';
@@ -49,9 +51,19 @@ export const filesHandlers = createIpcHandlers({
 export const filesBroadcasts = createIpcHandlers({
   async FileChanged(_event, { id, title, content }: SaveChanges) {
     const filepath = filesDir(id, 'data.json');
-    const file: FileJSON = { id, title, content };
+    const now = Date.now();
+    const file: FileJSON = { createdAt: now, ...files.get(id), id, title, content, updatedAt: now };
     await fs.outputFile(filepath, JSON.stringify(file));
     files.set(file.id, file);
     return file;
+  },
+  async DeleteFile(_event, { id }: { id: string }) {
+    const file = files.get(id);
+    const pathname = filesDir(id);
+    if (file) {
+      files.delete(id);
+      await fs.rm(pathname, { force: true, recursive: true });
+    }
+    return { id };
   }
 });

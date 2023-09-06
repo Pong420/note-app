@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { createStyles } from '@mantine/core';
+import { SpotlightProvider } from '@/components/Spotlight/SpotlightProvider';
 import { APP_REGION_HEIGHT } from '@/constants';
 
 const useStyles = createStyles((_theme, { appRegionSize }: { appRegionSize: 'fixed' | 'fullpage' }) => {
@@ -14,9 +15,6 @@ const useStyles = createStyles((_theme, { appRegionSize }: { appRegionSize: 'fix
     },
     content: {
       position: 'relative'
-      // flex: `1 1 auto`,
-      // display: 'flex',
-      // flexDirection: 'column'
     }
   };
 });
@@ -25,11 +23,11 @@ export function MainLayout() {
   const { classes } = useStyles({ appRegionSize: 'fixed' });
 
   return (
-    <>
+    <SpotlightProvider>
       <div className={classes.appRegion} />
       <div className={classes.content}>
         <Outlet />
       </div>
-    </>
+    </SpotlightProvider>
   );
 }

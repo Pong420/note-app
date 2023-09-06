@@ -30,6 +30,7 @@ npm run dev
 
 - [ ] Saving file
 - [ ] Code Block
+  - [x] Basic Setup
   - [ ] bubble menu to configure title, line-highlight etc
 - [ ] Task List
 - [ ] Table
@@ -38,7 +39,10 @@ npm run dev
 - [ ] Export PDF
 - [ ] Context menu
 - [ ] Spotlight
+  - [x] Basic Setup
+  - [ ] More actions
 - [ ] Export static HTML
+      = [ ] Documentation Page
 
 ## Features
 

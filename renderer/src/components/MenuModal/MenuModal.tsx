@@ -4,14 +4,22 @@ import { getMenuColors } from '@/components/MenuModal/colors';
 
 export interface MenuModalProps extends Omit<ModalProps, 'ref'> {
   icon?: React.ComponentType<TablerIconsProps>;
+  onExited?: () => void;
 }
 
-export function MenuModal({ title, children, icon: Icon = IconMenu2, ...props }: MenuModalProps) {
+export function MenuModal({ title, children, icon: Icon = IconMenu2, onExited, ...props }: MenuModalProps) {
   const theme = useMantineTheme();
   const [primaryColor, secondaryColor] = getMenuColors(theme.colorScheme);
 
   return (
-    <Modal.Root radius={6} size="sm" centered withinPortal {...props}>
+    <Modal.Root
+      radius={6}
+      size="sm"
+      centered
+      withinPortal
+      transitionProps={{ ...props.transitionProps, onExited }}
+      {...props}
+    >
       <Modal.Overlay opacity={0.5} />
 
       <Modal.Content bg={primaryColor}>

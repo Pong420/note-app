@@ -8,10 +8,9 @@ export type GeneratedPath = typeof __generated;
 
 const __generated = '__generated';
 
-export function generatePath<AP extends PathPatterns, PS extends Params<AP>>(
-  pathname: AP,
-  ...[params]: PS extends never ? [Record<string, string | null>?] : [PS]
-) {
+export function generatePath<AP extends StaticPaths>(pathname: AP): GeneratedPath;
+export function generatePath<AP extends PathPatterns, PS extends Params<AP>>( pathname: AP, ...[params]: PS extends never ? [Record<string, unknown>?] : [PS]): GeneratedPath; // prettier-ignore
+export function generatePath(pathname: string, params?: Record<string, unknown>) {
   return defaultGeneratePath<string>(pathname, params) as GeneratedPath;
 }
 

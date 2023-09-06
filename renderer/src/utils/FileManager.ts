@@ -20,6 +20,7 @@ export class FileManager extends ExternalStore<Snapshot> {
 
     // TODO: try typescript disposed later
     adapter.subscribeFileChanged(this.handleFileChanged);
+    adapter.subscribeDeleteFile(this.handleDeleteFile);
     adapter.subscribeLastVisitUpdated(this.handleLastVisitUpdated);
   }
 
@@ -35,11 +36,37 @@ export class FileManager extends ExternalStore<Snapshot> {
     this.emitChange();
   }
 
+  get files() {
+    return this.snapshot.files;
+  }
+
+  get fileDict() {
+    return this.snapshot.fileDict;
+  }
+
+  get lastVisits() {
+    return this.snapshot.lastVisits;
+  }
+
+  getFile(id: string): FileJSON | undefined {
+    return this.snapshot.fileDict[id];
+  }
+
   handleFileChanged = (file: FileJSON) => {
     this.snapshot = {
       ...this.snapshot,
       files: this.snapshot.files.map(f => (f.id === file.id ? file : f)),
       fileDict: { ...this.snapshot.fileDict, [file.id]: file }
+    };
+    this.emitChange();
+  };
+
+  handleDeleteFile = (file: Pick<FileJSON, 'id'>) => {
+    const { [file.id]: deleted, ...fileDict } = this.snapshot.fileDict;
+    this.snapshot = {
+      ...this.snapshot,
+      files: this.snapshot.files.filter(f => f.id !== file.id),
+      fileDict
     };
     this.emitChange();
   };
