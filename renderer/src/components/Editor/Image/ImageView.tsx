@@ -36,12 +36,13 @@ const useStyles = createStyles(() => {
 // https://github.com/breakerh/tiptap-image-resize/blob/main/src/component/ImageResizeComponent.tsx
 export function ImageView(props: ImageViewProps) {
   const { classes, cx } = useStyles();
-  const { maxWidth, width, height, ratio, ...attrs } = props.node.attrs as ImageViewAttributes;
+  const { width, height, ratio, ...attrs } = props.node.attrs as ImageViewAttributes;
   const [dragStart, drag] = useDisclosure();
 
   return (
     <NodeViewWrapper className={cx(classes.root, { [classes.drag]: dragStart })}>
       <img
+        alt=""
         {...attrs}
         data-drag-handle
         width={width}

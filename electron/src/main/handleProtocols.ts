@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { format as URLFormat } from 'node:url';
-import { app, protocol, net } from 'electron';
+import { protocol, net } from 'electron';
+import { appPath } from '../constants';
 
 // https://github.com/electron/electron/issues/19775#issuecomment-522289694
 // https://github.com/electron/electron/issues/19775#issuecomment-1001643667
@@ -9,6 +10,8 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'http', privileges: { standard: true, bypassCSP: true, allowServiceWorkers: true, supportFetchAPI: true } },
   { scheme: 'file', privileges: { standard: true, bypassCSP: true, allowServiceWorkers: true, supportFetchAPI: true } },
 ]);
+
+const staticRegex = /^\/static/;
 
 // function for serve/rewrite local files path, optional
 // https://www.electronjs.org/docs/latest/api/net#netfetchinput-init
@@ -20,9 +23,9 @@ async function serveLocalFiles(req: Request) {
   // it not working with  new URL(decodeURIComponent(req.url));
   pathname = decodeURIComponent(pathname);
 
-  if (pathname.startsWith('static')) {
+  if (staticRegex.test(pathname)) {
     const filepath = URLFormat({
-      pathname: path.join(app.getAppPath(), pathname),
+      pathname: path.join(appPath, pathname.replace(staticRegex, '')),
       protocol: 'file:',
       slashes: true
     });

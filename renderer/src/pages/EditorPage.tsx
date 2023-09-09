@@ -12,8 +12,7 @@ import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import { Editor } from '@/components/Editor';
-import { clipboardTextParser } from '@/components/Editor/clipboardTextParser';
-import { handleDrop } from '@/components/Editor/handleDrop';
+import { clipboardTextParser } from '@/components/Editor/utils/clipboardTextParser';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
 import { Spotlight } from '@/components/Editor/Spotlight';
 import { Image } from '@/components/Editor/Image/Image';
@@ -43,8 +42,7 @@ const extensions: Extensions = [
 ];
 
 const editorProps: EditorOptions['editorProps'] = {
-  clipboardTextParser,
-  handleDrop
+  clipboardTextParser
 };
 
 export function EditorPage() {

@@ -1,9 +1,10 @@
 import fs from 'fs-extra';
 import path from 'path';
+import crypto from 'crypto';
+import axios from 'axios';
 import fastGlob from 'fast-glob';
-import { app } from 'electron';
 import { createIpcHandlers } from './ipcCreator';
-import { rootDir as projectRootDir } from '../constants';
+import { appPath } from '../constants';
 
 export interface FileJSON {
   id: string; // unique
@@ -23,16 +24,7 @@ export type FileID = {
   id: string;
 };
 
-let rootDir = '';
-try {
-  // userData it is not recommended to write large files here because some environments may backup this directory to cloud storage.
-  const appPath = app.getAppPath();
-  rootDir = path.join(appPath, appPath === projectRootDir ? '.temp' : 'storage');
-} catch {
-  //
-}
-
-export const filesDir = (...args: string[]) => path.join(rootDir, ...args);
+export const filesDir = (...args: string[]) => path.join(appPath, ...args);
 
 export const files = new Map<string, FileJSON>();
 
@@ -49,6 +41,28 @@ export const filesHandlers = createIpcHandlers({
   },
   getFile(_event, { id }: FileID) {
     return files.get(id);
+  },
+  async uploadImage(_event, { id }: FileID, payload: string | { name: string; buffer: ArrayBufferLike }) {
+    const image =
+      typeof payload === 'string'
+        ? await axios.get<Buffer>(payload, { responseType: 'arraybuffer' }).then(async ({ data: buffer }) => ({
+            name: '',
+            buffer,
+            // file-type is esm module and cannot be resolved in `electron/plugins/removeNodeModulePlugin.ts`
+            ext: await import('file-type').then(({ fileTypeFromBuffer }) =>
+              fileTypeFromBuffer(buffer).then(r => `.${r?.ext || 'png'}`)
+            )
+          }))
+        : {
+            ...path.parse(payload.name),
+            buffer: Buffer.from(payload.buffer)
+          };
+
+    const hash = crypto.createHash('sha256').update(image.buffer).digest('hex');
+    const filename = [image.name, hash, image.ext.replace(/^\./, '')].join('.');
+    const filepath = filesDir(id, 'assets', filename);
+    await fs.outputFile(filepath, image.buffer);
+    return `./static/${id}/assets/${filename}`;
   }
 });
 

@@ -70,7 +70,8 @@ export function EditorStyles() {
 
             /* image */
             '.react-renderer.node-image': {
-              width: 'fit-content'
+              width: 'fit-content',
+              maxWidth: '100%'
             }
           }
         };

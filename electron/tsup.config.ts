@@ -11,7 +11,7 @@ const options: Options = {
   format: ['cjs'],
   external: [/electron/],
   // convert esm module to cjs
-  noExternal: [],
+  noExternal: [/file-type/],
   define: {
     ...Object.entries(env).reduce(
       (e, [k, v]) => ({ ...e, [`process.env.${k}`]: JSON.stringify(v) }),

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Editor } from '@tiptap/react';
+import { FileID } from '@/types';
 
 export function file2Buffer(file: File) {
   return new Promise<ArrayBuffer>(resolve => {
@@ -12,6 +13,20 @@ export function file2Buffer(file: File) {
   });
 }
 
-export async function uploadImage(editor: Editor, payload: string | File) {
-  // TODO:
+export async function setImage(editor: Editor, id: FileID, payload: string | File) {
+  let src = '';
+
+  if (typeof payload === 'string') {
+    src = await adapter.uploadImage(id, payload);
+  } else {
+    const buffer = await file2Buffer(payload);
+    src = await adapter.uploadImage(id, { name: payload.name, buffer });
+  }
+
+  const image = new Image();
+  image.src = src;
+  image.onload = () => {
+    const size = { width: image.naturalWidth, height: image.naturalHeight };
+    editor.commands.setImage({ ...size, src, ratio: size.width / size.height });
+  };
 }
