@@ -19,6 +19,10 @@ export type SaveChanges = {
   content?: Record<string, unknown>;
 };
 
+export type FileID = {
+  id: string;
+};
+
 let rootDir = '';
 try {
   // userData it is not recommended to write large files here because some environments may backup this directory to cloud storage.
@@ -43,7 +47,7 @@ export const filesHandlers = createIpcHandlers({
   getFiles(_event) {
     return Array.from(files, ([, file]) => file);
   },
-  getFile(_event, { id }: { id: string }) {
+  getFile(_event, { id }: FileID) {
     return files.get(id);
   }
 });
@@ -57,7 +61,7 @@ export const filesBroadcasts = createIpcHandlers({
     files.set(file.id, file);
     return file;
   },
-  async DeleteFile(_event, { id }: { id: string }) {
+  async DeleteFile(_event, { id }: FileID) {
     const file = files.get(id);
     const pathname = filesDir(id);
     if (file) {

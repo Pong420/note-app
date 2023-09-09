@@ -5,6 +5,7 @@ import { SpotlightProvider as MantineSpotlightProvider, SpotlightAction as ISpot
 import { IconFile, IconSearch } from '@tabler/icons-react';
 import { shortcut } from '@/components/Editor/Spotlight';
 import { navigate } from '@/routes';
+import { FileID } from '@/types';
 import { fileManager } from '@/utils/FileManager';
 import { SpotlightAction, SpotlightActionSchema, SpotlightFileAction } from './SpotlightAction';
 import { mainActions } from './actions';
@@ -22,7 +23,7 @@ const filter = (query: string, actions: ISpotlightAction[]) => {
 };
 
 export function SpotlightProvider({ children }: React.PropsWithChildren) {
-  const { id } = useParams() as { id: string };
+  const { id } = useParams() as FileID;
   const [query, setQuery] = useState('');
   const files = useSyncExternalStore(fileManager.subscribe, getFiles);
   const file = fileManager.getFile(id);

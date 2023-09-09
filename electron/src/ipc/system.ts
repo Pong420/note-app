@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { app } from 'electron';
 import { createIpcHandlers } from './ipcCreator';
+import { FileID } from './files';
 
 export interface LastVisit {
   id: string; // file id
@@ -43,7 +44,7 @@ export const systemHandlers = createIpcHandlers({
 });
 
 export const systemBroadcasts = createIpcHandlers({
-  LastVisitUpdated(_event, { id }: { id: string }) {
+  LastVisitUpdated(_event, { id }: FileID) {
     const lastVisits = [{ id, timestamp: Date.now() }, ...system.lastVisits.filter(l => l.id !== id)].slice(0, 5);
     system.lastVisits = lastVisits;
     return lastVisits;
