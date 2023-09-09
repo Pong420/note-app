@@ -30,12 +30,8 @@ const useStyles = createStyles(() => {
 export function ImageViewBubbleMenu({ width, height, ratio, onSubmit }: ImageViewBubbleMenuProps) {
   const { classes } = useStyles();
   const [opened, { open, close }] = useDisclosure();
-  const form = useForm({
-    initialValues: {
-      width: typeof width === 'string' ? parseInt(width, 10) : width,
-      height: typeof height === 'string' ? parseInt(height, 10) : height
-    }
-  });
+  const form = useForm();
+
   const handleSubmit = form.onSubmit(values => {
     onSubmit(values);
     close();
@@ -44,7 +40,12 @@ export function ImageViewBubbleMenu({ width, height, ratio, onSubmit }: ImageVie
   return (
     <div className={classes.root}>
       <RichTextEditor.ControlsGroup>
-        <RichTextEditor.Control onClick={open}>
+        <RichTextEditor.Control
+          onClick={() => {
+            form.setValues({ width, height });
+            open();
+          }}
+        >
           <IconPhotoCog stroke={1.5} size="1rem" />
         </RichTextEditor.Control>
       </RichTextEditor.ControlsGroup>
