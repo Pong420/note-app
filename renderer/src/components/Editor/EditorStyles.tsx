@@ -1,5 +1,9 @@
 import { Global } from '@mantine/core';
 
+/**
+ * Some global styles rely on mantine theme, so use the Global component instead of css
+ */
+
 export function EditorStyles() {
   return (
     <Global
@@ -13,7 +17,6 @@ export function EditorStyles() {
           // https://mantine.dev/core/typography-styles-provider/
           '.tiptap.tiptap.tiptap': {
             /* table */
-
             table: {
               borderCollapse: 'collapse',
               margin: '0',
@@ -63,6 +66,11 @@ export function EditorStyles() {
               top: 5,
               borderWidth: 2,
               borderColor
+            },
+
+            /* image */
+            '.react-renderer.node-image': {
+              width: 'fit-content'
             }
           }
         };

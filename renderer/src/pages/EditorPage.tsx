@@ -12,12 +12,13 @@ import Table from '@tiptap/extension-table';
 import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
-import Image from '@tiptap/extension-image';
 import { Editor } from '@/components/Editor';
 import { clipboardTextParser } from '@/components/Editor/clipboardTextParser';
+import { handleDrop } from '@/components/Editor/handleDrop';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
 import { Spotlight } from '@/components/Editor/Spotlight';
-import { FileJSON } from '../../../electron/src/ipc/files';
+import { Image } from '@/components/Editor/Image/Image';
+import { FileJSON } from '@/types';
 
 const extensions: Extensions = [
   StarterKit.configure({
@@ -43,7 +44,8 @@ const extensions: Extensions = [
 ];
 
 const editorProps: EditorProps = {
-  clipboardTextParser
+  clipboardTextParser,
+  handleDrop
 };
 
 export function EditorPage() {
@@ -79,15 +81,14 @@ export function EditorPage() {
         });
       }
 
-      editor
-        ?.chain()
-        .focus()
-        .setContent(file.content || null)
-        .run();
+      editor?.commands.setContent(file.content || null);
 
       adapter.emitLastVisitUpdated({ id });
       // with delay ui without blinking when app at initial / refersh
       await new Promise(resolve => setTimeout(resolve));
+
+      editor?.commands.focus();
+
       return true;
     };
 

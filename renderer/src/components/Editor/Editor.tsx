@@ -1,10 +1,9 @@
 import { Container, createStyles } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
 import { Editor as TipTapEditor } from '@tiptap/react';
+import { APP_REGION_HEIGHT } from '@/constants';
 import { TableBubbleMenu, tableMenuRefId } from './Table/TableBubbleMenu';
 import { EditorStyles } from './EditorStyles';
-import { useEffect } from 'react';
-import { APP_REGION_HEIGHT } from '@/constants';
 
 export interface EditorProps {
   editor?: TipTapEditor | null;
@@ -55,10 +54,6 @@ const useStyles = createStyles(() => {
 
 export function Editor({ editor = null }: EditorProps) {
   const { classes } = useStyles();
-
-  useEffect(() => {
-    editor?.chain().focus().run();
-  }, [editor]);
 
   return (
     <Container w="100%">
