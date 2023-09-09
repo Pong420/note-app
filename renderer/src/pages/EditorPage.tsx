@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from '@mantine/tiptap';
-import { EditorProps } from '@tiptap/pm/view';
 import { EditorOptions, Extensions, useEditor } from '@tiptap/react';
 import Highlight from '@tiptap/extension-highlight';
 import StarterKit from '@tiptap/starter-kit';
@@ -43,7 +42,7 @@ const extensions: Extensions = [
   Spotlight
 ];
 
-const editorProps: EditorProps = {
+const editorProps: EditorOptions['editorProps'] = {
   clipboardTextParser,
   handleDrop
 };

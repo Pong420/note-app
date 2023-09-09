@@ -1,5 +1,5 @@
 {
-  "name": "@electron-starter/electron",
+  "name": "@notes/electron",
   "version": "1.0.0",
   "private": true,
   "main": "./dist/main/index.js",
