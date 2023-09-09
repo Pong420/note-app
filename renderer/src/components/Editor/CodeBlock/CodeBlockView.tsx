@@ -3,7 +3,7 @@ import { NodeViewContent, NodeViewProps, NodeViewWrapper } from '@tiptap/react';
 import { IconCheck, IconClipboard } from '@tabler/icons-react';
 
 const top = 40;
-const lineHeight = 1.5;
+const lineHeight = 1.55;
 
 const useStyles = createStyles(theme => {
   const color = theme.colors[theme.primaryColor][9];
@@ -23,6 +23,11 @@ const useStyles = createStyles(theme => {
       display: 'flex',
       gap: 10
     },
+    content: {
+      position: 'relative',
+      width: `100%`,
+      height: `100%`
+    },
     badge: {
       backgroundColor: color,
       padding: '0.1rem 0.5rem',
@@ -37,12 +42,25 @@ const useStyles = createStyles(theme => {
       top: 5,
       right: 10
     },
-    lineHighlight: {
+    lines: {
       position: 'absolute',
-      height: '1.5em',
-      backgroundColor: 'rgb(52 58 64 / 20%)',
-      left: '0',
-      right: '0'
+      left: `-1.8em`,
+      right: `-1.8em`,
+
+      height: '100%',
+      overflow: 'hidden',
+
+      '+ code': {
+        position: 'relative',
+        lineHeight: `${lineHeight}em`
+      }
+    },
+    lineHighlight: {
+      height: `${lineHeight}em`,
+      backgroundColor: 'rgb(52 58 64 / 60%)',
+      position: 'absolute',
+      left: 0,
+      right: 0
     }
   };
 });
@@ -62,14 +80,15 @@ export function CodeBlockView(props: NodeViewProps) {
   return (
     <NodeViewWrapper>
       <pre className={cx(classes.root, className)}>
-        {lineHighlight.map(l => (
-          <div
-            key={l}
-            className={classes.lineHighlight}
-            style={{ top: `calc(${top}px + ${(l - 1) * lineHeight}em)` }}
-          />
-        ))}
-        <NodeViewContent as="code" className={cx(className, classes.code)} />
+        <div className={classes.content}>
+          <div className={classes.lines}>
+            {lineHighlight.map(l => (
+              <div key={l} className={classes.lineHighlight} style={{ top: `${(l - 1) * lineHeight}em` }} />
+            ))}
+          </div>
+          <NodeViewContent as="code" className={cx(className, classes.code)} />
+        </div>
+
         <div className={classes.head}>
           <div className={cx(classes.badge, classes.language)}>{languageLabelMap[language] || language}</div>
           {title && <div className={classes.badge}>{title}</div>}

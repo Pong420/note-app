@@ -28,13 +28,18 @@ npm run dev
 
 ## TODO:
 
-- [ ] Saving file
+- [x] Saving file
 - [ ] Code Block
   - [x] Basic Setup
-  - [ ] bubble menu to configure title, line-highlight etc
+  - [ ] Bubble menu for configure title, line-highlights
 - [ ] Task List
 - [ ] Table
-- [ ] Resizeable Image, drop to upload
+- [ ] Image
+  - [x] Resizeable
+  - [x] Drop to Upload
+  - [ ] Upload from url
+  - [ ] Markdown patterns
+  - [ ] Alignment, flot, center
 - [ ] Bubble Menu
 - [ ] Export PDF
 - [ ] Context menu
@@ -42,7 +47,8 @@ npm run dev
   - [x] Basic Setup
   - [ ] More actions
 - [ ] Export static HTML
-      = [ ] Documentation Page
+      - [ ] Documentation Page
+- [ ] Table of content on the right hand side
 
 ## Features
 
