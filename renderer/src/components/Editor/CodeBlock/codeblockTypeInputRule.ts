@@ -12,7 +12,12 @@ const languageMap: Record<string, string> = {
 export const codeblockInputRegex = /^```(.*)\n$/;
 export const codeblockFullInputRegex = /^```(.*)\n((.|\n)*)```\n?$/;
 
-const parseMeta = (payload: string) => {
+const parseMeta = (payload: string, index: number) => {
+  const language = payload.match(/(^[a-z]+$)/i);
+  if (index === 0 && language) {
+    return { language: payload };
+  }
+
   const keyValue = payload.match(/(.*)=(.*)/);
   if (keyValue) {
     const [, key, value] = keyValue;
@@ -20,7 +25,6 @@ const parseMeta = (payload: string) => {
   }
 
   const lineHighlight = payload.match(/{(.*)}/)?.[1];
-
   if (lineHighlight) {
     return {
       lineHighlight: lineHighlight.split(',').flatMap(range => {
@@ -40,16 +44,17 @@ export function codeblockTypeInputRule(config: { find: InputRuleFinder; type: No
     handler: ({ state, range, match }) => {
       const $start = state.doc.resolve(range.from);
       const [metaString = '', content = ''] = match.slice(1).filter(s => !!s);
-      const [l, ...metadata] = metaString.split(' ');
-
-      let language = l || 'plain';
-      language = languageMap[language] || language;
+      const metadata = metaString.split(' ');
 
       const attributes = {
-        language: languageMap[language] || language,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ...metadata.reduce((r, p) => ({ ...r, ...parseMeta(p) }), {} as Record<string, any>)
+        ...metadata.reduce((r, p, i) => ({ ...r, ...parseMeta(p, i) }), {} as Record<string, unknown>)
       };
+
+      if (!attributes.language) {
+        attributes.language = 'plain';
+      } else {
+        attributes.language = languageMap[attributes.language as string] || attributes.language;
+      }
 
       if (!$start.node(-1).canReplaceWith($start.index(-1), $start.indexAfter(-1), config.type)) {
         return null;
