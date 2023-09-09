@@ -86,13 +86,14 @@ export function CodeBlockView(props: NodeViewProps) {
               <div key={l} className={classes.lineHighlight} style={{ top: `${(l - 1) * lineHeight}em` }} />
             ))}
           </div>
-          <NodeViewContent as="code" className={cx(className, classes.code)} />
+          <NodeViewContent as="code" className={cx(className, classes.code)} spellCheck={false} />
         </div>
 
         <div className={classes.head}>
           <div className={cx(classes.badge, classes.language)}>{languageLabelMap[language] || language}</div>
           {title && <div className={classes.badge}>{title}</div>}
         </div>
+
         <CopyButton value={props.node.content.firstChild?.text || ''} timeout={2000}>
           {({ copied, copy }) => (
             <ActionIcon className={classes.copy} color={copied ? 'teal' : 'gray'} onClick={copy}>
