@@ -60,7 +60,7 @@ export const filesHandlers = createIpcHandlers({
           };
 
     const hash = crypto.createHash('sha256').update(image.buffer).digest('hex');
-    const filename = [image.name, hash, image.ext.replace(/^\./, '')].join('.');
+    const filename = [hash, image.ext.replace(/^\./, '')].join('.');
     const filepath = filesDir(id, 'assets', filename);
     await fs.outputFile(filepath, image.buffer);
     return `./static/${id}/assets/${filename}`;
