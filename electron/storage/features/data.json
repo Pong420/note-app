@@ -15,7 +15,7 @@
         "content": [
           {
             "type": "text",
-            "text": "Features"
+            "text": "Feature"
           }
         ]
       },
@@ -34,9 +34,166 @@
         "content": [
           {
             "type": "text",
-            "text": "Code Block Syntax"
+            "text": "Spotlight"
           }
         ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "The application are frame less and without control bar on the UI. To switch between notes, and some other actions, you can use the "
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "bold"
+              }
+            ],
+            "text": "Spotlight."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "video",
+        "attrs": {
+          "src": "./static/Features/assets/29cdc4c7a8377813799d80a0ccd34c1dce421e95d307decd7c74a8c8970f2ca9.mp4",
+          "loop": true,
+          "controls": false,
+          "autoPlay": true,
+          "width": 3600,
+          "height": 2146,
+          "ratio": 1.6775396085740912
+        }
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 4
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Keyboard Shortcuts"
+          }
+        ]
+      },
+      {
+        "type": "bulletList",
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "kbd",
+                    "attrs": {
+                      "content": "Cmd"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "text": " + "
+                  },
+                  {
+                    "type": "kbd",
+                    "attrs": {
+                      "content": "K"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "kbd",
+                    "attrs": {
+                      "content": "Cmd"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "text": " + "
+                  },
+                  {
+                    "type": "kbd",
+                    "attrs": {
+                      "content": "P"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 4
+        }
+      },
+      {
+        "type": "horizontalRule"
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 2
+        }
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Code Block"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
       },
       {
         "type": "heading",
@@ -126,21 +283,7 @@
         }
       },
       {
-        "type": "codeBlock",
-        "attrs": {
-          "language": "plain",
-          "title": null,
-          "lineHighlight": [
-            1,
-            2
-          ]
-        },
-        "content": [
-          {
-            "type": "text",
-            "text": "qweqweqwe"
-          }
-        ]
+        "type": "horizontalRule"
       },
       {
         "type": "paragraph",
@@ -162,6 +305,65 @@
         ]
       },
       {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 4
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Drop & Drop,  Resizable"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "video",
+        "attrs": {
+          "src": "./static/Features/assets/fffeb737e5aff17e9165428878ff3a3237b7049d89ed14bff8336a05c0d8283b.mp4",
+          "loop": true,
+          "controls": false,
+          "autoPlay": true,
+          "width": 3600,
+          "height": 2146,
+          "ratio": 1.6775396085740912
+        }
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "horizontalRule"
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Others"
+          }
+        ]
+      },
+      {
         "type": "bulletList",
         "content": [
           {
@@ -175,32 +377,52 @@
                 "content": [
                   {
                     "type": "text",
-                    "text": "Resizable"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "listItem",
-            "content": [
-              {
-                "type": "paragraph",
-                "attrs": {
-                  "textAlign": "left"
-                },
-                "content": [
+                    "text": "Typing "
+                  },
                   {
                     "type": "text",
-                    "text": "Drop to upload"
+                    "marks": [
+                      {
+                        "type": "code"
+                      }
+                    ],
+                    "text": "kbd[Cmd]"
+                  },
+                  {
+                    "type": "text",
+                    "text": " will transform into "
+                  },
+                  {
+                    "type": "kbd",
+                    "attrs": {
+                      "content": "Cmd"
+                    }
                   }
                 ]
               }
             ]
           }
         ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": " "
+          }
+        ]
       }
     ]
   },
-  "updatedAt": 1694308171005
+  "updatedAt": 1694338938496
 }
