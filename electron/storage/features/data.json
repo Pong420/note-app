@@ -15,7 +15,7 @@
         "content": [
           {
             "type": "text",
-            "text": "Feature"
+            "text": "Features"
           }
         ]
       },
@@ -424,5 +424,5 @@
       }
     ]
   },
-  "updatedAt": 1694338938496
+  "updatedAt": 1694342430785
 }

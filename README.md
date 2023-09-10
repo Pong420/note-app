@@ -33,13 +33,14 @@ npm run dev
   - [x] Basic Setup
   - [ ] Bubble menu for configure title, line-highlights
   - [ ] Inside list item
+  - [ ] Drag handler
 - [ ] Task List
 - [ ] Table
 - [ ] Image
   - [x] Resizeable
   - [x] Drop to Upload
   - [ ] Upload from url
-  - [ ] Markdown patterns
+  - [ ] Check Markdown patterns
   - [ ] Alignment, flot, center
 - [ ] Bubble Menu
 - [ ] Export PDF
@@ -49,6 +50,9 @@ npm run dev
   - [ ] More actions
 - [ ] Export static HTML - [ ] Documentation Page
 - [ ] Table of content on the right hand side
+- [ ] Prefernces
+- [ ] Documentation
+  - [ ] Shortcuts
 
 ## Features
 
