@@ -5,7 +5,7 @@ import { DefaultMantineColor } from '@mantine/core';
 
 export interface ThemePreferences {
   darkMode: boolean;
-  color: DefaultMantineColor;
+  primaryColor: DefaultMantineColor;
 }
 
 export interface Preferences {
@@ -15,7 +15,7 @@ export interface Preferences {
 export type PreferencesPaths = ObjectKeyPaths<Preferences>;
 
 const initialValues: Preferences = {
-  theme: { darkMode: true, color: 'blue' }
+  theme: { darkMode: true, primaryColor: 'blue' }
 };
 
 export const preferences = createStorage('preferences', initialValues);

@@ -10,7 +10,7 @@ export interface BooleanOptionProps {
 
 export function BooleanOption({ path }: BooleanOptionProps) {
   const value = usePreferences(path);
-  const primaryColor = usePreferences('theme.color');
+  const primaryColor = usePreferences('theme.primaryColor');
   return (
     <Switch
       size="md"

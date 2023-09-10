@@ -1,12 +1,20 @@
-import { IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
+import { IconAdjustmentsHorizontal, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
 import { NewNote } from '@/components/Modals/NewNote';
 import { EditNote } from '@/components/Modals/EditNote';
 import { DeleteNote } from '@/components/Modals/DeleteNote';
 import { FileJSON } from '@/types';
+import { navigate } from '@/routes';
 import { SpotlightActionSchema } from './SpotlightAction';
 
 export const mainActions = (file?: FileJSON) =>
   [
+    {
+      type: 'action',
+      id: 'preferences',
+      title: 'Preferences',
+      icon: <IconAdjustmentsHorizontal size="1.2rem" />,
+      onTrigger: () => navigate('/preferences')
+    },
     {
       type: 'action',
       id: 'new-note',

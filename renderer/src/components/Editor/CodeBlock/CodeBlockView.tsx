@@ -6,7 +6,7 @@ const top = 40;
 const lineHeight = 1.55;
 
 const useStyles = createStyles(theme => {
-  const color = theme.colors[theme.primaryColor][9];
+  const color = theme.colors[theme.primaryColor][6];
 
   return {
     root: {

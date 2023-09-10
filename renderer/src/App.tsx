@@ -19,7 +19,7 @@ const components: MantineThemeOverride['components'] = {
 };
 
 export function App() {
-  const primaryColor = usePreferences('theme.color');
+  const primaryColor = usePreferences('theme.primaryColor');
   const darkMode = usePreferences('theme.darkMode');
   const colorScheme: ColorScheme = darkMode ? 'dark' : 'light';
   const [ready, setReady] = useState(false);

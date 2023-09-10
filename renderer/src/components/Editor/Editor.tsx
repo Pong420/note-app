@@ -1,7 +1,6 @@
 import { Container, createStyles } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
 import { Editor as TipTapEditor } from '@tiptap/react';
-import { APP_REGION_HEIGHT } from '@/constants';
 import { TableBubbleMenu, tableMenuRefId } from './Table/TableBubbleMenu';
 import { EditorStyles } from './EditorStyles';
 
@@ -10,9 +9,6 @@ export interface EditorProps {
 }
 
 const useStyles = createStyles(() => {
-  const paddingX = 30;
-  const paddingY = APP_REGION_HEIGHT;
-
   return {
     root: {
       display: 'flex',
@@ -24,12 +20,6 @@ const useStyles = createStyles(() => {
       flex: '1 1 auto',
       display: 'flex',
       flexDirection: 'column',
-
-      paddingTop: paddingY,
-      paddingBottom: paddingY,
-      paddingLeft: paddingX,
-      paddingRight: paddingX,
-
       minHeight: '100vh'
     },
     content: {

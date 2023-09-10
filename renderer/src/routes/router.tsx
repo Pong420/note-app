@@ -4,6 +4,7 @@ import { HomePage } from '@/pages/HomePage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { EditorPage } from '@/pages/EditorPage';
 import { NewPage } from '@/pages/NewPage';
+import { PreferencePage } from '@/pages/PreferencePage';
 import { RouteObjectParser } from './types';
 
 export type Routes = (typeof routes)[number];
@@ -30,6 +31,10 @@ const routes = [
       {
         path: '/editor/new-page/:title?' as const,
         Component: NewPage
+      },
+      {
+        path: '/preferences' as const,
+        Component: PreferencePage
       },
       {
         path: '*' as const,

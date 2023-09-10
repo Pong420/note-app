@@ -4,6 +4,9 @@ import { SpotlightProvider } from '@/components/Spotlight/SpotlightProvider';
 import { APP_REGION_HEIGHT } from '@/constants';
 
 const useStyles = createStyles((_theme, { appRegionSize }: { appRegionSize: 'fixed' | 'fullpage' }) => {
+  const paddingX = 30;
+  const paddingY = APP_REGION_HEIGHT;
+
   return {
     appRegion: {
       position: 'fixed',
@@ -14,7 +17,11 @@ const useStyles = createStyles((_theme, { appRegionSize }: { appRegionSize: 'fix
       appRegion: 'drag'
     },
     content: {
-      position: 'relative'
+      position: 'relative',
+      paddingTop: paddingY,
+      paddingBottom: paddingY,
+      paddingLeft: paddingX,
+      paddingRight: paddingX
     }
   };
 });
