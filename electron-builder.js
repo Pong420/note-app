@@ -14,7 +14,7 @@ module.exports = {
     app,
     output: 'release/${version}'
   },
-  files: ['dist/**/*', 'build/**/*'],
+  files: ['dist/**/*', 'build/**/*', 'storage/features/**/*'],
   mac: {
     artifactName: '${productName}_${version}.${ext}',
     target: ['dmg', 'zip']

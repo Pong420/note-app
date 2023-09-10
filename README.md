@@ -46,13 +46,12 @@ npm run dev
 - [ ] Bubble Menu
 - [ ] Export PDF
 - [ ] Context menu
-- [ ] Spotlight
-  - [x] Basic Setup
-  - [ ] More actions
-- [ ] Export static HTML - [ ] Documentation Page
+- [x] Spotlight
+- [ ] Export static HTML
 - [ ] Table of content on the right hand side
-- [ ] Prefernces
+- [x] Prefernces
 - [ ] Documentation
+  - [x] Features
   - [ ] Shortcuts
 
 ## Features
