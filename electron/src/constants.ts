@@ -9,7 +9,7 @@ export let appPath = '';
 try {
   // userData it is not recommended to write large files here because some environments may backup this directory to cloud storage.
   appPath = app.getAppPath();
-  appPath = path.join(appPath, appPath === rootDir ? '.temp' : 'storage');
+  appPath = path.join(appPath, 'storage');
 } catch {
   //
 }

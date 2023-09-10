@@ -32,6 +32,7 @@ npm run dev
 - [ ] Code Block
   - [x] Basic Setup
   - [ ] Bubble menu for configure title, line-highlights
+  - [ ] Inside list item
 - [ ] Task List
 - [ ] Table
 - [ ] Image
@@ -46,8 +47,7 @@ npm run dev
 - [ ] Spotlight
   - [x] Basic Setup
   - [ ] More actions
-- [ ] Export static HTML
-      - [ ] Documentation Page
+- [ ] Export static HTML - [ ] Documentation Page
 - [ ] Table of content on the right hand side
 
 ## Features

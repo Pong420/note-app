@@ -10,6 +10,7 @@ export interface FileJSON {
   id: string; // unique
   title: string;
   content?: Record<string, unknown>;
+  readOnly?: boolean;
   createdAt: number;
   updatedAt: number;
 }
@@ -67,11 +68,18 @@ export const filesHandlers = createIpcHandlers({
 });
 
 export const filesBroadcasts = createIpcHandlers({
-  async FileChanged(_event, { id, title, content }: SaveChanges) {
+  async FileChanged(_event, changes: SaveChanges) {
+    const { id } = changes;
     const filepath = filesDir(id, 'data.json');
     const now = Date.now();
-    const file: FileJSON = { createdAt: now, ...files.get(id), id, title, content, updatedAt: now };
-    await fs.outputFile(filepath, JSON.stringify(file));
+    let file = files.get(id);
+
+    if (file) {
+      file = { ...file, ...changes, updatedAt: now };
+    } else {
+      file = { ...changes, createdAt: now, updatedAt: now };
+    }
+    await fs.outputFile(filepath, JSON.stringify(file, null, 2));
     files.set(file.id, file);
     return file;
   },
