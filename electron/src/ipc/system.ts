@@ -1,8 +1,9 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { app } from 'electron';
+import { shell } from 'electron';
 import { createIpcHandlers } from './ipcCreator';
 import { FileID } from './files';
+import { appPath } from '../constants';
 
 export interface LastVisit {
   id: string; // file id
@@ -13,14 +14,7 @@ export interface SystemData {
   lastVisits: LastVisit[];
 }
 
-let rootDir = '';
-try {
-  rootDir = app.getPath('userData');
-} catch {
-  //
-}
-
-export const systemDataPath = path.join(rootDir, 'system.json');
+export const systemDataPath = path.join(appPath, 'system.json');
 
 const defaultValue: SystemData = {
   lastVisits: []
@@ -40,6 +34,12 @@ export const system = new Proxy(systemData, {
 export const systemHandlers = createIpcHandlers({
   getLastVisits() {
     return system.lastVisits;
+  },
+  getAppPath() {
+    return appPath;
+  },
+  openAppDir() {
+    return shell.openPath(appPath);
   }
 });
 

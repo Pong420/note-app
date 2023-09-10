@@ -9,9 +9,10 @@ export function PreferencesSection({ title, children }: PreferencesSectionProps)
   return (
     <Box w="100%">
       <Group align="self-start" noWrap spacing="lg">
-        <Text weight={500} style={{ flexBasis: '30%' }}>
+        <Text weight="bold" size="lg" style={{ flexBasis: '30%', lineHeight: '24.8px' }}>
           {title}
         </Text>
+
         <Stack spacing={50} style={{ flexBasis: '70%' }}>
           {children}
         </Stack>

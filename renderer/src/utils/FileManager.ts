@@ -34,6 +34,7 @@ export class FileManager extends ExternalStore<Snapshot> {
         .filter(Boolean);
     });
     this.emitChange();
+    return true;
   }
 
   get files() {

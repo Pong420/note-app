@@ -6,6 +6,8 @@ import { DefaultMantineColor } from '@mantine/core';
 export interface ThemePreferences {
   darkMode: boolean;
   primaryColor: DefaultMantineColor;
+  pageWidth: number;
+  fontSize: number;
 }
 
 export interface Preferences {
@@ -15,7 +17,7 @@ export interface Preferences {
 export type PreferencesPaths = ObjectKeyPaths<Preferences>;
 
 const initialValues: Preferences = {
-  theme: { darkMode: true, primaryColor: 'blue' }
+  theme: { darkMode: true, primaryColor: 'blue', pageWidth: 960, fontSize: 16 }
 };
 
 export const preferences = createStorage('preferences', initialValues);
