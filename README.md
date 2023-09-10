@@ -2,7 +2,8 @@
 
 > :warning: Working In Progress
 
-![screenshot](./screenshot.png)
+![feature](./assets/features.png)
+![preferences](./assets/preferences.png)
 
 ## Development
 
