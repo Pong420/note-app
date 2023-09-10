@@ -72,6 +72,11 @@ export function EditorStyles() {
             '.react-renderer.node-image, .react-renderer.node-video': {
               width: 'fit-content',
               maxWidth: '100%'
+            },
+
+            'code:not([class*="language-"])': {
+              backgroundColor: `#2C2E33`,
+              padding: `0.1875rem 0.3125rem`
             }
           }
         };
