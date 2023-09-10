@@ -74,7 +74,7 @@ export function CodeBlockView(props: NodeViewProps) {
   const { classes, cx } = useStyles();
   const title = props.node.attrs.title;
   const language = props.node.attrs.language;
-  const lineHighlight = props.node.attrs.lineHighlight as number[];
+  const lineHighlight = (props.node.attrs.lineHighlight || []) as number[];
   const className = `language-${language}`;
 
   return (
@@ -82,7 +82,7 @@ export function CodeBlockView(props: NodeViewProps) {
       <pre className={cx(classes.root, className)}>
         <div className={classes.content}>
           <div className={classes.lines}>
-            {lineHighlight.map(l => (
+            {lineHighlight?.map(l => (
               <div key={l} className={classes.lineHighlight} style={{ top: `${(l - 1) * lineHeight}em` }} />
             ))}
           </div>

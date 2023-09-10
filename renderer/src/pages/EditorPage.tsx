@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from '@mantine/tiptap';
-import { EditorOptions, Extensions, useEditor } from '@tiptap/react';
-import Highlight from '@tiptap/extension-highlight';
+import { EditorOptions, Extensions, ReactNodeViewRenderer, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Highlight from '@tiptap/extension-highlight';
 import Underline from '@tiptap/extension-underline';
+import HorizontalRule from '@tiptap/extension-horizontal-rule';
+import Link from '@tiptap/extension-link';
 import TextAlign from '@tiptap/extension-text-align';
 import Placeholder from '@tiptap/extension-placeholder';
 import Table from '@tiptap/extension-table';
@@ -17,13 +18,21 @@ import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
 import { Spotlight } from '@/components/Editor/Spotlight';
 import { Image } from '@/components/Editor/Image/Image';
 import { Video } from '@/components/Editor/Video/Video';
+import { KeyboardButton } from '@/components/Editor/KeyboardButton/KeyboardButton';
+import { HorizontalRule as HorizontalRuleComponent } from '@/components/Editor/HorizontalRule';
 import { FileJSON } from '@/types';
 
 const extensions: Extensions = [
   StarterKit.configure({
-    codeBlock: false
+    codeBlock: false,
+    horizontalRule: false
   }),
   Underline,
+  HorizontalRule.extend({
+    addNodeView() {
+      return ReactNodeViewRenderer(HorizontalRuleComponent);
+    }
+  }),
   Link,
   Highlight,
   TextAlign.configure({ types: ['heading', 'paragraph'] }),
@@ -40,7 +49,8 @@ const extensions: Extensions = [
   TableHeader,
   TableCell,
   CodeBlockPrism,
-  Spotlight
+  Spotlight,
+  KeyboardButton
 ];
 
 const editorProps: EditorOptions['editorProps'] = {
@@ -87,7 +97,7 @@ export function EditorPage() {
       await new Promise(resolve => setTimeout(resolve));
 
       if (!file.readOnly || import.meta.env.DEV) editor?.setEditable(true);
-      editor?.commands.focus();
+      editor?.commands.focus(null, { scrollIntoView: false });
 
       return true;
     };
