@@ -17,10 +17,10 @@ export async function setImage(editor: Editor, id: FileID, payload: string | Fil
   let src = '';
 
   if (typeof payload === 'string') {
-    src = await adapter.uploadImage(id, payload);
+    src = await adapter.uploadAsset(id, payload);
   } else {
     const buffer = await file2Buffer(payload);
-    src = await adapter.uploadImage(id, { name: payload.name, buffer });
+    src = await adapter.uploadAsset(id, { name: payload.name, buffer });
   }
 
   const image = new Image();

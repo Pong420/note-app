@@ -69,7 +69,7 @@ export function EditorStyles() {
             },
 
             /* image */
-            '.react-renderer.node-image': {
+            '.react-renderer.node-image, .react-renderer.node-video': {
               width: 'fit-content',
               maxWidth: '100%'
             }

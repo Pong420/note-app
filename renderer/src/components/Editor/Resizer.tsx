@@ -56,7 +56,6 @@ export interface Size {
 }
 
 export interface ResizerProps {
-  selected: boolean;
   onResize: (size: Size) => void;
 }
 
@@ -66,7 +65,7 @@ export function Resizer({ onResize }: ResizerProps) {
 
   const handler = (key: keyof ReturnType<typeof useStyles>['classes']): React.ComponentProps<'div'> => {
     const onMouseDown = (event: React.MouseEvent) => {
-      const el = ref.current?.parentElement?.querySelector<HTMLImageElement>('img');
+      const el = ref.current?.parentElement?.querySelector<HTMLImageElement>('[data-resizable]');
       const container = ref.current?.closest<HTMLElement>('.tiptap.ProseMirror');
 
       if (!el || !container) return;

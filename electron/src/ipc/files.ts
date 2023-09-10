@@ -43,7 +43,7 @@ export const filesHandlers = createIpcHandlers({
   getFile(_event, { id }: FileID) {
     return files.get(id);
   },
-  async uploadImage(_event, { id }: FileID, payload: string | { name: string; buffer: ArrayBufferLike }) {
+  async uploadAsset(_event, { id }: FileID, payload: string | { name: string; buffer: ArrayBufferLike }) {
     const image =
       typeof payload === 'string'
         ? await axios.get<Buffer>(payload, { responseType: 'arraybuffer' }).then(async ({ data: buffer }) => ({
@@ -51,7 +51,7 @@ export const filesHandlers = createIpcHandlers({
             buffer,
             // file-type is esm module and cannot be resolved in `electron/plugins/removeNodeModulePlugin.ts`
             ext: await import('file-type').then(({ fileTypeFromBuffer }) =>
-              fileTypeFromBuffer(buffer).then(r => `.${r?.ext || 'png'}`)
+              fileTypeFromBuffer(buffer).then(r => (r?.ext ? `.${r?.ext}` : ''))
             )
           }))
         : {

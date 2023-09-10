@@ -16,6 +16,7 @@ import { clipboardTextParser } from '@/components/Editor/utils/clipboardTextPars
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
 import { Spotlight } from '@/components/Editor/Spotlight';
 import { Image } from '@/components/Editor/Image/Image';
+import { Video } from '@/components/Editor/Video/Video';
 import { FileJSON } from '@/types';
 
 const extensions: Extensions = [
@@ -30,6 +31,7 @@ const extensions: Extensions = [
     inline: false,
     allowBase64: false
   }),
+  Video,
   Placeholder.configure({
     placeholder: "Let's start writing here ..."
   }),
@@ -59,7 +61,8 @@ export function EditorPage() {
   const editor = useEditor({
     extensions,
     editorProps,
-    onUpdate
+    onUpdate,
+    editable: false
   });
 
   useEffect(() => {
@@ -79,11 +82,11 @@ export function EditorPage() {
       }
 
       editor?.commands.setContent(file.content || null);
-
       adapter.emitLastVisitUpdated({ id });
       // with delay ui without blinking when app at initial / refersh
       await new Promise(resolve => setTimeout(resolve));
 
+      if (!file.readOnly || import.meta.env.DEV) editor?.setEditable(true);
       editor?.commands.focus();
 
       return true;
