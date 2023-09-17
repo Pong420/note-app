@@ -36,7 +36,7 @@ npm run dev
   - [ ] Inside list item
   - [ ] Drag handler
 - [ ] Task List
-- [ ] Table
+- [x] Table
 - [ ] Image
   - [x] Resizeable
   - [x] Drop to Upload
