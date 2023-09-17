@@ -21,18 +21,19 @@ const useStyles = createStyles((_theme, { appRegionSize }: { appRegionSize: 'fix
       paddingTop: paddingY,
       paddingBottom: paddingY,
       paddingLeft: paddingX,
-      paddingRight: paddingX
+      paddingRight: paddingX,
+      minHeight: '100vh'
     }
   };
 });
 
 export function MainLayout() {
-  const { classes } = useStyles({ appRegionSize: 'fixed' });
+  const { classes, cx } = useStyles({ appRegionSize: 'fixed' });
 
   return (
     <SpotlightProvider>
       <div className={classes.appRegion} />
-      <div className={classes.content}>
+      <div className={cx(classes.content, '__stretch')}>
         <Outlet />
       </div>
     </SpotlightProvider>

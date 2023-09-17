@@ -19,8 +19,7 @@ const useStyles = createStyles(() => {
       border: 0,
       flex: '1 1 auto',
       display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh'
+      flexDirection: 'column'
     },
     content: {
       width: `100%`,
@@ -46,7 +45,7 @@ export function Editor({ editor = null }: EditorProps) {
   const { classes } = useStyles();
 
   return (
-    <Container w="100%">
+    <Container w="100%" className="__stretch">
       <RichTextEditor className={classes.editor} editor={editor}>
         <RichTextEditor.Content className={classes.content}>
           <div id={tableMenuRefId}></div>
