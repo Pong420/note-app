@@ -46,7 +46,7 @@ export function Editor({ editor = null }: EditorProps) {
 
   return (
     <Container w="100%" className="__stretch">
-      <RichTextEditor className={classes.editor} editor={editor}>
+      <RichTextEditor className={classes.editor} editor={editor} withCodeHighlightStyles={false}>
         <RichTextEditor.Content className={classes.content}>
           <div id={tableMenuRefId}></div>
         </RichTextEditor.Content>

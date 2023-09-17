@@ -11,6 +11,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
+import Code from '@tiptap/extension-code';
 import { Editor } from '@/components/Editor';
 import { clipboardTextParser } from '@/components/Editor/utils/clipboardTextParser';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
@@ -48,6 +49,10 @@ const extensions: Extensions = [
   TableRow,
   TableHeader,
   TableCell,
+  // Don't known why
+  // With `Code.configure({...})` cannot exit code by arrow right
+  // So add the code extension to override same extension in StarterKit
+  Code,
   CodeBlockPrism,
   Spotlight,
   KeyboardButton

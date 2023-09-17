@@ -3,8 +3,10 @@
 // https://github.com/Hebmor/tiptap-extension-code-block-prism/tree/master
 // https://github.com/ueberdosis/tiptap
 
-import CodeBlock, { CodeBlockOptions } from '@tiptap/extension-code-block';
+import { ContentMatch } from '@tiptap/pm/model';
+import { Selection } from '@tiptap/pm/state';
 import { ReactNodeViewRenderer } from '@tiptap/react';
+import { default as CodeBlock, CodeBlockOptions } from '@tiptap/extension-code-block';
 import { PrismPlugin } from './PrismPlugin';
 import { CodeBlockView } from './CodeBlockView';
 import { codeblockInputRegex, codeblockFullInputRegex, codeblockTypeInputRule } from './codeblockTypeInputRule';
@@ -26,6 +28,14 @@ declare module '@tiptap/core' {
       toggleCodeBlock: (attributes?: CodeBlockPrismAttributes) => ReturnType;
     };
   }
+}
+
+function defaultBlockAt(match: ContentMatch) {
+  for (let i = 0; i < match.edgeCount; i++) {
+    const { type } = match.edge(i);
+    if (type.isTextblock && !type.hasRequiredAttrs()) return type;
+  }
+  return null;
 }
 
 export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
@@ -69,7 +79,7 @@ export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
           .run();
         return true;
       },
-      // overriden
+      // overriden the default function in tiptap
       ArrowDown: ({ editor }) => {
         if (!this.options.exitOnArrowDown) {
           return false;
@@ -89,19 +99,22 @@ export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
           return false;
         }
 
-        const after = $from.after();
+        // `editor.commands.exitCode()` will insert a new paragraph which not my expected
+        // so, copy the original function from
+        // https://github.com/ProseMirror/prosemirror-commands/blob/760c1f15cd55e842647305af4530d829574efb75/src/commands.ts#L308
+        // and slightly change it
 
-        if (after === undefined) {
-          return false;
-        }
-
-        // const nodeAfter = doc.nodeAt(after);
-
-        // if (nodeAfter) {
-        //   return false;
-        // }
-
-        return editor.commands.exitCode();
+        const { $head, $anchor } = state.selection;
+        if (!$head.parent.type.spec.code || !$head.sameParent($anchor)) return false;
+        const above = $head.node(-1),
+          after = $head.indexAfter(-1),
+          type = defaultBlockAt(above.contentMatchAt(after));
+        if (!type || !above.canReplaceWith(after, after, type)) return false;
+        const pos = $head.after(),
+          tr = state.tr.insertText('', pos);
+        tr.setSelection(Selection.near(tr.doc.resolve(pos), 1));
+        this.editor.view.dispatch(tr.scrollIntoView());
+        return true;
       }
     };
   },
