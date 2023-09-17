@@ -13,6 +13,21 @@ export interface CodeBlockPrismOptions extends CodeBlockOptions {
   defaultLanguage?: string;
 }
 
+export interface CodeBlockPrismAttributes {
+  language: string;
+  title: string;
+  lineHighlight: number[];
+}
+
+declare module '@tiptap/core' {
+  interface Commands<ReturnType> {
+    codeBlockPrism: {
+      setCodeBlock: (attributes?: CodeBlockPrismAttributes) => ReturnType;
+      toggleCodeBlock: (attributes?: CodeBlockPrismAttributes) => ReturnType;
+    };
+  }
+}
+
 export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
   addOptions() {
     return {
@@ -43,6 +58,7 @@ export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
   // https://github.com/ueberdosis/tiptap/issues/457#issuecomment-1221231841
   addKeyboardShortcuts() {
     return {
+      ...this.parent?.(),
       Tab: () => {
         this.editor
           .chain()
@@ -52,6 +68,40 @@ export const CodeBlockPrism = CodeBlock.extend<CodeBlockPrismOptions>({
           })
           .run();
         return true;
+      },
+      // overriden
+      ArrowDown: ({ editor }) => {
+        if (!this.options.exitOnArrowDown) {
+          return false;
+        }
+
+        const { state } = editor;
+        const { selection } = state;
+        const { $from, empty } = selection;
+
+        if (!empty || $from.parent.type !== this.type) {
+          return false;
+        }
+
+        const isAtEnd = $from.parentOffset === $from.parent.nodeSize - 2;
+
+        if (!isAtEnd) {
+          return false;
+        }
+
+        const after = $from.after();
+
+        if (after === undefined) {
+          return false;
+        }
+
+        // const nodeAfter = doc.nodeAt(after);
+
+        // if (nodeAfter) {
+        //   return false;
+        // }
+
+        return editor.commands.exitCode();
       }
     };
   },

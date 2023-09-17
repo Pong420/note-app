@@ -1,6 +1,8 @@
 import { ActionIcon, CopyButton, createStyles } from '@mantine/core';
 import { NodeViewContent, NodeViewProps, NodeViewWrapper } from '@tiptap/react';
 import { IconCheck, IconClipboard } from '@tabler/icons-react';
+import { CodeBlockPrismAttributes } from './CodeBlockPrism';
+import { languageMap } from './PrismPlugin';
 
 const top = 40;
 const lineHeight = 1.55;
@@ -72,10 +74,11 @@ const languageLabelMap: Record<string, string> = {
 
 export function CodeBlockView(props: NodeViewProps) {
   const { classes, cx } = useStyles();
-  const title = props.node.attrs.title;
-  const language = props.node.attrs.language;
-  const lineHighlight = (props.node.attrs.lineHighlight || []) as number[];
+  const { title, language: l = 'plain', lineHighlight: lh = [] } = { ...props.node.attrs } as CodeBlockPrismAttributes;
+  const language = languageMap[l] || l;
+  const languageLabel = languageLabelMap[language];
   const className = `language-${language}`;
+  const lineHighlight = Array.isArray(lh) ? lh : [];
 
   return (
     <NodeViewWrapper>
@@ -90,7 +93,7 @@ export function CodeBlockView(props: NodeViewProps) {
         </div>
 
         <div className={classes.head}>
-          <div className={cx(classes.badge, classes.language)}>{languageLabelMap[language] || language}</div>
+          <div className={cx(classes.badge, classes.language)}>{languageLabel || language}</div>
           {title && <div className={classes.badge}>{title}</div>}
         </div>
 

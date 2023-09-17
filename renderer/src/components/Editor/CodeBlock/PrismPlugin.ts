@@ -15,6 +15,19 @@ import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-javascript';
 import './prism-cloud9-night-low.css';
 
+export const languageMap: Record<string, string> = {
+  md: 'markdown',
+  ts: 'typescript',
+  js: 'javascript',
+  javascriptreact: 'jsx',
+  typescriptreact: 'tsx'
+};
+
+for (const k in languageMap) {
+  const raw = languageMap[k];
+  Prism.languages[k] = Prism.languages[raw];
+}
+
 function parseNodes(nodes: any[], className: string[] = []): { text: string; classes: string[] }[] {
   return nodes
     .map(node => {

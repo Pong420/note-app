@@ -1,13 +1,6 @@
 import { NodeType } from '@tiptap/pm/model';
 import { InputRule, InputRuleFinder } from '@tiptap/react';
-
-const languageMap: Record<string, string> = {
-  md: 'markdown',
-  ts: 'typescript',
-  js: 'javascript',
-  javascriptreact: 'jsx',
-  typescriptreact: 'tsx'
-};
+import { CodeBlockPrismAttributes } from './CodeBlockPrism';
 
 export const codeblockInputRegex = /^```(.*)\n$/;
 export const codeblockFullInputRegex = /^```(.*)\n((.|\n)*)```\n?$/;
@@ -47,14 +40,8 @@ export function codeblockTypeInputRule(config: { find: InputRuleFinder; type: No
       const metadata = metaString.split(' ');
 
       const attributes = {
-        ...metadata.reduce((r, p, i) => ({ ...r, ...parseMeta(p, i) }), {} as Record<string, unknown>)
+        ...metadata.reduce((r, p, i) => ({ ...r, ...parseMeta(p, i) }), {} as CodeBlockPrismAttributes)
       };
-
-      if (!attributes.language) {
-        attributes.language = 'plain';
-      } else {
-        attributes.language = languageMap[attributes.language as string] || attributes.language;
-      }
 
       if (!$start.node(-1).canReplaceWith($start.index(-1), $start.indexAfter(-1), config.type)) {
         return null;
