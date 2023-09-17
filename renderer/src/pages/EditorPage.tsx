@@ -62,10 +62,12 @@ export function EditorPage() {
   const [loaded, setLoaded] = useState(false);
 
   const onUpdate: EditorOptions['onUpdate'] = useCallback(
-    ({ editor }) => {
-      adapter.emitFileChanged({ id, title, content: editor.getJSON() });
+    ({ editor, transaction }) => {
+      if (loaded && transaction.docChanged) {
+        adapter.emitFileChanged({ id, title, content: editor.getJSON() });
+      }
     },
-    [id, title]
+    [id, title, loaded]
   );
 
   const editor = useEditor({
