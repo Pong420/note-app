@@ -63,9 +63,16 @@ export function EditorStyles() {
 
             /* gap cursor */
             '.ProseMirror-gapcursor:after': {
-              top: 5,
               borderWidth: 2,
               borderColor
+            },
+
+            // to avoid overlap with table or image
+            '.ProseMirror-gapcursor:first-of-type:after': {
+              top: -5
+            },
+            '* + .ProseMirror-gapcursor.ProseMirror-gapcursor:after': {
+              top: 5
             },
 
             /* image */

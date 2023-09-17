@@ -86,12 +86,15 @@ export const tableMenuRefId = `table-menu-item`;
 function getPos(node: Element | null) {
   let top = 0;
   let left = 0;
+  const height = node && node instanceof HTMLElement ? node.offsetHeight : 0;
+
   while (node && node instanceof HTMLElement && !node.querySelector(`#${tableMenuRefId}`)) {
     top += node.offsetTop;
     left += node.offsetLeft;
     node = node.offsetParent;
   }
-  return { top, left };
+
+  return { top: top + height, left };
 }
 
 // References:
@@ -130,12 +133,7 @@ export const TableBubbleMenu = ({ editor }: TableBubbleMenuProps) => {
 
   return (
     <Portal target={document.querySelector<HTMLElement>(`#${tableMenuRefId}`) || undefined}>
-      <Paper
-        p={5}
-        shadow="md"
-        withBorder
-        sx={{ position: 'absolute', top: rect.top - 5, left: rect.left, transform: 'translate(0px, -100%)', zIndex: 1 }}
-      >
+      <Paper p={5} shadow="md" withBorder sx={{ position: 'absolute', top: rect.top + 5, right: rect.left, zIndex: 1 }}>
         <Group spacing={10}>
           {options.map((group, i) => {
             return (

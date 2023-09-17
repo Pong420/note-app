@@ -8,7 +8,6 @@ import HorizontalRule from '@tiptap/extension-horizontal-rule';
 import Link from '@tiptap/extension-link';
 import TextAlign from '@tiptap/extension-text-align';
 import Placeholder from '@tiptap/extension-placeholder';
-import Table from '@tiptap/extension-table';
 import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
@@ -20,6 +19,7 @@ import { Image } from '@/components/Editor/Image/Image';
 import { Video } from '@/components/Editor/Video/Video';
 import { KeyboardButton } from '@/components/Editor/KeyboardButton/KeyboardButton';
 import { HorizontalRule as HorizontalRuleComponent } from '@/components/Editor/HorizontalRule';
+import { Table } from '@/components/Editor/Table/Table';
 import { FileJSON } from '@/types';
 
 const extensions: Extensions = [
