@@ -42,4 +42,5 @@ body {
 
 .__stretch > * {
   flex: 1 1 auto;
+  width: -webkit-fill-available;
 }
