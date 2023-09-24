@@ -1,0 +1,65 @@
+/* mutliple class name to make sure styles will be overriden by */
+/* https://mantine.dev/core/typography-styles-provider/ */
+.tiptap.tiptap.tiptap {
+  table {
+    border-collapse: collapse;
+    margin: 0;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 100%;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  th {
+    background-color: var(--mantine-color-gray-light-hover);
+
+    @mixin dark {
+      color: var(--mantine-color-gray-light);
+    }
+  }
+
+  td,
+  th {
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-4));
+
+    min-width: 1em;
+    padding: 3px 5px;
+    position: relative;
+    vertical-align: top;
+
+    > * {
+      margin-bottom: 0;
+    }
+  }
+
+  .selectedCell {
+    /* TODO: */
+    /* background-color: blue.background; */
+    /* color: blue.color */
+  }
+
+  .column-resize-handle {
+    background-color: #adf;
+    bottom: -2px;
+    position: absolute;
+    right: -2px;
+    pointer-events: none;
+    top: 0;
+    width: 4px;
+  }
+
+  .tableWrapper {
+    padding: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .resize-cursor {
+    cursor: ew-resize, col-resize;
+  }
+}

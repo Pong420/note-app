@@ -1,0 +1,67 @@
+:root {
+  --top: 40px;
+  --lineHeight: 1.55em;
+}
+
+.root.root {
+  position: relative;
+  padding-top: var(--top);
+  line-height: var(--lineHeight);
+}
+
+/* code {} */
+.head {
+  position: absolute;
+  top: 10px;
+  font-size: 10px;
+  line-height: 1rem;
+  display: flex;
+  gap: 10px;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.badge {
+  /* FIXME: */
+  /* background-color: color; */
+  padding: 0.1rem 0.5rem;
+  border-radius: 5px 5px 5px 5px;
+  color: #fff;
+}
+
+.language {
+  text-transform: capitalize;
+}
+
+.copy.copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.lines {
+  position: absolute;
+  left: -1.8em;
+  right: -1.8em;
+
+  height: 100%;
+  overflow: hidden;
+
+  + code {
+    position: relative;
+    line-height: var(--lineHeight);
+  }
+}
+
+.lineHighlight {
+  height: var(--lineHeight);
+  background-color: rgb(52 58 64 / 60%);
+
+  position: absolute;
+  left: 0;
+  right: 0;
+}

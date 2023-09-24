@@ -26,14 +26,14 @@ export function ColorSwatchs() {
   const primaryColor = usePreferences('theme.primaryColor');
 
   return (
-    <Group position="center" spacing={spacing} w={(size + spacing) * 6 - spacing}>
+    <Group justify="center" gap={spacing} w={(size + spacing) * 6 - spacing}>
       {colors.map(color => (
         <ColorSwatch
           key={color}
           size={size}
           component="button"
           color={theme.colors[color][6]}
-          sx={{ color: '#fff', cursor: 'pointer' }}
+          style={{ color: '#fff', cursor: 'pointer' }}
           onClick={() => preferences.set('theme.primaryColor', color)}
         >
           {color === primaryColor && <CheckIcon width={rem(10)} style={{ marginTop: '0.05rem' }} />}

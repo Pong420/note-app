@@ -1,71 +1,12 @@
-import { ActionIcon, CopyButton, createStyles } from '@mantine/core';
+import { ActionIcon, CopyButton } from '@mantine/core';
 import { NodeViewContent, NodeViewProps, NodeViewWrapper } from '@tiptap/react';
 import { IconCheck, IconClipboard } from '@tabler/icons-react';
 import { CodeBlockPrismAttributes } from './CodeBlockPrism';
 import { languageMap } from './PrismPlugin';
+import cx from 'clsx';
+import classes from './CodeBlockView.module.css';
 
-const top = 40;
 const lineHeight = 1.55;
-
-const useStyles = createStyles(theme => {
-  const color = theme.colors[theme.primaryColor][6];
-
-  return {
-    root: {
-      position: 'relative',
-      paddingTop: `${top}px !important`,
-      lineHeight
-    },
-    code: {},
-    head: {
-      position: 'absolute',
-      top: 10,
-      fontSize: 10,
-      lineHeight: `1rem`,
-      display: 'flex',
-      gap: 10
-    },
-    content: {
-      position: 'relative',
-      width: `100%`,
-      height: `100%`
-    },
-    badge: {
-      backgroundColor: color,
-      padding: '0.1rem 0.5rem',
-      borderRadius: `5px 5px 5px 5px`,
-      color: '#fff'
-    },
-    language: {
-      textTransform: 'capitalize'
-    },
-    copy: {
-      position: 'absolute',
-      top: 5,
-      right: 10
-    },
-    lines: {
-      position: 'absolute',
-      left: `-1.8em`,
-      right: `-1.8em`,
-
-      height: '100%',
-      overflow: 'hidden',
-
-      '+ code': {
-        position: 'relative',
-        lineHeight: `${lineHeight}em`
-      }
-    },
-    lineHighlight: {
-      height: `${lineHeight}em`,
-      backgroundColor: 'rgb(52 58 64 / 60%)',
-      position: 'absolute',
-      left: 0,
-      right: 0
-    }
-  };
-});
 
 const languageLabelMap: Record<string, string> = {
   tsx: 'TSX',
@@ -73,7 +14,6 @@ const languageLabelMap: Record<string, string> = {
 };
 
 export function CodeBlockView(props: NodeViewProps) {
-  const { classes, cx } = useStyles();
   const { title, language: l = 'plain', lineHighlight: lh = [] } = { ...props.node.attrs } as CodeBlockPrismAttributes;
   const language = languageMap[l] || l;
   const languageLabel = languageLabelMap[language];

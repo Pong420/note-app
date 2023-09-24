@@ -133,8 +133,13 @@ export const TableBubbleMenu = ({ editor }: TableBubbleMenuProps) => {
 
   return (
     <Portal target={document.querySelector<HTMLElement>(`#${tableMenuRefId}`) || undefined}>
-      <Paper p={5} shadow="md" withBorder sx={{ position: 'absolute', top: rect.top + 5, right: rect.left, zIndex: 1 }}>
-        <Group spacing={10}>
+      <Paper
+        p={5}
+        shadow="md"
+        withBorder
+        style={{ position: 'absolute', top: rect.top + 5, right: rect.left, zIndex: 1 }}
+      >
+        <Group gap={10}>
           {options.map((group, i) => {
             return (
               <RichTextEditor.ControlsGroup key={i}>

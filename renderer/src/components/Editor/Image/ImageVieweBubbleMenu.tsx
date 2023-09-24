@@ -1,9 +1,10 @@
-import { Button, Divider, Group, Modal, NumberInput, Stack, Text, createStyles } from '@mantine/core';
+import { Button, Divider, Group, Modal, NumberInput, Stack, Text } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { RichTextEditor } from '@mantine/tiptap';
 import { IconPhotoCog } from '@tabler/icons-react';
 import { ImageViewAttributes } from './Image';
+import classes from './ImageViewBubbleMenu.module.css';
 
 export interface ImageViewBubbleMenuProps {
   width: number;
@@ -12,23 +13,7 @@ export interface ImageViewBubbleMenuProps {
   onSubmit: (attr: Partial<ImageViewAttributes>) => void;
 }
 
-const useStyles = createStyles(() => {
-  return {
-    root: {
-      position: 'absolute',
-      bottom: -5,
-      left: 0,
-      transform: 'translate(0, 100%)',
-      fontSize: 14,
-      lineHeight: '1rem',
-      width: 'fit-content',
-      zIndex: 1
-    }
-  };
-});
-
 export function ImageViewBubbleMenu({ width, height, ratio, onSubmit }: ImageViewBubbleMenuProps) {
-  const { classes } = useStyles();
   const [opened, { open, close }] = useDisclosure();
   const form = useForm();
 
@@ -52,9 +37,9 @@ export function ImageViewBubbleMenu({ width, height, ratio, onSubmit }: ImageVie
 
       <Modal
         title={
-          <Group spacing="xs">
+          <Group gap="xs">
             <IconPhotoCog width={20} />
-            <Text weight="bold">Image Config</Text>
+            <Text fw="bold">Image Config</Text>
           </Group>
         }
         opened={opened}

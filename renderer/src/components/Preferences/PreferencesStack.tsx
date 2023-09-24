@@ -9,7 +9,7 @@ export interface PreferencesStack {
 export function PreferencesStack({ title, description, children }: PreferencesStack) {
   return (
     <div>
-      <Text weight={500}>{title}</Text>
+      <Text fw={500}>{title}</Text>
 
       {description && (
         <Text color="dimmed" size="sm">

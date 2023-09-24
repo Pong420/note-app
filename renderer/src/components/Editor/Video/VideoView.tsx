@@ -1,39 +1,17 @@
-import { createStyles } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Node } from '@tiptap/pm/model';
 import { NodeViewProps, NodeViewWrapper } from '@tiptap/react';
 import { VideoViewAttributes } from './Video';
 import { Resizer } from '../Resizer';
 import { VideoViewBubbleMenu } from './VideoViewBubbleMenu';
+import cx from 'clsx';
+import classes from './VideoView.module.css';
 
 export interface VideoViewProps extends NodeViewProps {
   node: Node & { attrs: VideoViewAttributes };
 }
 
-const useStyles = createStyles(() => {
-  return {
-    root: {
-      position: 'relative',
-      height: 'auto',
-      display: 'block',
-
-      [`&& video`]: {
-        position: 'relative',
-        display: 'block',
-        maxWidth: '100%',
-        height: 'auto'
-      }
-    },
-    drag: {
-      '*:not(video)': {
-        display: 'none'
-      }
-    }
-  };
-});
-
 export function VideoView(props: VideoViewProps) {
-  const { classes, cx } = useStyles();
   const [drag, { open: onDragStart, close: onDragEnd }] = useDisclosure();
   const { ratio, ...attrs } = props.node.attrs;
 

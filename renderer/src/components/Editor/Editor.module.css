@@ -1,0 +1,30 @@
+.root.root {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.editor.editor {
+  border: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.content.content {
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  :global(.mantine-RichTextEditor-content) {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
+  .ProseMirror {
+    flex: 1 1 auto;
+    app-region: no-drag;
+  }
+}

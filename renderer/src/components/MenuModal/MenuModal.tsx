@@ -25,9 +25,9 @@ export function MenuModal({ title, children, icon: Icon = IconMenu2, onExited, .
       <Modal.Content bg={primaryColor}>
         <Modal.Header bg={secondaryColor} pl="md">
           <Modal.Title>
-            <Group spacing="xs">
+            <Group gap="xs">
               <Icon size="1.5rem" />
-              <Text size="lg" weight={500}>
+              <Text size="lg" fw={500}>
                 {title}
               </Text>
             </Group>
@@ -36,7 +36,7 @@ export function MenuModal({ title, children, icon: Icon = IconMenu2, onExited, .
         </Modal.Header>
 
         <Modal.Body p="0">
-          <Stack pb="sm" spacing={0}>
+          <Stack pb="sm" gap={0}>
             {children}
           </Stack>
         </Modal.Body>

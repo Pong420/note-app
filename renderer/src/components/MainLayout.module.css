@@ -1,0 +1,22 @@
+:root {
+  --padding-x: 30px;
+  --padding-y: var(--app-region-height);
+}
+
+.appRegion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--app-region-height);
+  app-region: drag;
+}
+
+.content {
+  position: relative;
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  min-height: 100vh;
+}

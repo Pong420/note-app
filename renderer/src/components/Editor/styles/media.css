@@ -1,0 +1,7 @@
+.tiptap.tiptap.tiptap {
+  .react-renderer.node-image,
+  .react-renderer.node-video {
+    width: fit-content;
+    max-width: 100%;
+  }
+}

@@ -1,4 +1,4 @@
-import { Button, Divider, Group, Modal, NumberInput, Stack, Text, Paper, createStyles } from '@mantine/core';
+import { Button, Divider, Group, Modal, NumberInput, Stack, Text, Paper } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { RichTextEditor } from '@mantine/tiptap';
@@ -10,6 +10,7 @@ import {
   IconAdjustmentsHorizontal
 } from '@tabler/icons-react';
 import { VideoOptions, VideoViewAttributes } from './Video';
+import classes from './VideoViewBubbleMenu.module.css';
 
 export interface VideoViewBubbleMenuProps extends VideoOptions {
   width: number;
@@ -18,23 +19,7 @@ export interface VideoViewBubbleMenuProps extends VideoOptions {
   update: (attr: Partial<VideoViewAttributes>) => void;
 }
 
-const useStyles = createStyles(() => {
-  return {
-    root: {
-      position: 'absolute',
-      bottom: -5,
-      left: 0,
-      transform: 'translate(0, 100%)',
-      fontSize: 14,
-      lineHeight: '1rem',
-      width: 'fit-content',
-      zIndex: 1
-    }
-  };
-});
-
 export function VideoViewBubbleMenu({ width, height, ratio, update, ...props }: VideoViewBubbleMenuProps) {
-  const { classes } = useStyles();
   const [opened, { open, close }] = useDisclosure();
   const form = useForm();
 
@@ -46,7 +31,7 @@ export function VideoViewBubbleMenu({ width, height, ratio, update, ...props }: 
   return (
     <div className={classes.root}>
       <Paper p={5} shadow="md" withBorder>
-        <Group spacing={2}>
+        <Group gap={2}>
           <RichTextEditor.Control
             onClick={() => {
               form.setValues({ width, height });
@@ -72,9 +57,9 @@ export function VideoViewBubbleMenu({ width, height, ratio, update, ...props }: 
 
       <Modal
         title={
-          <Group spacing="xs">
+          <Group gap="xs">
             <IconPhotoCog width={20} />
-            <Text weight="bold">Video Config</Text>
+            <Text fw="bold">Video Config</Text>
           </Group>
         }
         opened={opened}

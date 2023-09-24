@@ -1,0 +1,18 @@
+.root {
+  position: relative;
+  height: auto;
+  display: block;
+
+  && img {
+    position: relative;
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.drag {
+  *:not(img) {
+    display: none;
+  }
+}

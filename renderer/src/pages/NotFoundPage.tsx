@@ -5,7 +5,7 @@ export function NotFoundPage() {
   return (
     <Container>
       <Box
-        sx={{
+        style={{
           position: 'absolute',
           top: '50%',
           left: '50%',
@@ -13,7 +13,7 @@ export function NotFoundPage() {
         }}
       >
         <Box
-          sx={{
+          style={{
             width: 'fit-content',
             padding: '0.5em 2.75em',
             fontSize: 60,
@@ -24,7 +24,7 @@ export function NotFoundPage() {
           404
         </Box>
 
-        <Group position="apart" mt="md">
+        <Group justify="apart" mt="md">
           <Text>We can't find the page you are looking for.</Text>
           <NavLink to="/">Back to home</NavLink>
         </Group>

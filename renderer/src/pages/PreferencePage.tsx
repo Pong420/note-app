@@ -39,7 +39,7 @@ export function PreferencePage() {
 
       <PreferencesSection title="Storage">
         <PreferencesStack title="App Data" description="Location where file content/assets is stored">
-          <Group spacing={5}>
+          <Group gap={5}>
             <TextInput readOnly style={{ flex: '1 1 auto' }} value={appPath || ''} />
             <ActionIcon variant="default" size="lg" onClick={() => adapter.openAppDir()}>
               <IconExternalLink size="1rem" />

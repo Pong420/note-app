@@ -1,0 +1,17 @@
+/* mutliple class name to make sure styles will be overriden by */
+/* https//mantine.dev/core/typography-styles-provider/ */
+.tiptap.tiptap.tiptap {
+  .ProseMirror-gapcursorafter {
+    border-width: 2;
+    border-color: light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-4));
+  }
+
+  /* to avoid overlap with table or image */
+  .ProseMirror-gapcursorfirst-of-typeafter {
+    top: -5px;
+  }
+
+  * + .ProseMirror-gapcursor.ProseMirror-gapcursorafter {
+    top: 5px;
+  }
+}

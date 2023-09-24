@@ -1,0 +1,49 @@
+:root {
+  --resizer-border-width: 1;
+}
+
+.root {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* borderWidth; */
+  border-style: solid;
+  border-color: color;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
+
+.handle {
+  width: handleSize;
+  height: handleSize;
+  background-color: color;
+  position: absolute;
+  pointer-events: all;
+}
+
+.topLeft {
+  cursor: nwse-resize;
+  top: -handleSize / 2;
+  left: -handleSize / 2;
+}
+
+.topRight {
+  cursor: nesw-resize;
+  top: -handleSize / 2;
+  right: -handleSize / 2;
+}
+
+.bottomLeft {
+  cursor: nesw-resize;
+  left: -handleSize / 2;
+  bottom: -handleSize / 2;
+}
+
+.bottomRight {
+  cursor: nwse-resize;
+  right: -handleSize / 2;
+  bottom: -handleSize / 2;
+}

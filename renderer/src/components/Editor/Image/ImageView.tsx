@@ -1,41 +1,19 @@
-import { createStyles } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Node } from '@tiptap/pm/model';
 import { NodeViewProps, NodeViewWrapper } from '@tiptap/react';
 import { ImageViewAttributes } from './Image';
 import { ImageViewBubbleMenu } from './ImageVieweBubbleMenu';
 import { Resizer } from '../Resizer';
+import cx from 'clsx';
+import classes from './ImageView.module.css';
 
 export interface ImageViewProps extends NodeViewProps {
   node: Node & { attrs: ImageViewAttributes };
 }
 
-const useStyles = createStyles(() => {
-  return {
-    root: {
-      position: 'relative',
-      height: 'auto',
-      display: 'block',
-
-      [`&& img`]: {
-        position: 'relative',
-        display: 'block',
-        maxWidth: '100%',
-        height: 'auto'
-      }
-    },
-    drag: {
-      '*:not(img)': {
-        display: 'none'
-      }
-    }
-  };
-});
-
 // referenes
 // https://github.com/breakerh/tiptap-image-resize/blob/main/src/component/ImageResizeComponent.tsx
 export function ImageView(props: ImageViewProps) {
-  const { classes, cx } = useStyles();
   const [drag, { open: onDragStart, close: onDragEnd }] = useDisclosure();
   const { ratio, ...attrs } = props.node.attrs as ImageViewAttributes;
 

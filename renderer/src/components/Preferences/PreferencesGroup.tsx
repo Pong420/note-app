@@ -8,9 +8,9 @@ export interface PreferencesGroup {
 
 export function PreferencesGroup({ title, description, children }: PreferencesGroup) {
   return (
-    <Group noWrap spacing="lg">
+    <Group wrap="nowrap" gap="lg">
       <div style={{ flex: '1 1 auto' }}>
-        <Text weight={500}>{title}</Text>
+        <Text fw={500}>{title}</Text>
         {description && (
           <Text color="dimmed" size="sm">
             {description}

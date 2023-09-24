@@ -1,5 +1,6 @@
+import { useMemo } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import { ColorScheme, MantineProvider, MantineThemeOverride } from '@mantine/core';
+import { createTheme, MantineProvider, Card, Container } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { ModalAnchor } from './components/ModalAnchor';
 import { usePromise } from './hooks/usePromise';
@@ -10,46 +11,40 @@ import { fileManager } from './utils/FileManager';
 const init = () => fileManager.load();
 
 export function App() {
-  const theme = usePreferences('theme');
-  const colorScheme: ColorScheme = theme.darkMode ? 'dark' : 'light';
   const ready = usePromise(init);
+  const theme = usePreferences('theme');
 
-  const components: MantineThemeOverride['components'] = {
-    Card: {
-      defaultProps(theme) {
-        return {
-          withBorder: theme.colorScheme === 'light',
-          shadow: 'sm'
-        };
-      }
-    },
-    Container: {
-      defaultProps() {
-        return {
-          maw: theme.pageWidth
-        };
-      }
-    }
-  };
+  const mantineTheme = useMemo(() => {
+    return createTheme({
+      /** Put your mantine theme override here */
+      components: {
+        Card: Card.extend({
+          defaultProps: {
+            shadow: 'sm',
+            withBorder: !theme.darkMode
+          }
+        }),
+        Container: Container.extend({
+          defaultProps: {
+            maw: theme.pageWidth
+          }
+        })
+      },
+      primaryColor: theme.primaryColor
+    });
+  }, [theme.darkMode, theme.pageWidth, theme.primaryColor]);
+
+  // FIXME:
+  // globalStyles() {
+  //   return {
+  //     body: {
+  //       fontSize: theme.fontSize
+  //     }
+  //   };
+  // }
 
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      withCSSVariables
-      theme={{
-        colorScheme,
-        primaryColor: theme.primaryColor,
-        components,
-        globalStyles() {
-          return {
-            body: {
-              fontSize: theme.fontSize
-            }
-          };
-        }
-      }}
-    >
+    <MantineProvider theme={mantineTheme} forceColorScheme={theme.darkMode ? 'dark' : 'light'}>
       {ready && <RouterProvider router={router} />}
       <Notifications containerWidth={400} position="top-right" />
       <ModalAnchor />

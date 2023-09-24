@@ -1,0 +1,29 @@
+.action {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: rem(6) rem(12);
+  border-radius: var(--mantine-radius-sm);
+
+  @mixin dark {
+    background-color: var(--mantine-color-dark-4-filled-hover);
+  }
+
+  @mixin light {
+    background-color: var(--mantine-color-gray-1-filled-hover);
+  }
+
+  &[data-hovered] {
+    @mixin dark {
+      color: var(--mantine-color-dark-4);
+    }
+
+    @mixin light {
+      color: var(--mantine-color-gray-1);
+    }
+  }
+
+  & + & {
+    margin-top: rem(5);
+  }
+}

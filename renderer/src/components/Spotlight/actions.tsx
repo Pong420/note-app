@@ -1,39 +1,35 @@
 import { IconAdjustmentsHorizontal, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
-import { NewNote } from '@/components/Modals/NewNote';
-import { EditNote } from '@/components/Modals/EditNote';
-import { DeleteNote } from '@/components/Modals/DeleteNote';
-import { FileJSON } from '@/types';
-import { navigate } from '@/routes';
-import { SpotlightActionSchema } from './SpotlightAction';
+// import { NewNote } from '@/components/Modals/NewNote';
+// import { EditNote } from '@/components/Modals/EditNote';
+// import { DeleteNote } from '@/components/Modals/DeleteNote';
+// import { FileJSON } from '@/types';
+// import { navigate } from '@/routes';
+import { SpotlightActionData } from './SpotlightAction';
 
-export const mainActions = (file?: FileJSON) =>
+export const mainActions = () =>
   [
     {
-      type: 'action',
       id: 'preferences',
       title: 'Preferences',
-      icon: <IconAdjustmentsHorizontal size="1.2rem" />,
-      onTrigger: () => navigate('/preferences')
+      icon: IconAdjustmentsHorizontal
+      // onTrigger: () => navigate('/preferences')
     },
     {
-      type: 'action',
       id: 'new-note',
       title: 'New Note',
-      icon: <IconPlus size="1.2rem" />,
-      onTrigger: () => NewNote.open()
+      icon: IconPlus
+      // onTrigger: () => NewNote.open()
     },
     {
-      type: 'action',
       id: 'edit-note',
       title: 'Edit Note',
-      icon: <IconEdit size="1.2rem" />,
-      onTrigger: () => file && EditNote.open({ file })
+      icon: IconEdit
+      // onTrigger: () => file && EditNote.open({ file })
     },
     {
-      type: 'action',
       id: 'delete-note',
       title: 'Delete Note',
-      icon: <IconTrash size="1.2rem" />,
-      onTrigger: () => file && DeleteNote.open({ file })
+      icon: IconTrash
+      // onTrigger: () => file && DeleteNote.open({ file })
     }
-  ] satisfies SpotlightActionSchema[];
+  ] satisfies SpotlightActionData[];

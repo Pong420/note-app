@@ -1,41 +1,16 @@
 import { Outlet } from 'react-router-dom';
-import { createStyles } from '@mantine/core';
-import { SpotlightProvider } from '@/components/Spotlight/SpotlightProvider';
-import { APP_REGION_HEIGHT } from '@/constants';
-
-const useStyles = createStyles((_theme, { appRegionSize }: { appRegionSize: 'fixed' | 'fullpage' }) => {
-  const paddingX = 30;
-  const paddingY = APP_REGION_HEIGHT;
-
-  return {
-    appRegion: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: `100%`,
-      height: appRegionSize === 'fullpage' ? `100%` : APP_REGION_HEIGHT,
-      appRegion: 'drag'
-    },
-    content: {
-      position: 'relative',
-      paddingTop: paddingY,
-      paddingBottom: paddingY,
-      paddingLeft: paddingX,
-      paddingRight: paddingX,
-      minHeight: '100vh'
-    }
-  };
-});
+import { Spotlight } from '@/components/Spotlight/Spotlight';
+import cx from 'clsx';
+import classes from './MainLayout.module.css';
 
 export function MainLayout() {
-  const { classes, cx } = useStyles({ appRegionSize: 'fixed' });
-
   return (
-    <SpotlightProvider>
+    <>
       <div className={classes.appRegion} />
       <div className={cx(classes.content, '__stretch')}>
         <Outlet />
+        <Spotlight />
       </div>
-    </SpotlightProvider>
+    </>
   );
 }

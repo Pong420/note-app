@@ -9,16 +9,16 @@ export interface MenuModalSectionProps {
 
 export function MenuModalSection({ title, icon: Icon, children }: MenuModalSectionProps) {
   const titleNode = (
-    <Text weight={500} sx={!title ? { visibility: 'hidden', height: '0.5em' } : { lineHeight: '2.75rem' }}>
+    <Text fw={500} style={!title ? { visibility: 'hidden', height: '0.5em' } : { lineHeight: '2.75rem' }}>
       {title}
     </Text>
   );
 
   return (
-    <Stack spacing={2}>
+    <Stack gap={2}>
       <Box px="md">
         {Icon ? (
-          <Group spacing={5}>
+          <Group gap={5}>
             <Icon size="1.3rem" /> {titleNode}
           </Group>
         ) : (
