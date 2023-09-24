@@ -26,8 +26,7 @@
 }
 
 .badge {
-  /* FIXME: */
-  /* background-color: color; */
+  background-color: var(--mantine-primary-color-filled);
   padding: 0.1rem 0.5rem;
   border-radius: 5px 5px 5px 5px;
   color: #fff;

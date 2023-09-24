@@ -25,6 +25,7 @@ import { FileJSON } from '@/types';
 
 const extensions: Extensions = [
   StarterKit.configure({
+    code: false,
     codeBlock: false,
     horizontalRule: false
   }),

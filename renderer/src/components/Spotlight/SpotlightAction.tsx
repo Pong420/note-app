@@ -13,9 +13,7 @@ export interface SpotlightActionData extends ISpotlightActionData {
   file?: FileJSON;
 }
 
-export interface SpotlightActionProps extends ISpotlightActionProps {
-  icon?: React.ComponentType<TablerIconsProps>;
-}
+export interface SpotlightActionProps extends Omit<ISpotlightActionProps, 'id'>, SpotlightActionData {}
 
 export function SpotlightAction({
   icon: Icon,
@@ -24,17 +22,11 @@ export function SpotlightAction({
   classNames,
   description,
   highlightQuery,
-  ...others
+  ...props
 }: SpotlightActionProps) {
   return (
-    <Spotlight.Action
-      className={classes.action}
-      tabIndex={-1}
-      onMouseDown={event => event.preventDefault()}
-      {...others}
-    >
+    <Spotlight.Action className={classes.action} tabIndex={-1} onMouseDown={event => event.preventDefault()} {...props}>
       <Group wrap="nowrap" w="100%">
-        {/* {action.icon && <Center>{action.icon}</Center>} */}
         {Icon && <Icon size="1.2rem" />}
 
         <div style={{ flex: 1 }}>

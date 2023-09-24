@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Spotlight as MantineSpotlight, SpotlightActionData } from '@mantine/spotlight';
 import { IconFile, IconSearch } from '@tabler/icons-react';
 import { shortcut } from '@/components/Editor/Spotlight';
-// import { navigate } from '@/routes';
+import { navigate } from '@/routes';
 import { FileID } from '@/types';
 import { fileManager } from '@/utils/FileManager';
 import { SpotlightAction } from './SpotlightAction';
@@ -41,7 +41,8 @@ export function Spotlight() {
                   title: file.title,
                   icon: IconFile,
                   // TODO: dayjs
-                  description: new Date(file.createdAt).toISOString()
+                  description: new Date(file.createdAt).toISOString(),
+                  onClick: () => navigate('/editor/:title/:id', file)
                 }
               ],
         [] as SpotlightActionData[]
@@ -52,7 +53,7 @@ export function Spotlight() {
       <MantineSpotlight.Search placeholder="Search..." leftSection={<IconSearch stroke={1.5} />} />
       <MantineSpotlight.ActionsList>
         {actions.length > 0 ? (
-          actions.map(data => <SpotlightAction key={data.id} {...data} />)
+          actions.map(props => <SpotlightAction key={props.id} {...props} />)
         ) : (
           <MantineSpotlight.Empty>Nothing found...</MantineSpotlight.Empty>
         )}

@@ -17,7 +17,7 @@
     background-color: var(--mantine-color-gray-light-hover);
 
     @mixin dark {
-      color: var(--mantine-color-gray-light);
+      color: var(--mantine-color-gray-light-color);
     }
   }
 
@@ -39,9 +39,8 @@
   }
 
   .selectedCell {
-    /* TODO: */
-    /* background-color: blue.background; */
-    /* color: blue.color */
+    background-color: var(--mantine-primary-color-light);
+    color: var(--mantine-primary-color-light-color);
   }
 
   .column-resize-handle {

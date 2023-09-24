@@ -1,15 +1,21 @@
 :root {
-  --resizer-border-width: 1;
+  --resizer-border-width: 1px;
+  --handler-size: 8px;
+  --position: calc(var(--handler-size) / -2);
 }
+
+/* const borderWidth = 1;
+const handleSize = 8;
+const color = theme.colors[theme.primaryColor][6]; */
 
 .root {
   position: absolute;
   top: 0;
   left: 0;
 
-  /* borderWidth; */
+  border-width: var(--resizer-border-width);
   border-style: solid;
-  border-color: color;
+  border-color: var(--mantine-primary-color-filled);
   width: 100%;
   height: 100%;
 
@@ -17,33 +23,33 @@
 }
 
 .handle {
-  width: handleSize;
-  height: handleSize;
-  background-color: color;
+  width: var(--handler-size);
+  height: var(--handler-size);
+  background-color: var(--mantine-primary-color-filled);
   position: absolute;
   pointer-events: all;
 }
 
 .topLeft {
   cursor: nwse-resize;
-  top: -handleSize / 2;
-  left: -handleSize / 2;
+  top: calc(var(--handler-size) / -2);
+  left: calc(var(--handler-size) / -2);
 }
 
 .topRight {
   cursor: nesw-resize;
-  top: -handleSize / 2;
-  right: -handleSize / 2;
+  top: calc(var(--handler-size) / -2);
+  right: calc(var(--handler-size) / -2);
 }
 
 .bottomLeft {
   cursor: nesw-resize;
-  left: -handleSize / 2;
-  bottom: -handleSize / 2;
+  left: calc(var(--handler-size) / -2);
+  bottom: calc(var(--handler-size) / -2);
 }
 
 .bottomRight {
   cursor: nwse-resize;
-  right: -handleSize / 2;
-  bottom: -handleSize / 2;
+  right: calc(var(--handler-size) / -2);
+  bottom: calc(var(--handler-size) / -2);
 }
