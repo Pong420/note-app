@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { createTheme, MantineProvider, Card, Container } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
@@ -34,14 +34,9 @@ export function App() {
     });
   }, [theme.darkMode, theme.pageWidth, theme.primaryColor]);
 
-  // FIXME:
-  // globalStyles() {
-  //   return {
-  //     body: {
-  //       fontSize: theme.fontSize
-  //     }
-  //   };
-  // }
+  useEffect(() => {
+    document.body.style.fontSize = `${theme.fontSize}px`;
+  }, [theme.fontSize]);
 
   return (
     <MantineProvider theme={mantineTheme} forceColorScheme={theme.darkMode ? 'dark' : 'light'}>

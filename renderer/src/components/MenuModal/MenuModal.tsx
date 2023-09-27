@@ -7,14 +7,10 @@ export interface MenuModalProps extends Omit<ModalProps, 'ref'> {
 }
 
 export function MenuModal({ title, children, icon: Icon = IconMenu2, ...props }: MenuModalProps) {
-  // const theme = useMantineTheme();
-  // const [primaryColor, secondaryColor] = getMenuColors(theme.colorScheme);
-
   return (
     <Modal.Root radius={6} size="sm" centered withinPortal {...props}>
       <Modal.Overlay opacity={0.5} />
 
-      {/* TODO: */}
       <Modal.Content bg="var(--menu-color)">
         <Modal.Header bg="var(--menu-background-color)" pl="md">
           <Modal.Title>
