@@ -1,8 +1,7 @@
-// import { NotificationProps } from '@mantine/core';
-import { notifications as ns, NotificationProps } from '@mantine/notifications';
+import { notifications as ns, NotificationData } from '@mantine/notifications';
 
 export const notifications = {
-  success(options: Partial<NotificationProps>) {
+  success(options: Partial<NotificationData>) {
     ns.show({
       title: 'Success',
       withBorder: true,
@@ -13,7 +12,7 @@ export const notifications = {
       ...options
     });
   },
-  error(options: Partial<NotificationProps>) {
+  error(options: Partial<NotificationData>) {
     ns.show({
       title: 'Error',
       withBorder: true,
@@ -24,7 +23,7 @@ export const notifications = {
       ...options
     });
   },
-  onError(options: Partial<NotificationProps>) {
+  onError(options: Partial<NotificationData>) {
     return (error: unknown) => {
       console.error(error);
       if (!options.message && error instanceof Error) {
