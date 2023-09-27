@@ -1,0 +1,19 @@
+html[data-mantine-color-scheme='light'] {
+  --menu-color: #f6f6f6;
+  --menu-background-color: #fff;
+  --menu-hover: rgba(255, 255, 255, 0.3);
+}
+
+html[data-mantine-color-scheme='dark'] {
+  --menu-color: #222;
+  --menu-background-color: #1c1c1c;
+  --menu-hover: rgba(142, 142, 142, 0.3);
+}
+
+.content {
+  background-color: var(--menu-color);
+}
+
+.header {
+  background-color: var(--menu-background-color);
+}

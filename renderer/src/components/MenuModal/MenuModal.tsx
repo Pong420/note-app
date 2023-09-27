@@ -1,29 +1,22 @@
-import { Text, Group, Modal, ModalProps, Stack, useMantineTheme } from '@mantine/core';
+import { Text, Group, Modal, ModalProps, Stack } from '@mantine/core';
 import { IconMenu2, type TablerIconsProps } from '@tabler/icons-react';
-import { getMenuColors } from '@/components/MenuModal/colors';
+import './MenuModal.css';
 
 export interface MenuModalProps extends Omit<ModalProps, 'ref'> {
   icon?: React.ComponentType<TablerIconsProps>;
-  onExited?: () => void;
 }
 
-export function MenuModal({ title, children, icon: Icon = IconMenu2, onExited, ...props }: MenuModalProps) {
-  const theme = useMantineTheme();
-  const [primaryColor, secondaryColor] = getMenuColors(theme.colorScheme);
+export function MenuModal({ title, children, icon: Icon = IconMenu2, ...props }: MenuModalProps) {
+  // const theme = useMantineTheme();
+  // const [primaryColor, secondaryColor] = getMenuColors(theme.colorScheme);
 
   return (
-    <Modal.Root
-      radius={6}
-      size="sm"
-      centered
-      withinPortal
-      transitionProps={{ ...props.transitionProps, onExited }}
-      {...props}
-    >
+    <Modal.Root radius={6} size="sm" centered withinPortal {...props}>
       <Modal.Overlay opacity={0.5} />
 
-      <Modal.Content bg={primaryColor}>
-        <Modal.Header bg={secondaryColor} pl="md">
+      {/* TODO: */}
+      <Modal.Content bg="var(--menu-color)">
+        <Modal.Header bg="var(--menu-background-color)" pl="md">
           <Modal.Title>
             <Group gap="xs">
               <Icon size="1.5rem" />

@@ -1,7 +1,7 @@
-// import { getMenuColors } from '@/components/MenuModal/colors';
 import { Flex, Group, Text } from '@mantine/core';
 import { IconChevronRight, type TablerIconsProps } from '@tabler/icons-react';
 import cx from 'clsx';
+import classes from './MenuModalRow.module.css';
 
 export interface MenuModalRowProps {
   icon?: React.ComponentType<TablerIconsProps>;
@@ -12,28 +12,7 @@ export interface MenuModalRowProps {
   onClick?: (event: React.MouseEvent) => void;
 }
 
-// FIXME:
-// const useStyles = createStyles(theme => {
-//   const [, backgroundColor] = getMenuColors(theme.colorScheme);
-//   return {
-//     root: {
-//       backgroundColor
-//     },
-//     interactive: {
-//       cursor: 'pointer',
-
-//       '&:hover': {
-//         backgroundColor: theme.fn.rgba(theme.fn.lighten(backgroundColor, 0.5), 0.3)
-//       }
-//     }
-//   };
-// });
-
-const classes = {} as Record<string, string>;
-
 export function MenuModalRow({ icon: Icon, title, text, rightSection, onClick }: MenuModalRowProps) {
-  // const { classes, cx } = useStyles();
-
   if (!!onClick && !rightSection) {
     rightSection = <IconChevronRight size="1.2rem" strokeWidth={2} />;
   }
@@ -55,7 +34,7 @@ export function MenuModalRow({ icon: Icon, title, text, rightSection, onClick }:
       </Group>
       <Group gap={5} style={{ flex: '0 0 auto' }}>
         {text && (
-          <Text size="sm" color="dimmed">
+          <Text size="sm" c="dimmed">
             {text}
           </Text>
         )}

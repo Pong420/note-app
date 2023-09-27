@@ -1,0 +1,11 @@
+.root {
+  background-color: var(--menu-background-color);
+}
+
+.interactive {
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--menu-hover);
+  }
+}
