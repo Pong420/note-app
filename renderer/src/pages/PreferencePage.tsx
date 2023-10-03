@@ -12,7 +12,7 @@ export function PreferencePage() {
 
   return (
     <Container>
-      <h1>Preferences</h1>
+      <h3>Preferences</h3>
 
       <Space h="lg" />
 

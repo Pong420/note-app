@@ -35,7 +35,7 @@ export function App() {
   }, [theme.darkMode, theme.pageWidth, theme.primaryColor]);
 
   useEffect(() => {
-    document.body.style.fontSize = `${theme.fontSize}px`;
+    document.documentElement.style.fontSize = `${theme.fontSize}px`;
   }, [theme.fontSize]);
 
   return (
