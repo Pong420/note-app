@@ -29,7 +29,7 @@ export function DeleteNote({ file, ...props }: DeleteNoteProps) {
       <MenuModalSection>
         <form onSubmit={handleSubmit}>
           <Stack mx="md">
-            <Text color="yellow" size="md">
+            <Text c="yellow" size="md">
               This will permanently delete the note <b> {file.title}</b>. To confirm, type "{keyword}" in the box below
             </Text>
 

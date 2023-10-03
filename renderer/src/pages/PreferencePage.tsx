@@ -1,11 +1,12 @@
-import { ActionIcon, Container, Group, Space, TextInput } from '@mantine/core';
+import { Container, Group, Space, TextInput } from '@mantine/core';
 import { BooleanOption, ColorSwatchs } from '@/components/Preferences/Options';
 import { PreferencesGroup } from '@/components/Preferences/PreferencesGroup';
 import { PreferencesStack } from '@/components/Preferences/PreferencesStack';
 import { PreferencesSection } from '@/components/Preferences/PreferencesSection';
-import { IconExternalLink } from '@tabler/icons-react';
+import { IconFolderOpen } from '@tabler/icons-react';
 import { usePromise } from '@/hooks/usePromise';
 import { NumberOption } from '@/components/Preferences/Options/NumberOption';
+import { IconButton } from '@/components/IconButton';
 
 export function PreferencePage() {
   const appPath = usePromise(adapter.getAppPath);
@@ -41,9 +42,7 @@ export function PreferencePage() {
         <PreferencesStack title="App Data" description="Location where file content/assets is stored">
           <Group gap={5}>
             <TextInput readOnly style={{ flex: '1 1 auto' }} value={appPath || ''} />
-            <ActionIcon variant="default" size="lg" onClick={() => adapter.openAppDir()}>
-              <IconExternalLink size="1rem" />
-            </ActionIcon>
+            <IconButton icon={IconFolderOpen} size={36} tooltip="Open Folder" onClick={() => adapter.openAppDir()} />
           </Group>
         </PreferencesStack>
       </PreferencesSection>

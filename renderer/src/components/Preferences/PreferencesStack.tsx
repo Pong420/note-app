@@ -12,7 +12,7 @@ export function PreferencesStack({ title, description, children }: PreferencesSt
       <Text fw={500}>{title}</Text>
 
       {description && (
-        <Text color="dimmed" size="sm">
+        <Text c="dimmed" size="sm">
           {description}
         </Text>
       )}

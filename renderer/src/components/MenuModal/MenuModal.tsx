@@ -4,11 +4,19 @@ import './MenuModal.css';
 
 export interface MenuModalProps extends Omit<ModalProps, 'ref'> {
   icon?: React.ComponentType<TablerIconsProps>;
+  onExited?: () => void;
 }
 
-export function MenuModal({ title, children, icon: Icon = IconMenu2, ...props }: MenuModalProps) {
+export function MenuModal({ title, children, icon: Icon = IconMenu2, onExited, ...props }: MenuModalProps) {
   return (
-    <Modal.Root radius={6} size="sm" centered withinPortal {...props}>
+    <Modal.Root
+      radius={6}
+      size="sm"
+      centered
+      withinPortal
+      {...props}
+      transitionProps={{ ...props.transitionProps, onExited }}
+    >
       <Modal.Overlay opacity={0.5} />
 
       <Modal.Content bg="var(--menu-color)">
