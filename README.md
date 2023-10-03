@@ -53,7 +53,7 @@ npm run dev
 - [ ] Documentation
   - [x] Features
   - [ ] Shortcuts
-- [ ] Block quote
+- [x] Admonition
 
 ## Features
 

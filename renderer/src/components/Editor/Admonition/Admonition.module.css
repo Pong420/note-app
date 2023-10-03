@@ -1,0 +1,13 @@
+.root {
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.selected {
+  border-color: var(--mantine-primary-color-filled);
+}
+
+.content {
+  min-height: 2rem;
+}

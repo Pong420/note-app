@@ -22,7 +22,7 @@ export const KeyboardButton = Node.create<KeyboardButtonOptions>({
   parseHTML() {
     return [
       {
-        tag: 'div[data-kbd]'
+        tag: 'span[data-kbd]'
       }
     ];
   },

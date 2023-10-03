@@ -19,6 +19,7 @@ import { Spotlight } from '@/components/Editor/Spotlight';
 import { Image } from '@/components/Editor/Image/Image';
 import { Video } from '@/components/Editor/Video/Video';
 import { KeyboardButton } from '@/components/Editor/KeyboardButton/KeyboardButton';
+import { Admonition } from '@/components/Editor/Admonition/Admonition';
 import { HorizontalRule as HorizontalRuleComponent } from '@/components/Editor/HorizontalRule';
 import { Table } from '@/components/Editor/Table/Table';
 import { FileJSON } from '@/types';
@@ -56,7 +57,8 @@ const extensions: Extensions = [
   Code,
   CodeBlockPrism,
   Spotlight,
-  KeyboardButton
+  KeyboardButton,
+  Admonition
 ];
 
 const editorProps: EditorOptions['editorProps'] = {

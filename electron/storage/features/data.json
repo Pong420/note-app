@@ -46,7 +46,7 @@
         "content": [
           {
             "type": "text",
-            "text": "The application are frame less and without control bar on the UI. To switch between notes, and some other actions, you can use the "
+            "text": "The application are frame less and without controls UI. To switch between notes, and some other actions, you can use the "
           },
           {
             "type": "text",
@@ -55,15 +55,9 @@
                 "type": "bold"
               }
             ],
-            "text": "Spotlight."
+            "text": "Spotlight.x"
           }
         ]
-      },
-      {
-        "type": "paragraph",
-        "attrs": {
-          "textAlign": "left"
-        }
       },
       {
         "type": "video",
@@ -359,7 +353,165 @@
         "content": [
           {
             "type": "text",
-            "text": "Others"
+            "text": "Admonition"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Type "
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "code"
+              }
+            ],
+            "text": ":::"
+          },
+          {
+            "type": "text",
+            "text": " and a correct type of admonition, e.g. "
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "code"
+              }
+            ],
+            "text": ":::note"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "code"
+              }
+            ],
+            "text": ":::tip"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "code"
+              }
+            ],
+            "text": ":::caution"
+          },
+          {
+            "type": "text",
+            "text": " will transform into below"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "admonition",
+        "attrs": {
+          "type": "note"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "note"
+          }
+        ]
+      },
+      {
+        "type": "admonition",
+        "attrs": {
+          "type": "tip"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "tips"
+          }
+        ]
+      },
+      {
+        "type": "admonition",
+        "attrs": {
+          "type": "info"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "info"
+          }
+        ]
+      },
+      {
+        "type": "admonition",
+        "attrs": {
+          "type": "caution"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "caution"
+          }
+        ]
+      },
+      {
+        "type": "admonition",
+        "attrs": {
+          "type": "danger"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "danger"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "horizontalRule"
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Keyboard Button"
           }
         ]
       },
@@ -424,5 +576,5 @@
       }
     ]
   },
-  "updatedAt": 1694347840570
+  "updatedAt": 1696338526203
 }
