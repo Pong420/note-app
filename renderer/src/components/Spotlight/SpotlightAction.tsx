@@ -33,7 +33,7 @@ export function SpotlightAction({
           <Text>{title}</Text>
 
           {description && (
-            <Text c="dimmed" size="xs">
+            <Text opacity={0.6} size="xs">
               {description}
             </Text>
           )}
