@@ -1,12 +1,11 @@
 import { useState, useSyncExternalStore } from 'react';
-import { useParams } from 'react-router-dom';
 import { default as Fuse } from 'fuse.js';
 import { Spotlight as MantineSpotlight, SpotlightActionData } from '@mantine/spotlight';
 import { IconFile, IconSearch } from '@tabler/icons-react';
 import { shortcut } from '@/components/Editor/Spotlight';
 import { navigate } from '@/routes';
-import { FileID } from '@/types';
 import { fileManager } from '@/utils/FileManager';
+import { useFile } from '@/hooks/useFile';
 import { SpotlightAction, SpotlightActionProps } from './SpotlightAction';
 import { mainActions } from './actions';
 import { spotlightStore } from './utils';
@@ -25,26 +24,24 @@ const renderActions = (query: string, actions: SpotlightActionProps[]): JSX.Elem
 };
 
 export function Spotlight() {
-  const { id } = useParams() as FileID;
   const [query, setQuery] = useState('');
+  const file = useFile();
   const files = useSyncExternalStore(fileManager.subscribe, getFiles);
-  const file = fileManager.getFile(id);
   const actions = query.startsWith('>')
     ? mainActions(spotlightStore, file)
     : files.reduce(
-        (actions, file) =>
-          file.id === id
+        (actions, f) =>
+          file && file.id === f.id
             ? actions
             : [
                 ...actions,
                 {
                   file,
-                  id: file.id,
-                  title: file.title,
+                  id: f.id,
+                  title: f.title,
                   icon: IconFile,
-                  // TODO: dayjs
-                  description: new Date(file.createdAt).toISOString(),
-                  onClick: () => navigate('/editor/:title/:id', file)
+                  description: new Date(f.createdAt).toISOString().replace(/T/, ' ').replace(/\..*/, ''),
+                  onClick: () => navigate('/editor/:title/:id', f)
                 }
               ],
         [] as SpotlightActionData[]

@@ -6,7 +6,7 @@ import { FileID } from '@/types';
 /**
  * If `id` is not assigned return current file
  */
-export function useFile({ id, subscription = true }: { id?: string; subscription?: boolean }) {
+export function useFile({ id, subscription = true }: { id?: string; subscription?: boolean } = {}) {
   const params = useParams() as FileID;
   const hooks = subscription ? useSubscribeFile : useLoadFile;
   return hooks({ id: id || params.id });

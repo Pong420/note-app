@@ -43,8 +43,8 @@ npm run dev
   - [ ] Upload from url
   - [ ] Check Markdown patterns
   - [ ] Alignment, flot, center
-- [ ] Bubble Menu
-- [ ] Export PDF
+- [ ] Highlight -> Floating Menu
+- [x] Export PDF
 - [ ] Context menu
 - [x] Spotlight
 - [ ] Export static HTML
