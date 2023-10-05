@@ -26,6 +26,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "../electron/ipc/index.ts"],
+  "include": ["src", "../electron/src/ipc/index.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
