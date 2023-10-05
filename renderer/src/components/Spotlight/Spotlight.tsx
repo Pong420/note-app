@@ -9,6 +9,8 @@ import { FileID } from '@/types';
 import { fileManager } from '@/utils/FileManager';
 import { SpotlightAction } from './SpotlightAction';
 import { mainActions } from './actions';
+import { spotlightStore } from './utils';
+import './spotlight.css';
 
 const getFiles = () => fileManager.files;
 
@@ -28,7 +30,7 @@ export function Spotlight() {
   const files = useSyncExternalStore(fileManager.subscribe, getFiles);
   const file = fileManager.getFile(id);
   const actions = query.startsWith('>')
-    ? mainActions(file)
+    ? mainActions(spotlightStore, file)
     : files.reduce(
         (actions, file) =>
           file.id === id
@@ -49,7 +51,13 @@ export function Spotlight() {
       );
 
   return (
-    <MantineSpotlight.Root returnFocus={false} shortcut={mantineShortcut} query={query} onQueryChange={setQuery}>
+    <MantineSpotlight.Root
+      store={spotlightStore}
+      returnFocus={false}
+      shortcut={mantineShortcut}
+      query={query}
+      onQueryChange={setQuery}
+    >
       <MantineSpotlight.Search placeholder="Search..." leftSection={<IconSearch stroke={1.5} />} />
       <MantineSpotlight.ActionsList>
         {actions.length > 0 ? (

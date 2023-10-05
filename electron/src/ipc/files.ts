@@ -3,6 +3,8 @@ import path from 'path';
 import crypto from 'crypto';
 import axios from 'axios';
 import fastGlob from 'fast-glob';
+import { BrowserWindow, app, dialog } from 'electron';
+import { PDFDocument } from 'pdf-lib';
 import { createIpcHandlers } from './ipcCreator';
 import { appPath } from '../constants';
 
@@ -24,6 +26,8 @@ export type SaveChanges = {
 export type FileID = {
   id: string;
 };
+
+export interface ExportPDFOptions extends FileID {}
 
 export const filesDir = (...args: string[]) => path.join(appPath, ...args);
 
@@ -64,6 +68,51 @@ export const filesHandlers = createIpcHandlers({
     const filepath = filesDir(id, 'assets', filename);
     await fs.outputFile(filepath, image.buffer);
     return `./static/${id}/assets/${filename}`;
+  },
+  async exportPDF(event, { id }: ExportPDFOptions) {
+    const file = files.get(id);
+    if (!file) throw new Error(`export pdf error, file ${id} is not defined`);
+
+    const win = BrowserWindow.fromWebContents(event.sender);
+    const buffer = await win?.webContents.printToPDF({
+      printBackground: true,
+      preferCSSPageSize: false,
+      pageSize: 'Tabloid',
+      margins: { top: 0, left: 0, right: 0, bottom: 0 }
+    });
+
+    if (buffer) {
+      const pdfDoc = await PDFDocument.create();
+      const page = pdfDoc.addPage();
+
+      let totalHeight = 0;
+      const srcDoc = await PDFDocument.load(buffer);
+      const pages = srcDoc.getPages().slice().reverse();
+
+      for (const p of pages) {
+        const embedPage = await pdfDoc.embedPage(p);
+        const width = p.getWidth();
+        const height = embedPage.height;
+
+        page.drawPage(embedPage, { x: 0, y: totalHeight, width, height });
+
+        totalHeight += height;
+        page.setWidth(Math.max(width, page.getWidth()));
+        page.setHeight(totalHeight);
+      }
+
+      // Save the PDF to a file
+      const pdfBytes = await pdfDoc.save();
+
+      const outFile = await dialog.showSaveDialog({
+        defaultPath: path.join(app.getPath('downloads'), `${file.title}.pdf`),
+        properties: ['dontAddToRecent', 'showOverwriteConfirmation']
+      });
+
+      if (!outFile.canceled && outFile.filePath) {
+        await fs.outputFile(outFile.filePath, pdfBytes);
+      }
+    }
   }
 });
 

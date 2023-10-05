@@ -1,5 +1,5 @@
-import { spotlight } from '@mantine/spotlight';
 import { Extension } from '@tiptap/core';
+import { spotlight } from '@/components/Spotlight/utils';
 
 export const shortcut = ['Mod-p'];
 

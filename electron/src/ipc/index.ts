@@ -1,6 +1,5 @@
 import { Args, BroadcastReceiver, BroadcastSender } from './ipcCreator';
 import { windowHandlers } from './window';
-import { pdfHandlers } from './pdf';
 import { filesHandlers, filesBroadcasts } from './files';
 import { systemHandlers, systemBroadcasts } from './system';
 
@@ -25,7 +24,6 @@ declare global {
 
 export const handlers = {
   ...windowHandlers,
-  ...pdfHandlers,
   ...filesHandlers,
   ...systemHandlers
 };

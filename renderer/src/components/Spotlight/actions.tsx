@@ -1,4 +1,5 @@
-import { IconAdjustmentsHorizontal, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
+import { SpotlightStore } from '@mantine/spotlight';
+import { IconAdjustmentsHorizontal, IconEdit, IconFileTypePdf, IconPlus, IconTrash } from '@tabler/icons-react';
 import { NewNote } from '@/components/Modals/NewNote';
 import { EditNote } from '@/components/Modals/EditNote';
 import { DeleteNote } from '@/components/Modals/DeleteNote';
@@ -6,8 +7,8 @@ import { FileJSON } from '@/types';
 import { navigate } from '@/routes';
 import { SpotlightActionProps } from './SpotlightAction';
 
-export const mainActions = (file?: FileJSON) =>
-  [
+export const mainActions = (_store: SpotlightStore, file?: FileJSON) => {
+  const actions: (SpotlightActionProps | false | undefined)[] = [
     {
       id: 'preferences',
       title: 'Preferences',
@@ -20,16 +21,27 @@ export const mainActions = (file?: FileJSON) =>
       icon: IconPlus,
       onClick: () => NewNote.open()
     },
-    {
+    file && {
       id: 'edit-note',
       title: 'Edit Note',
       icon: IconEdit,
-      onClick: () => file && EditNote.open({ file })
+      onClick: () => EditNote.open({ file })
     },
-    {
+    file && {
       id: 'delete-note',
       title: 'Delete Note',
       icon: IconTrash,
-      onClick: () => file && DeleteNote.open({ file })
+      onClick: () => DeleteNote.open({ file })
+    },
+    file && {
+      id: 'export-pdf',
+      title: 'Export as PDF',
+      icon: IconFileTypePdf,
+      onClick: () => {
+        adapter.exportPDF({ id: file.id });
+      }
     }
-  ] satisfies SpotlightActionProps[];
+  ];
+
+  return actions.filter((a): a is SpotlightActionProps => !!a);
+};

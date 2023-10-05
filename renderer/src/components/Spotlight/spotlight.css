@@ -1,0 +1,5 @@
+@media print {
+  .mantine-Spotlight-root {
+    visibility: hidden;
+  }
+}
