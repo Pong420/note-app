@@ -5,6 +5,7 @@ import { TableBubbleMenu, tableMenuRefId } from './Table/TableBubbleMenu';
 import classes from './Editor.module.css';
 import './styles/code.css';
 import './styles/gapCursor.css';
+import './styles/list.css';
 import './styles/media.css';
 import './styles/table.css';
 import './styles/spotlight.css';

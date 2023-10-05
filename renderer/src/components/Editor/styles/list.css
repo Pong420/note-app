@@ -1,0 +1,8 @@
+.tiptap.tiptap {
+  li {
+    ul,
+    ol {
+      margin-top: 0.5rem;
+    }
+  }
+}
