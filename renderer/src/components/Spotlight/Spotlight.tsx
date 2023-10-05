@@ -1,13 +1,13 @@
 import { useState, useSyncExternalStore } from 'react';
 import { useParams } from 'react-router-dom';
-// import { default as Fuse } from 'fuse.js';
+import { default as Fuse } from 'fuse.js';
 import { Spotlight as MantineSpotlight, SpotlightActionData } from '@mantine/spotlight';
 import { IconFile, IconSearch } from '@tabler/icons-react';
 import { shortcut } from '@/components/Editor/Spotlight';
 import { navigate } from '@/routes';
 import { FileID } from '@/types';
 import { fileManager } from '@/utils/FileManager';
-import { SpotlightAction } from './SpotlightAction';
+import { SpotlightAction, SpotlightActionProps } from './SpotlightAction';
 import { mainActions } from './actions';
 import { spotlightStore } from './utils';
 import './spotlight.css';
@@ -16,13 +16,13 @@ const getFiles = () => fileManager.files;
 
 const mantineShortcut = shortcut.map(s => s.replace(/-/g, ' + '));
 
-// const fuse = new Fuse<SpotlightActionProps>([], { keys: ['title', 'keywords'] });
-// const filter = (query: string, actions: SpotlightActionProps[]) => {
-//   query = query.replace(/^(>)/, '');
-//   if (!query.trim()) return actions;
-//   fuse.setCollection(actions);
-//   return fuse.search(query).map(i => i.item);
-// };
+const fuse = new Fuse<SpotlightActionProps>([], { keys: ['title', 'keywords'] });
+const renderActions = (query: string, actions: SpotlightActionProps[]): JSX.Element[] => {
+  query = query.replace(/^(>)/, '');
+  if (!query.trim()) return actions.map(a => <SpotlightAction key={a.id} {...a} />);
+  fuse.setCollection(actions);
+  return fuse.search(query).map(({ item: a }) => <SpotlightAction key={a.id} {...a} />);
+};
 
 export function Spotlight() {
   const { id } = useParams() as FileID;
@@ -61,7 +61,7 @@ export function Spotlight() {
       <MantineSpotlight.Search placeholder="Search..." leftSection={<IconSearch stroke={1.5} />} />
       <MantineSpotlight.ActionsList>
         {actions.length > 0 ? (
-          actions.map(props => <SpotlightAction key={props.id} {...props} />)
+          renderActions(query, actions)
         ) : (
           <MantineSpotlight.Empty>Nothing found...</MantineSpotlight.Empty>
         )}
