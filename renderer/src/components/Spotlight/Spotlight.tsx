@@ -9,7 +9,6 @@ import { useFile } from '@/hooks/useFile';
 import { SpotlightAction, SpotlightActionProps } from './SpotlightAction';
 import { mainActions } from './actions';
 import { spotlightStore } from './utils';
-import './spotlight.css';
 
 const getFiles = () => fileManager.files;
 
@@ -25,7 +24,7 @@ const renderActions = (query: string, actions: SpotlightActionProps[]): JSX.Elem
 
 export function Spotlight() {
   const [query, setQuery] = useState('');
-  const file = useFile();
+  const file = useFile({ subscription: false });
   const files = useSyncExternalStore(fileManager.subscribe, getFiles);
   const actions = query.startsWith('>')
     ? mainActions(spotlightStore, file)

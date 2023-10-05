@@ -7,6 +7,7 @@ import './styles/code.css';
 import './styles/gapCursor.css';
 import './styles/media.css';
 import './styles/table.css';
+import './styles/spotlight.css';
 
 export interface EditorProps {
   editor?: TipTapEditor | null;
