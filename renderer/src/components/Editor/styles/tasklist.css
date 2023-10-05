@@ -1,0 +1,12 @@
+[data-type='taskList'] {
+  && {
+    padding-left: 0px;
+    margin-top: 0;
+  }
+}
+
+.react-renderer.node-taskItem {
+  & + & {
+    margin-top: 0.5rem;
+  }
+}

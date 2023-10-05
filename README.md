@@ -35,7 +35,7 @@ npm run dev
   - [ ] Bubble menu for configure title, line-highlights
   - [ ] Inside list item
   - [ ] Drag handler
-- [ ] Task List
+- [x] Task List
 - [x] Table
 - [ ] Image
   - [x] Resizeable
@@ -43,7 +43,7 @@ npm run dev
   - [ ] Upload from url
   - [ ] Check Markdown patterns
   - [ ] Alignment, flot, center
-- [ ] Highlight -> Floating Menu
+- [ ] Highlight -> Bubble Menu
 - [x] Export PDF
 - [ ] Context menu
 - [x] Spotlight

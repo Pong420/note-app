@@ -1,0 +1,25 @@
+.root.root {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+
+  p {
+    margin: 0;
+    height: calc(1.25rem * var(--mantine-scale));
+    line-height: calc(1.25rem * var(--mantine-scale));
+  }
+
+  & + &,
+  [data-type='taskList'] {
+    margin-top: 0.5rem;
+  }
+
+  [data-type='taskList'] {
+    margin-bottom: 0px;
+  }
+}
+
+/* this make cursor visible */
+.content {
+  min-width: 1px;
+}

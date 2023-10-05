@@ -12,6 +12,7 @@ import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import Code from '@tiptap/extension-code';
+import TaskList from '@tiptap/extension-task-list';
 import { Editor } from '@/components/Editor';
 import { clipboardTextParser } from '@/components/Editor/utils/clipboardTextParser';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
@@ -22,6 +23,7 @@ import { KeyboardButton } from '@/components/Editor/KeyboardButton/KeyboardButto
 import { Admonition } from '@/components/Editor/Admonition/Admonition';
 import { HorizontalRule as HorizontalRuleComponent } from '@/components/Editor/HorizontalRule';
 import { Table } from '@/components/Editor/Table/Table';
+import { TaskItem } from '@/components/Editor/TaskItem/TaskItem';
 import { FileJSON } from '@/types';
 
 const extensions: Extensions = [
@@ -58,7 +60,11 @@ const extensions: Extensions = [
   CodeBlockPrism,
   Spotlight,
   KeyboardButton,
-  Admonition
+  Admonition,
+  TaskList,
+  TaskItem.configure({
+    nested: true
+  })
 ];
 
 const editorProps: EditorOptions['editorProps'] = {

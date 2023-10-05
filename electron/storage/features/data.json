@@ -516,43 +516,33 @@
         ]
       },
       {
-        "type": "bulletList",
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        },
         "content": [
           {
-            "type": "listItem",
-            "content": [
+            "type": "text",
+            "text": "Typing "
+          },
+          {
+            "type": "text",
+            "marks": [
               {
-                "type": "paragraph",
-                "attrs": {
-                  "textAlign": "left"
-                },
-                "content": [
-                  {
-                    "type": "text",
-                    "text": "Typing "
-                  },
-                  {
-                    "type": "text",
-                    "marks": [
-                      {
-                        "type": "code"
-                      }
-                    ],
-                    "text": "kbd[Cmd]"
-                  },
-                  {
-                    "type": "text",
-                    "text": " will transform into "
-                  },
-                  {
-                    "type": "kbd",
-                    "attrs": {
-                      "content": "Cmd"
-                    }
-                  }
-                ]
+                "type": "code"
               }
-            ]
+            ],
+            "text": "kbd[Cmd]"
+          },
+          {
+            "type": "text",
+            "text": " will transform into "
+          },
+          {
+            "type": "kbd",
+            "attrs": {
+              "content": "Cmd"
+            }
           }
         ]
       },
@@ -563,18 +553,163 @@
         }
       },
       {
+        "type": "horizontalRule"
+      },
+      {
         "type": "paragraph",
         "attrs": {
           "textAlign": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 2
         },
         "content": [
           {
             "type": "text",
-            "text": " "
+            "text": "Task List"
+          }
+        ]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": {
+              "checked": true
+            },
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Task 1"
+                  }
+                ]
+              },
+              {
+                "type": "taskList",
+                "content": [
+                  {
+                    "type": "taskItem",
+                    "attrs": {
+                      "checked": true
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Sub Task 1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "taskItem",
+                    "attrs": {
+                      "checked": true
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Sub Task 2"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": {
+              "checked": false
+            },
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Task 2"
+                  }
+                ]
+              },
+              {
+                "type": "taskList",
+                "content": [
+                  {
+                    "type": "taskItem",
+                    "attrs": {
+                      "checked": true
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Sub Task 1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "taskItem",
+                    "attrs": {
+                      "checked": false
+                    },
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "textAlign": "left"
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Sub Task 2"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
     ]
   },
-  "updatedAt": 1696338526203
+  "updatedAt": 1696501882017
 }
