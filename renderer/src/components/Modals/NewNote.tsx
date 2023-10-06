@@ -25,7 +25,7 @@ export function NewNote(props: NewNoteProps) {
     <MenuModal {...props} onExited={() => form.reset()} icon={IconPlus} title="New Note">
       <MenuModalSection>
         <form onSubmit={handleSubmit}>
-          <Stack mx="md">
+          <Stack mx="md" gap="md">
             <TextInput data-autofocus label="Title" {...form.getInputProps('title')} />
             <Button type="submit">Conform</Button>
           </Stack>

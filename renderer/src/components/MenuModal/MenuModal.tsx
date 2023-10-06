@@ -20,11 +20,11 @@ export function MenuModal({ title, children, icon: Icon = IconMenu2, onExited, .
       <Modal.Overlay opacity={0.5} />
 
       <Modal.Content bg="var(--menu-color)">
-        <Modal.Header bg="var(--menu-background-color)" pl="md">
+        <Modal.Header bg="var(--menu-background-color)" py="sm">
           <Modal.Title>
             <Group gap="xs">
-              <Icon size="1.5rem" />
-              <Text size="lg" fw={500}>
+              <Icon size="1.3rem" />
+              <Text size="md" fw={500}>
                 {title}
               </Text>
             </Group>

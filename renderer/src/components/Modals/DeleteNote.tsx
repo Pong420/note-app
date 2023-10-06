@@ -28,8 +28,8 @@ export function DeleteNote({ file, ...props }: DeleteNoteProps) {
     <MenuModal {...props} onExited={() => setInput('')} icon={IconTrash} title="Delete Note">
       <MenuModalSection>
         <form onSubmit={handleSubmit}>
-          <Stack mx="md">
-            <Text c="yellow" size="md">
+          <Stack mx="md" gap="md">
+            <Text size="md">
               This will permanently delete the note <b> {file.title}</b>. To confirm, type "{keyword}" in the box below
             </Text>
 
