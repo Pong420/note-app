@@ -43,7 +43,7 @@ npm run dev
   - [ ] Upload from url
   - [ ] Check Markdown patterns
   - [ ] Alignment, flot, center
-- [ ] Highlight -> Bubble Menu
+- [x] Highlight text -> Bubble Menu
 - [x] Export PDF
 - [ ] Context menu
 - [x] Spotlight

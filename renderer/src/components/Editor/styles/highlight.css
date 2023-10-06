@@ -1,0 +1,70 @@
+/* [
+  'red',
+  'pink',
+  'grape',
+  'violet',
+  'indigo',
+  'blue',
+  'cyan',
+  'teal',
+  'green',
+  'lime',
+  'yellow',
+  'orange',
+]
+  .map(
+    (c) => `html[data-primary-color='${c}'] & {
+    background-color: var(--mantine-color-${c}-4);
+  }`
+  )
+  .join('\n\n'); */
+
+.tiptap mark {
+  html[data-primary-color='red'] & {
+    background-color: var(--mantine-color-red-4);
+  }
+
+  html[data-primary-color='pink'] & {
+    background-color: var(--mantine-color-pink-4);
+  }
+
+  html[data-primary-color='grape'] & {
+    background-color: var(--mantine-color-grape-4);
+  }
+
+  html[data-primary-color='violet'] & {
+    background-color: var(--mantine-color-violet-4);
+  }
+
+  html[data-primary-color='indigo'] & {
+    background-color: var(--mantine-color-indigo-4);
+  }
+
+  html[data-primary-color='blue'] & {
+    background-color: var(--mantine-color-blue-4);
+  }
+
+  html[data-primary-color='cyan'] & {
+    background-color: var(--mantine-color-cyan-4);
+  }
+
+  html[data-primary-color='teal'] & {
+    background-color: var(--mantine-color-teal-4);
+  }
+
+  html[data-primary-color='green'] & {
+    background-color: var(--mantine-color-green-4);
+  }
+
+  html[data-primary-color='lime'] & {
+    background-color: var(--mantine-color-lime-4);
+  }
+
+  html[data-primary-color='yellow'] & {
+    background-color: var(--mantine-color-yellow-4);
+  }
+
+  html[data-primary-color='orange'] & {
+    background-color: var(--mantine-color-orange-4);
+  }
+}

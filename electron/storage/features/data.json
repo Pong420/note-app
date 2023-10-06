@@ -708,8 +708,251 @@
             ]
           }
         ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "horizontalRule"
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Bubble Menu"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Select some text to see bubble menu"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "attrs": {
+          "src": "./static/Features/assets/d0adc20fae3c22808ea9a01ae08407f713fc2ee053ff60f0aa6794d48df7ba05.png",
+          "alt": null,
+          "title": null,
+          "width": 359,
+          "height": 118,
+          "ratio": 3.042372881355932
+        }
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "horizontalRule"
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": "left",
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Text Formatting"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "You can set the text formatting through bubble menu or type specific patterns"
+          }
+        ]
+      },
+      {
+        "type": "bulletList",
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "text": "Bold"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "marks": [
+                      {
+                        "type": "italic"
+                      }
+                    ],
+                    "text": "Italic"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "marks": [
+                      {
+                        "type": "underline"
+                      }
+                    ],
+                    "text": "Underline"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "marks": [
+                      {
+                        "type": "strike"
+                      }
+                    ],
+                    "text": "Strikethrough"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "marks": [
+                      {
+                        "type": "highlight"
+                      }
+                    ],
+                    "text": "Highlight"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "marks": [
+                      {
+                        "type": "textStyle",
+                        "attrs": {
+                          "color": "#868e96"
+                        }
+                      }
+                    ],
+                    "text": "Color"
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "attrs": {
+                  "textAlign": "left"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
       }
     ]
   },
-  "updatedAt": 1696501882017
+  "updatedAt": 1696620245060
 }

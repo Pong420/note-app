@@ -38,6 +38,11 @@ export function App() {
     document.documentElement.style.fontSize = `${theme.fontSize}px`;
   }, [theme.fontSize]);
 
+  useEffect(() => {
+    // document.documentElement.style.setProperty('--primary-color', theme.primaryColor);
+    document.documentElement.setAttribute('data-primary-color', theme.primaryColor);
+  }, [theme.primaryColor]);
+
   return (
     <MantineProvider theme={mantineTheme} forceColorScheme={theme.darkMode ? 'dark' : 'light'}>
       {ready && <RouterProvider router={router} />}

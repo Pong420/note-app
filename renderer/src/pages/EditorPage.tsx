@@ -13,6 +13,8 @@ import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import Code from '@tiptap/extension-code';
 import TaskList from '@tiptap/extension-task-list';
+import TextStyle from '@tiptap/extension-text-style';
+import { Color } from '@tiptap/extension-color';
 import { Editor } from '@/components/Editor';
 import { clipboardTextParser } from '@/components/Editor/utils/clipboardTextParser';
 import { CodeBlockPrism } from '@/components/Editor/CodeBlock/CodeBlockPrism';
@@ -64,7 +66,9 @@ const extensions: Extensions = [
   TaskList,
   TaskItem.configure({
     nested: true
-  })
+  }),
+  TextStyle,
+  Color
 ];
 
 const editorProps: EditorOptions['editorProps'] = {

@@ -4,7 +4,7 @@ import { NodeViewWrapper } from '@tiptap/react';
 export function HorizontalRule() {
   return (
     <NodeViewWrapper>
-      <Divider />
+      <Divider mb="xs" />
     </NodeViewWrapper>
   );
 }

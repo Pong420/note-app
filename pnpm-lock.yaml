@@ -99,6 +99,9 @@ importers:
       '@tiptap/core':
         specifier: ^2.1.11
         version: 2.1.11(@tiptap/pm@2.1.11)
+      '@tiptap/extension-color':
+        specifier: ^2.1.11
+        version: 2.1.11(@tiptap/core@2.1.11)(@tiptap/extension-text-style@2.1.11)
       '@tiptap/extension-highlight':
         specifier: ^2.1.11
         version: 2.1.11(@tiptap/core@2.1.11)
@@ -130,6 +133,9 @@ importers:
         specifier: ^2.1.11
         version: 2.1.11(@tiptap/core@2.1.11)
       '@tiptap/extension-text-align':
+        specifier: ^2.1.11
+        version: 2.1.11(@tiptap/core@2.1.11)
+      '@tiptap/extension-text-style':
         specifier: ^2.1.11
         version: 2.1.11(@tiptap/core@2.1.11)
       '@tiptap/extension-underline':
@@ -1372,6 +1378,16 @@ packages:
       '@tiptap/core': 2.1.11(@tiptap/pm@2.1.11)
     dev: false
 
+  /@tiptap/extension-color@2.1.11(@tiptap/core@2.1.11)(@tiptap/extension-text-style@2.1.11):
+    resolution: {integrity: sha512-xfSfZRnNd40YtFfrXvzpGa2OZsRAZapq0Ce09q7bCEpudhiD7yIIVOjOjggagllOFnafKTwKkFaDLIA0K0eIwg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/extension-text-style': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.11(@tiptap/pm@2.1.11)
+      '@tiptap/extension-text-style': 2.1.11(@tiptap/core@2.1.11)
+    dev: false
+
   /@tiptap/extension-document@2.1.11(@tiptap/core@2.1.11):
     resolution: {integrity: sha512-L/iLuqxvJep33ycCFNrnUhdR0VtcZyeNnqB+ZvVHzEwLoRud+LBy44lpEdBrAFsvRm3DG14m/FGYL+TfaD0vxA==}
     peerDependencies:
@@ -1578,6 +1594,14 @@ packages:
 
   /@tiptap/extension-text-align@2.1.11(@tiptap/core@2.1.11):
     resolution: {integrity: sha512-mRUouUZviU7OjzMbW5O728HsRl/T/Gue4DuNWaY2hiddlJWOpDmO/FYRR7JaAQjTr+16NCofRwgfWdJL3nyv5w==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.11(@tiptap/pm@2.1.11)
+    dev: false
+
+  /@tiptap/extension-text-style@2.1.11(@tiptap/core@2.1.11):
+    resolution: {integrity: sha512-+JDWmcSUyFKzMDm/1xqlk7e0qPJ1nQ/UKIRuDeRtqgbxTyEw4fNlkV2k7GHCoELXqxUoplzweLID+kM1Vk2OaA==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
     dependencies:
