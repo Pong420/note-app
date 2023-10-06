@@ -54,9 +54,10 @@ export class FileManager extends ExternalStore<Snapshot> {
   }
 
   handleFileChanged = (file: FileJSON) => {
+    const exists = !!this.snapshot.fileDict[file.id];
     this.snapshot = {
       ...this.snapshot,
-      files: this.snapshot.files.map(f => (f.id === file.id ? file : f)),
+      files: exists ? this.snapshot.files.map(f => (f.id === file.id ? file : f)) : [file, ...this.snapshot.files],
       fileDict: { ...this.snapshot.fileDict, [file.id]: file }
     };
     this.emitChange();
