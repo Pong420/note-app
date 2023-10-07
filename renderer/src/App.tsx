@@ -7,6 +7,7 @@ import { usePromise } from './hooks/usePromise';
 import { usePreferences } from './hooks/usePreferences';
 import { router } from './routes';
 import { fileManager } from './utils/FileManager';
+import { APP_REGION_HEIGHT } from './constants';
 
 const init = () => fileManager.load();
 
@@ -35,11 +36,14 @@ export function App() {
   }, [theme.darkMode, theme.pageWidth, theme.primaryColor]);
 
   useEffect(() => {
+    document.documentElement.style.setProperty('--app-region-height', `${APP_REGION_HEIGHT}px`);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.style.fontSize = `${theme.fontSize}px`;
   }, [theme.fontSize]);
 
   useEffect(() => {
-    // document.documentElement.style.setProperty('--primary-color', theme.primaryColor);
     document.documentElement.setAttribute('data-primary-color', theme.primaryColor);
   }, [theme.primaryColor]);
 

@@ -1,6 +1,6 @@
 import { useCallback, useSyncExternalStore } from 'react';
 import { Get, ObjectKeyPaths } from '@/types';
-import { storage, get, createStorage } from '@/utils/storage';
+import { get, createLocalStorage } from '@/utils/storage';
 import { DefaultMantineColor } from '@mantine/core';
 
 export interface ThemePreferences {
@@ -20,7 +20,7 @@ const initialValues: Preferences = {
   theme: { darkMode: true, primaryColor: 'blue', pageWidth: 960, fontSize: 16 }
 };
 
-export const preferences = createStorage('preferences', initialValues);
+export const preferences = createLocalStorage('preferences', initialValues);
 
 export function usePreferences(): Preferences;
 export function usePreferences<P extends PreferencesPaths>(path: P): Get<Preferences, P>;
@@ -30,5 +30,5 @@ export function usePreferences<P extends PreferencesPaths>(path?: P): Preference
     return path ? ((get(value, path) ?? get(initialValues, path)) as Get<Preferences, P>) : value;
   }, [path]);
 
-  return useSyncExternalStore(storage.subscribe, getSnapshot);
+  return useSyncExternalStore(preferences.subscribe, getSnapshot);
 }

@@ -16,7 +16,7 @@ import { Get, ObjectKeyPaths } from '@/types';
  * declare global {
  *    interface TypedStorage {
  *      newField: string;
- *      // for object property, better use createStorage('objectField', {}) instead
+ *      // for object property, better use createLocalStorage('objectField', {}) instead
  *      objectField: Record<string, any>;
  *    }
  * }
@@ -37,7 +37,7 @@ import { Get, ObjectKeyPaths } from '@/types';
  *
  * 2.  Create a new storage
  * ```ts
- * export const newStorage = createStorage<NewObjectSchema>('data-key', { required: '123' });
+ * export const newStorage = createLocalStorage<NewObjectSchema>('data-key', { required: '123' });
  * ```
  *
  * 3. Then use it
@@ -229,13 +229,19 @@ export function webStorageSupport() {
   return false;
 }
 
-export const createLocalStorage = webStorageSupport() ? createStorageFromWebStorage(localStorage) : createMemoryStorage;
+const key = '@eeze/bot';
 
-export const createSessionStorage = webStorageSupport()
+const createRootLocalStorage = webStorageSupport() ? createStorageFromWebStorage(localStorage) : createMemoryStorage;
+
+const createRootSessionStorage = webStorageSupport()
   ? createStorageFromWebStorage(sessionStorage)
   : createMemoryStorage;
 
-export const storage = createLocalStorage('@eeze/editor', {} as TypedStorage);
+export const rootLocalStorage = createRootLocalStorage(key, {} as TypedStorage);
+export const rootSessionStorage = createRootSessionStorage(key, {} as TypedStorage);
 
-export const createStorage = <T extends Record<string, any>>(key: string, defaultValue: T) =>
-  createStorageFromStorage(storage as IStorage<Record<string, any>>)(key, defaultValue);
+export const createLocalStorage = <T extends Record<string, any>>(key: string, defaultValue: T) =>
+  createStorageFromStorage(rootLocalStorage as IStorage<Record<string, any>>)(key, defaultValue);
+
+export const createSessionStorage = <T extends Record<string, any>>(key: string, defaultValue: T) =>
+  createStorageFromStorage(rootSessionStorage as IStorage<Record<string, any>>)(key, defaultValue);
