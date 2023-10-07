@@ -1,5 +1,5 @@
 import { ModalProps } from '@mantine/core';
-import { createUseExternalEvents } from '@mantine/utils';
+import { createUseExternalEvents } from '@mantine/core';
 
 export interface ModalPayload<T extends ModalProps> {
   component: React.ComponentType<Partial<T>>;
