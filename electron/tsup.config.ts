@@ -17,7 +17,7 @@ const options: Options = {
   // convert esm module to cjs
   noExternal: [/file-type/],
   define: {
-    APP_ID: config.appId,
+    APP_ID: JSON.stringify(config.appId),
     ...Object.entries(env).reduce(
       (e, [k, v]) => ({ ...e, [`process.env.${k}`]: JSON.stringify(v) }),
       {} as Record<string, string>
