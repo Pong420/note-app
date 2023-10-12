@@ -1,6 +1,10 @@
-# Note Taking App
+<div align="center">
+  <img src="./assets/icon.png" />
+  <h1 style="margin-top: -0.5em;">Notes</h1>
+</div>
 
-> :warning: Working In Progress
+<p align="center">MacOS frameless note taking app</p>
+<p align="center">:warning: Working In Progress</p>
 
 ![feature](./assets/features.png)
 ![preferences](./assets/preferences.png)
