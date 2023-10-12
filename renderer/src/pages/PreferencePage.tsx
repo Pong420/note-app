@@ -9,7 +9,7 @@ import { NumberOption } from '@/components/Preferences/Options/NumberOption';
 import { IconButton } from '@/components/IconButton';
 
 export function PreferencePage() {
-  const appPath = usePromise(adapter.getAppPath);
+  const storageDir = usePromise(adapter.getAppPath);
 
   return (
     <Container>
@@ -41,7 +41,7 @@ export function PreferencePage() {
       <PreferencesSection title="Storage">
         <PreferencesStack title="App Data" description="Location where file content/assets is stored">
           <Group gap={5}>
-            <TextInput readOnly style={{ flex: '1 1 auto' }} value={appPath || ''} />
+            <TextInput readOnly style={{ flex: '1 1 auto' }} value={storageDir || ''} />
             <IconButton icon={IconFolderOpen} size={36} tooltip="Open Folder" onClick={() => adapter.openAppDir()} />
           </Group>
         </PreferencesStack>

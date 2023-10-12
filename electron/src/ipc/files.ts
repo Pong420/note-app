@@ -6,7 +6,7 @@ import fastGlob from 'fast-glob';
 import { BrowserWindow, app, dialog } from 'electron';
 import { PDFDocument } from 'pdf-lib';
 import { createIpcHandlers } from './ipcCreator';
-import { appPath } from '../constants';
+import { storageDir } from '../constants';
 
 export interface FileJSON {
   id: string; // unique
@@ -29,7 +29,7 @@ export type FileID = {
 
 export interface ExportPDFOptions extends FileID {}
 
-export const filesDir = (...args: string[]) => path.join(appPath, ...args);
+export const filesDir = (...args: string[]) => path.join(storageDir, ...args);
 
 export const files = new Map<string, FileJSON>();
 

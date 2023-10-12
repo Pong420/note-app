@@ -3,7 +3,7 @@ import path from 'path';
 import { shell } from 'electron';
 import { createIpcHandlers } from './ipcCreator';
 import { FileID } from './files';
-import { appPath } from '../constants';
+import { storageDir } from '../constants';
 
 export interface LastVisit {
   id: string; // file id
@@ -14,7 +14,7 @@ export interface SystemData {
   lastVisits: LastVisit[];
 }
 
-export const systemDataPath = path.join(appPath, 'system.json');
+export const systemDataPath = path.join(storageDir, 'system.json');
 
 const defaultValue: SystemData = {
   lastVisits: []
@@ -36,10 +36,10 @@ export const systemHandlers = createIpcHandlers({
     return system.lastVisits;
   },
   getAppPath() {
-    return appPath;
+    return storageDir;
   },
   openAppDir() {
-    return shell.openPath(appPath);
+    return shell.openPath(storageDir);
   }
 });
 
