@@ -3,8 +3,9 @@ import { Button, Stack, Text, TextInput } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
 import { MenuModal, MenuModalProps, MenuModalSection } from '@/components/MenuModal';
 import { createModalHandler } from '@/utils/modals';
-import { navigate } from '@/routes';
+import { generatePath, navigate } from '@/routes';
 import { FileJSON } from '@/types';
+import { fileManager } from '@/utils/FileManager';
 
 export interface DeleteNoteProps extends MenuModalProps {
   file: FileJSON;
@@ -20,8 +21,10 @@ export function DeleteNote({ file, ...props }: DeleteNoteProps) {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     adapter.emitDeleteFile({ id: file.id });
-    navigate('/editor/new-page');
     props.onClose();
+
+    const lastVisit = fileManager.lastVisits.find(f => f.id !== file.id);
+    lastVisit ? navigate(generatePath('/editor/:title/:id', lastVisit)) : navigate('/editor/new-page');
   };
 
   return (
