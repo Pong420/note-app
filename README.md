@@ -1,6 +1,7 @@
+# Notes
+
 <div align="center">
   <img src="./assets/icon.png" />
-  <h1 style="margin-top: -0.5em;">Notes</h1>
 </div>
 
 <p align="center">MacOS frameless note taking app</p>
