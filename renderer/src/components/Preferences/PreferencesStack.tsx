@@ -1,12 +1,12 @@
 import { Space, Text } from '@mantine/core';
 
-export interface PreferencesStack {
+export interface PreferencesStackProps {
   title: string;
   description?: string;
   children?: React.ReactNode;
 }
 
-export function PreferencesStack({ title, description, children }: PreferencesStack) {
+export function PreferencesStack({ title, description, children }: PreferencesStackProps) {
   return (
     <div>
       <Text fw={500}>{title}</Text>
