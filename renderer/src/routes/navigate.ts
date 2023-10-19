@@ -1,30 +1,21 @@
-import { generatePath as defaultGeneratePath, Path, NavigateOptions } from 'react-router-dom';
+import { generatePath as defaultGeneratePath, NavigateOptions } from 'react-router-dom';
 import { Params } from './types';
-import { router, PathPatterns, StaticPaths } from './router';
+import { router, StaticPaths, DynamicPaths } from './router';
 
-type TP<P> = P | (Omit<Partial<Path>, 'path'> & { pathname: P });
 type NOpts = Omit<NavigateOptions, 'relative'>;
 export type GeneratedPath = typeof __generated;
 
 const __generated = '__generated';
 
-export function generatePath<AP extends StaticPaths>(pathname: AP): GeneratedPath;
-export function generatePath<AP extends PathPatterns, PS extends Params<AP>>( pathname: AP, ...[params]: PS extends never ? [Record<string, unknown>?] : [PS]): GeneratedPath; // prettier-ignore
-export function generatePath(pathname: string, params?: Record<string, unknown>) {
+export function generatePath<AP extends DynamicPaths>(pathname: AP, params: Params<AP>) {
   return defaultGeneratePath<string>(pathname, params) as GeneratedPath;
 }
 
+export function navigate<AP extends DynamicPaths>(to: AP, params: Params<AP>, options?: NOpts): void;
+export function navigate(to: StaticPaths, options?: NOpts): Promise<void>;
+export function navigate(to: GeneratedPath, options?: NOpts): Promise<void>;
 export function navigate(to: number): Promise<void>;
-export function navigate(to: StaticPaths): Promise<void>;
-export function navigate(to: GeneratedPath): Promise<void>;
-export function navigate<AP extends PathPatterns, PS extends Params<AP>>(
-  to: TP<AP>,
-  ...[params, options]: PS extends never ? [Record<string, string | null>?, NOpts?] : [PS, NOpts?]
-): Promise<void>;
-export function navigate<AP extends PathPatterns, PS extends Params<AP>>(
-  to: number | GeneratedPath | TP<AP>,
-  ...[params, options]: PS extends never ? [Record<string, string | null>?, NOpts?] : [PS, NOpts?]
-): Promise<void> {
+export function navigate(to: number | string, ...args: unknown[]): Promise<void> {
   // The navigate function has strict type guard
   // It accept static paths or dynamic paths with params, but not accept path from generatePath function
   // The type `GeneratedPath` is used to bypass the type gurd
@@ -32,11 +23,15 @@ export function navigate<AP extends PathPatterns, PS extends Params<AP>>(
     throw new Error(`${__generated} is not a valid path`);
   }
 
+  const [params, options] = (args.length === 2 ? [args[0], args[1]] : [undefined, args[0]]) as [
+    Record<string, unknown>?,
+    NOpts?
+  ];
+
   if (typeof to === 'number') {
     return router.navigate(to);
   }
 
-  const path: Partial<Path> = typeof to === 'string' ? { pathname: to } : to;
-  path.pathname = path.pathname && defaultGeneratePath<string>(path.pathname, params || {});
-  return router.navigate(path, options);
+  const pathname = params ? defaultGeneratePath<string>(to, params) : to;
+  return router.navigate(pathname, options);
 }

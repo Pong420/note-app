@@ -10,6 +10,7 @@ import { RouteObjectParser } from './types';
 export type Routes = (typeof routes)[number];
 export type PathPatterns = RouteObjectParser<Routes>;
 export type StaticPaths = '/' | Exclude<PathPatterns, `${string}/:${string}`>;
+export type DynamicPaths = Extract<PathPatterns, `${string}/:${string}`>;
 
 /**
  * !!! Note:
