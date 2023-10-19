@@ -15,7 +15,13 @@ export function MenuModal({ title, children, icon: Icon = IconMenu2, onExited, .
       centered
       withinPortal
       {...props}
-      transitionProps={{ ...props.transitionProps, onExited }}
+      transitionProps={{
+        ...props.transitionProps,
+        onExited: () => {
+          props.transitionProps?.onExited?.();
+          onExited?.();
+        }
+      }}
     >
       <Modal.Overlay opacity={0.5} />
 

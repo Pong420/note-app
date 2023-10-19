@@ -40,8 +40,7 @@ function ModalAnchorComponent() {
             return newState;
           }
 
-          // exists, set `opened` to true
-          return set(ss, idx, { opened: true });
+          return set(ss, idx, { opened: true, props: payload.props });
         });
 
         return id;
@@ -81,5 +80,4 @@ function ModalAnchorComponent() {
   return nodes;
 }
 
-// @ts-ignore FIXME: later
 export const ModalAnchor = memo(ModalAnchorComponent);
