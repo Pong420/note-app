@@ -4,11 +4,12 @@
   <img src="./assets/icon.png" />
 </div>
 
-<p align="center">MacOS frameless note taking app</p>
+<p align="center">Single Page Note App</p>
+<p align="center">Anims to export small document into single page PDF</p>
 <p align="center">:warning: Working In Progress</p>
 
-![feature](./assets/features.png)
-![preferences](./assets/preferences.png)
+![feature](./.internal/features.png)
+![preferences](./.internal/preferences.png)
 
 ## Development
 
@@ -45,12 +46,15 @@ npm run dev
 - [ ] Image
   - [x] Resizeable
   - [x] Drop to Upload
+  - [ ] Review drop to upload
   - [ ] Upload from url
   - [ ] Check Markdown patterns
-  - [ ] Alignment, flot, center
+  - [ ] Alignment, Flot, Center, Inline
 - [x] Highlight text -> Bubble Menu
 - [x] Export PDF
+  - [ ] Remove Extra Spacing
 - [ ] Context menu
+  - [ ] all actions Spotlight
 - [x] Spotlight
 - [ ] Export static HTML
 - [ ] Table of content on the right hand side
@@ -59,3 +63,7 @@ npm run dev
   - [x] Features
   - [ ] Shortcuts
 - [x] Admonition
+- [ ] Git Sync
+- [ ] Review Delete
+- [ ] Nested List Item
+- [ ] Admonition UI
