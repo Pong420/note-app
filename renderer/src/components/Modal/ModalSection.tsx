@@ -1,13 +1,13 @@
 import { Box, Group, Stack, Text } from '@mantine/core';
 import { TablerIconsProps } from '@tabler/icons-react';
 
-export interface MenuModalSectionProps {
+export interface ModalSectionProps {
   title?: React.ReactNode;
   icon?: React.ComponentType<TablerIconsProps>;
   children?: React.ReactNode;
 }
 
-export function MenuModalSection({ title, icon: Icon, children }: MenuModalSectionProps) {
+export function ModalSection({ title, icon: Icon, children }: ModalSectionProps) {
   const titleNode = (
     <Text fw={500} style={!title ? { visibility: 'hidden', height: '0.5em' } : { lineHeight: '2.75rem' }}>
       {title}

@@ -1,5 +1,9 @@
 .root {
   background-color: var(--menu-background-color);
+  width: auto;
+  height: 60px;
+  padding: var(--mantine-spacing-lg);
+  margin: 0 calc(var(--mantine-spacing-md) * -1);
 }
 
 .interactive {

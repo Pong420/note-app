@@ -8,7 +8,7 @@ export interface ModalPayload<T extends ModalProps> {
 
 export type ModalsEvents = {
   openModal<T extends ModalProps>(context: ModalPayload<T>): number;
-  closeModal(payload: number | React.ComponentType<Partial<ModalProps>>): void;
+  closeModal<T extends ModalProps>(payload: number | React.ComponentType<Partial<T>>): void;
   closeAllModals(): void;
 };
 
@@ -22,5 +22,5 @@ export const createModalHandler = <T extends ModalProps>(c: React.ComponentType<
   const component = c as React.ComponentType<Partial<ModalProps>>;
   const open = (props?: Omit<T, 'opened' | 'onClose'> & Partial<ModalProps>) => openModal({ props, component });
   const close = () => closeModal(component);
-  return [open, close];
+  return [open, close] as const;
 };

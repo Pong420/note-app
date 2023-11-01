@@ -6,6 +6,7 @@ import '@mantine/notifications/styles.css';
 import '@mantine/tiptap/styles.css';
 import '@mantine/spotlight/styles.css';
 import './index.css';
+import './tooltip.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

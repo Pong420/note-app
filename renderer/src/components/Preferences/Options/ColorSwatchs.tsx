@@ -1,43 +1,47 @@
-import { preferences, usePreferences } from '@/hooks/usePreferences';
-import { ColorSwatch, Group, DefaultMantineColor, CheckIcon, rem } from '@mantine/core';
+import { ColorSwatch, Group } from '@mantine/core';
+import cx from 'clsx';
 
-const colors: DefaultMantineColor[] = [
-  // 'dark',
-  // 'gray',
-  'red',
-  'pink',
-  'grape',
-  'violet',
-  'indigo',
-  'blue',
-  'cyan',
-  'teal',
-  'green',
-  'lime',
-  'yellow',
-  'orange'
-];
+const size = 24;
+const spacing = 5;
 
-const size = 20;
-const spacing = 10;
+export interface ColorSwatchsProps {
+  className?: string;
+  colors: string[];
+  onClick?: (color: string) => void;
+  onDoubleClick?: (color: string) => void;
+  getColor?: (color: string) => string;
+  children?: (color: string) => React.ReactNode;
+}
 
-export function ColorSwatchs() {
-  const primaryColor = usePreferences('theme.primaryColor');
-
+export function ColorSwatchs({
+  className = '',
+  colors,
+  getColor,
+  children,
+  onClick,
+  onDoubleClick
+}: ColorSwatchsProps) {
   return (
-    <Group justify="center" wrap="wrap" gap={spacing} w={`${(size + spacing) * 6 - spacing}px`}>
-      {colors.map(color => (
-        <ColorSwatch
-          key={color}
-          size={size}
-          component="button"
-          color={`var(--mantine-color-${color}-6)`}
-          style={{ color: '#fff', cursor: 'pointer' }}
-          onClick={() => preferences.set('theme.primaryColor', color)}
-        >
-          {color === primaryColor && <CheckIcon style={{ width: rem(10), height: rem(10), marginTop: '0.05rem' }} />}
-        </ColorSwatch>
-      ))}
+    <Group justify="flex-end" wrap="wrap" gap={spacing} w={`${(size + spacing) * 6 - spacing}px`}>
+      {colors.map(color => {
+        const c = getColor?.(color) || color;
+        return (
+          <ColorSwatch
+            className={cx('css-tooltip', className)}
+            color={c}
+            key={color}
+            size={size}
+            radius="sm"
+            component="button"
+            title={color.replace(/^\w/, s => s.toUpperCase())}
+            style={{ color: '#fff', cursor: 'pointer' }}
+            onClick={() => onClick?.(color)}
+            onDoubleClick={() => onDoubleClick?.(color)}
+          >
+            {children?.(color)}
+          </ColorSwatch>
+        );
+      })}
     </Group>
   );
 }

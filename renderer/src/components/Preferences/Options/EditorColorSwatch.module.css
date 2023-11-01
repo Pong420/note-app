@@ -1,0 +1,10 @@
+.color {
+  svg {
+    visibility: hidden;
+    display: 'block';
+  }
+
+  &:hover svg {
+    visibility: visible;
+  }
+}

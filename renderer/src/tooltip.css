@@ -1,0 +1,76 @@
+/* https://codepen.io/jackdomleo7/pen/mderEeG */
+
+:root {
+  --cooltipz-timing: 120ms;
+  --cooltipz-arrow-size: 0.3125rem;
+  --cooltipz-arrow-offset: 0px;
+  --cooltipz-delay-show: 0s;
+  --cooltipz-delay-hide: 0s;
+}
+
+.css-tooltip,
+.mantine-IconButton,
+.mantine-RichTextEditor-control {
+  position: relative;
+
+  &:hover {
+    &:before,
+    &:after {
+      opacity: 1;
+      transition-delay: var(--cooltipz-delay-show, 0s);
+    }
+  }
+
+  &:before {
+    content: '';
+
+    width: 0;
+    height: 0;
+
+    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.3));
+
+    position: absolute;
+    left: 50%;
+    top: calc(100% - var(--cooltipz-arrow-size, 0.3125rem) / 2);
+    transform: translate(calc(-50% + var(--cooltipz-arrow-offset, 0px)));
+    transform-origin: bottom;
+
+    transition: all var(--cooltipz-timing, 0.12s) ease-out var(--cooltipz-timing, 0.12s);
+    transition-delay: var(--cooltipz-delay-hide, 0s);
+
+    pointer-events: none;
+    z-index: 11;
+    opacity: 0;
+  }
+
+  &:after {
+    content: attr(title);
+
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+    background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-gray-9));
+
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1em;
+
+    padding: 0.5em 0.65em;
+
+    border-radius: 0.2rem;
+    box-shadow: 0 0 0.1875rem rgba(0, 0, 0, 0.3);
+
+    position: absolute;
+    left: 50%;
+    top: calc(100% - var(--cooltipz-arrow-size, 0.3125rem) / 2);
+    transform: translate(-50%);
+    margin-top: calc(var(--cooltipz-arrow-size, 0.3125rem) * 2);
+
+    transition: all var(--cooltipz-timing, 0.12s) ease-out var(--cooltipz-timing, 0.12s);
+    transition-delay: var(--cooltipz-delay-hide, 0s);
+
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+  }
+}

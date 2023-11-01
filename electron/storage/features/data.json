@@ -55,9 +55,15 @@
                 "type": "bold"
               }
             ],
-            "text": "Spotlight.x"
+            "text": "Spotlight"
           }
         ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": "left"
+        }
       },
       {
         "type": "video",
@@ -322,7 +328,7 @@
         "attrs": {
           "src": "./static/Features/assets/fffeb737e5aff17e9165428878ff3a3237b7049d89ed14bff8336a05c0d8283b.mp4",
           "loop": true,
-          "controls": false,
+          "controls": true,
           "autoPlay": true,
           "width": 3600,
           "height": 2146,
@@ -733,7 +739,7 @@
         "content": [
           {
             "type": "text",
-            "text": "Bubble Menu"
+            "text": "Text Bubble Menu"
           }
         ]
       },
@@ -954,5 +960,5 @@
       }
     ]
   },
-  "updatedAt": 1696620245060
+  "updatedAt": 1698869896254
 }

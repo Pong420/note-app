@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Button, Stack, Text, TextInput } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
-import { MenuModal, MenuModalProps, MenuModalSection } from '@/components/MenuModal';
+import { Modal, ModalProps, ModalSection } from '@/components/Modal';
 import { createModalHandler } from '@/utils/modals';
 import { FileJSON } from '@/types';
 
-export interface DeleteNoteProps extends MenuModalProps {
+export interface DeleteNoteProps extends ModalProps {
   file: FileJSON;
 }
 
@@ -23,8 +23,8 @@ export function DeleteNote({ file, ...props }: DeleteNoteProps) {
   };
 
   return (
-    <MenuModal {...props} onExited={() => setInput('')} icon={IconTrash} title="Delete Note">
-      <MenuModalSection>
+    <Modal {...props} onExited={() => setInput('')} icon={IconTrash} title="Delete Note">
+      <ModalSection>
         <form onSubmit={handleSubmit}>
           <Stack mx="md" gap="md">
             <Text size="md">
@@ -44,8 +44,8 @@ export function DeleteNote({ file, ...props }: DeleteNoteProps) {
             </Button>
           </Stack>
         </form>
-      </MenuModalSection>
-    </MenuModal>
+      </ModalSection>
+    </Modal>
   );
 }
 

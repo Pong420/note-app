@@ -2,7 +2,7 @@ import { Container } from '@mantine/core';
 import { RichTextEditor } from '@mantine/tiptap';
 import { Editor as TipTapEditor } from '@tiptap/react';
 import { TableBubbleMenu, tableMenuRefId } from './Table/TableBubbleMenu';
-import { BubbleMenu } from './BubbleMenu';
+import { TextBubbleMenu } from './TextBubbleMenu';
 import classes from './Editor.module.css';
 import './styles/code.css';
 import './styles/gapCursor.css';
@@ -25,7 +25,7 @@ export function Editor({ editor = null }: EditorProps) {
           <div id={tableMenuRefId}></div>
         </RichTextEditor.Content>
         {editor && <TableBubbleMenu editor={editor} />}
-        {editor && <BubbleMenu editor={editor} />}
+        {editor && <TextBubbleMenu editor={editor} />}
       </RichTextEditor>
     </Container>
   );

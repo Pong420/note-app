@@ -1,11 +1,11 @@
 import { Button, Stack, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconEdit } from '@tabler/icons-react';
-import { MenuModal, MenuModalProps, MenuModalSection } from '@/components/MenuModal';
+import { Modal, ModalProps, ModalSection } from '@/components/Modal';
 import { createModalHandler } from '@/utils/modals';
 import { FileJSON } from '@/types';
 
-export interface EditNoteProps extends MenuModalProps {
+export interface EditNoteProps extends ModalProps {
   file: FileJSON;
 }
 
@@ -22,16 +22,16 @@ export function EditNote({ file, ...props }: EditNoteProps) {
   });
 
   return (
-    <MenuModal {...props} onExited={() => form.reset()} icon={IconEdit} title="Edit Note">
-      <MenuModalSection>
+    <Modal {...props} onExited={() => form.reset()} icon={IconEdit} title="Edit Note">
+      <ModalSection>
         <form onSubmit={handleSubmit}>
           <Stack mx="md" gap="md">
             <TextInput data-autofocus label="Title" {...form.getInputProps('title')} />
             <Button type="submit">Conform</Button>
           </Stack>
         </form>
-      </MenuModalSection>
-    </MenuModal>
+      </ModalSection>
+    </Modal>
   );
 }
 

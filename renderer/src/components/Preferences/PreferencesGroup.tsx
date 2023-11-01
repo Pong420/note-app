@@ -9,7 +9,7 @@ export interface PreferencesGroupProps {
 export function PreferencesGroup({ title, description, children }: PreferencesGroupProps) {
   return (
     <Group wrap="nowrap" gap="lg">
-      <div style={{ flex: '1 1 50%' }}>
+      <div style={{ flex: '1 1 50%', alignSelf: 'flex-start' }}>
         <Text fw={500}>{title}</Text>
         {description && (
           <Text c="dimmed" size="sm">

@@ -14,6 +14,7 @@ const init = () => fileManager.load();
 export function App() {
   const ready = usePromise(init);
   const theme = usePreferences('theme');
+  const editor = usePreferences('editor');
 
   const mantineTheme = useMemo(() => {
     return createTheme({
@@ -27,21 +28,21 @@ export function App() {
         }),
         Container: Container.extend({
           defaultProps: {
-            maw: theme.pageWidth
+            maw: editor.pageWidth
           }
         })
       },
       primaryColor: theme.primaryColor
     });
-  }, [theme.darkMode, theme.pageWidth, theme.primaryColor]);
+  }, [theme.darkMode, editor.pageWidth, theme.primaryColor]);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--app-region-height', `${APP_REGION_HEIGHT}px`);
   }, []);
 
   useEffect(() => {
-    document.documentElement.style.fontSize = `${theme.fontSize}px`;
-  }, [theme.fontSize]);
+    document.documentElement.style.fontSize = `${editor.fontSize}px`;
+  }, [editor.fontSize]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-primary-color', theme.primaryColor);
