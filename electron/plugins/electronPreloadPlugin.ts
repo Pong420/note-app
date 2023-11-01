@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Options } from 'tsup';
 import { bundleRequire } from 'bundle-require'; // deps of tsup
 
@@ -13,14 +17,15 @@ export const electronPreloadPlugin: NonNullable<Options['esbuildPlugins']>[numbe
   name: `electronPreloadPlugin`,
   setup(build) {
     build.onLoad({ filter: /ipc/ }, async args => {
-      const { mod } = await bundleRequire<{ handlers: unknown; broadcasts: unknown }>({
+      const { mod } = await bundleRequire({
         filepath: args.path,
         format: 'cjs'
       });
 
       const contents = JSON.stringify({
-        handlers: Object.keys(mod.handlers).reduce<Record<string, unknown>>((p, c) => ({ ...p, [c]: {} }), {}),
-        broadcasts: Object.keys(mod.broadcasts).reduce<Record<string, unknown>>((p, c) => ({ ...p, [c]: {} }), {})
+        handlers: Object.keys(mod.handlers).reduce<Object>((p, c) => ({ ...p, [c]: {} }), {}),
+        requests: Object.keys(mod.requests).reduce<Object>((p, c) => ({ ...p, [c]: {} }), {}),
+        broadcasts: Object.keys(mod.broadcasts).reduce<Object>((p, c) => ({ ...p, [c]: {} }), {})
       });
 
       return {

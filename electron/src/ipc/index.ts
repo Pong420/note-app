@@ -1,4 +1,4 @@
-import { Args, BroadcastReceiver, BroadcastSender } from './ipcCreator';
+import { Args, RequestReply, RequestReceiver, BroadcastReceiver, BroadcastSender } from './ipcCreator';
 import { windowHandlers } from './window';
 import { filesHandlers, filesBroadcasts } from './files';
 import { systemHandlers, systemBroadcasts } from './system';
@@ -10,6 +10,8 @@ export type Handlers = {
 };
 
 export type { Args } from './ipcCreator';
+export type RequestReplies = RequestReply<typeof requests>;
+export type RequestReceivers = RequestReceiver<typeof requests>;
 export type BroadcastSenders = BroadcastSender<typeof broadcasts>;
 export type BroadcastReceivers = BroadcastReceiver<typeof broadcasts>;
 
@@ -31,4 +33,8 @@ export const handlers = {
 export const broadcasts = {
   ...filesBroadcasts,
   ...systemBroadcasts
+};
+
+export const requests = {
+  ...gitRequestSchema
 };
