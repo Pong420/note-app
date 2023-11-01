@@ -15,10 +15,10 @@ module.exports = {
     output: `release/${pkg.version}`,
     buildResources: 'resource'
   },
-  files: ['dist/**/*', 'build/**/*'],
+  files: ['dist/**/*', 'build/**/*', 'package.json'],
   mac: {
     artifactName: '${productName}_${version}.${ext}',
-    target: ['dmg', 'zip']
+    target: ['dmg', 'pkg', 'zip']
   },
   win: {
     target: [
