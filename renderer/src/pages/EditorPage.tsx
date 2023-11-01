@@ -112,7 +112,6 @@ export function EditorPage() {
       }
 
       editor?.commands.setContent(file.content || null);
-      adapter.emitLastVisitUpdated({ id });
       // with delay ui without blinking when app at initial / refersh
       await new Promise(resolve => setTimeout(resolve));
 
