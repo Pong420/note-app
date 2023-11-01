@@ -11,7 +11,7 @@ export function generatePath<AP extends DynamicPaths>(pathname: AP, params: Para
   return defaultGeneratePath<string>(pathname, params) as GeneratedPath;
 }
 
-export function navigate<AP extends DynamicPaths>(to: AP, params: Params<AP>, options?: NOpts): void;
+export function navigate<AP extends DynamicPaths>(to: AP, params: Params<AP>, options?: NOpts): Promise<void>;
 export function navigate(to: StaticPaths, options?: NOpts): Promise<void>;
 export function navigate(to: GeneratedPath, options?: NOpts): Promise<void>;
 export function navigate(to: number): Promise<void>;
@@ -23,7 +23,7 @@ export function navigate(to: number | string, ...args: unknown[]): Promise<void>
     throw new Error(`${__generated} is not a valid path`);
   }
 
-  const [params, options] = (args.length === 2 ? [args[0], args[1]] : [undefined, args[0]]) as [
+  const [params, options] = (args.length === 2 ? [args[0], args[1]] : [args[0], args[0]]) as [
     Record<string, unknown>?,
     NOpts?
   ];
