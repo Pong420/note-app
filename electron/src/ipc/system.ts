@@ -22,8 +22,8 @@ export let systemData = deepMerge(
 );
 
 export const systemHandlers = createIpcHandlers({
-  openStorageDir() {
-    return shell.openPath(storageDir);
+  async openPath(_event, pathname: string) {
+    await shell.openPath(pathname);
   },
   getStorageDir() {
     return storageDir;

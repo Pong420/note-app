@@ -67,7 +67,7 @@ export function createIpcRequests<H extends Record<string, Request>>(schema: H) 
               // should be same in electron/src/preload/index.ts and RequestReply, RequestReceiver
               const capitalized = key.charAt(0).toUpperCase() + key.slice(1);
               win.webContents.send(key);
-              ipcMain.once(`reply${capitalized}`, (event, resp) => resolve(resp));
+              ipcMain.once(`reply${capitalized}`, (_event, resp) => resolve(resp));
             });
           };
 

@@ -7,7 +7,7 @@ export type DeepPartial<T> = T extends object
 export const deepMerge = <A extends object, B extends object>(
   a: A,
   b: B,
-  fn: (key: string, a: unknown, b: unknown) => unknown = (key, a, b) => {
+  fn: (key: string, a: unknown, b: unknown) => unknown = (_key, a, b) => {
     return Array.isArray(a) && Array.isArray(b)
       ? b
       : typeof a === 'object' || typeof b === 'object'
