@@ -9,7 +9,7 @@ export function tableInputRule(config: { find: InputRuleFinder; type: NodeType }
     handler: ({ state, range, match, commands }) => {
       const [cols, rows] = (match[2]?.match(/\d+/g) || []).map(Number);
       state.tr.delete(range.from, range.to);
-      commands.insertTable({ cols, rows, withHeaderRow: true });
+      commands.insertTable({ cols, rows, withHeaderRow: false });
     }
   });
 }

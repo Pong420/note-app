@@ -39,9 +39,10 @@ export const themeColors: DefaultMantineColor[] = [
 export type TextBubbleMenuOption = (typeof textBubbleMenuOptions)[number][number];
 
 export const textBubbleMenuOptions = [
-  ['Bold', 'Italic', 'Underline', 'Strikethrough', 'Code', 'ColorPicker', 'Highlight', 'ClearFormatting'],
+  ['Bold', 'Italic', 'Underline', 'Strikethrough', 'Code', 'ColorPicker', 'Highlight'],
   ['AlignCenter', 'AlignJustify', 'AlignLeft', 'AlignRight'],
   ['H1', 'H2', 'H3', 'H4'],
   ['BulletList', 'OrderedList'],
-  ['Link', 'Unlink']
+  ['Link', 'Unlink'],
+  ['ClearFormatting']
 ] as const;

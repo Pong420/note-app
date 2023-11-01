@@ -49,7 +49,6 @@ export function TextBubbleMenu({ editor }: TextBubbleMenuProps) {
                       if (key === 'ColorPicker') {
                         return <RichTextEditor.ColorPicker key={key} colors={colors} />;
                       }
-
                       const Component = RichTextEditor[key];
                       return <Component key={key} />;
                     })}

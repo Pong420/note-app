@@ -4,9 +4,7 @@
   table {
     border-collapse: collapse;
     margin: 0;
-    overflow: hidden;
-    table-layout: fixed;
-    width: 100%;
+    table-layout: auto;
 
     p {
       margin: 0;
@@ -31,10 +29,21 @@
     min-width: 1em;
     padding: 3px 5px;
     position: relative;
-    vertical-align: top;
 
     > * {
       margin-bottom: 0;
+    }
+
+    &[valign='top'] {
+      vertical-align: top;
+    }
+
+    &[valign='middle'] {
+      vertical-align: middle;
+    }
+
+    &[valign='bottom'] {
+      vertical-align: bottom;
     }
   }
 

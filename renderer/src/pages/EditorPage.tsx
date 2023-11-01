@@ -8,7 +8,6 @@ import HorizontalRule from '@tiptap/extension-horizontal-rule';
 import Link from '@tiptap/extension-link';
 import TextAlign from '@tiptap/extension-text-align';
 import Placeholder from '@tiptap/extension-placeholder';
-import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import Code from '@tiptap/extension-code';
@@ -25,6 +24,7 @@ import { KeyboardButton } from '@/components/Editor/KeyboardButton/KeyboardButto
 import { Admonition } from '@/components/Editor/Admonition/Admonition';
 import { HorizontalRule as HorizontalRuleComponent } from '@/components/Editor/HorizontalRule';
 import { Table } from '@/components/Editor/Table/Table';
+import { TableCell } from '@/components/Editor/Table/TableCell';
 import { TaskItem } from '@/components/Editor/TaskItem/TaskItem';
 import { FileJSON } from '@/types';
 

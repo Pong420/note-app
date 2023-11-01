@@ -26,6 +26,7 @@ export function ImageViewBubbleMenu({ width, height, ratio, onSubmit }: ImageVie
     <div className={classes.root}>
       <RichTextEditor.ControlsGroup>
         <RichTextEditor.Control
+          title="Image Config"
           onClick={() => {
             form.setValues({ width, height });
             open();

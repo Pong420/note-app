@@ -1,85 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Group, Paper, Portal } from '@mantine/core';
-import { RichTextEditor } from '@mantine/tiptap';
-import { Commands, Editor, findParentNodeClosestToPos } from '@tiptap/core';
-import {
-  IconColumnInsertLeft,
-  IconColumnInsertRight,
-  IconColumnRemove,
-  IconRowInsertBottom,
-  IconRowInsertTop,
-  IconRowRemove,
-  IconTableColumn,
-  IconTableMinus,
-  IconTableRow,
-  TablerIconsProps
-} from '@tabler/icons-react';
+import { Paper, Portal } from '@mantine/core';
+import { Editor, findParentNodeClosestToPos } from '@tiptap/core';
+import { TableControls } from './TableControls';
+import { TableCellControls } from './TableCellControls';
 
 export type TableBubbleMenuProps = {
   editor: Editor;
 };
 
-interface ButtonOptions {
-  icon: React.ComponentType<TablerIconsProps>;
-  title: string;
-  command: keyof Commands['table'];
+interface State {
+  table?: ReturnType<typeof findParentNodeClosestToPos>;
+  rect?: { top: number; left: number };
+  cellSelected: boolean;
 }
-
-const options = [
-  [
-    {
-      icon: IconTableMinus,
-      title: 'Delete Table',
-      command: 'deleteTable'
-    }
-  ],
-  [
-    {
-      icon: IconRowInsertTop,
-      title: 'Insert row above',
-      command: 'addRowBefore'
-    },
-    {
-      icon: IconRowInsertBottom,
-      title: 'Insert row below',
-      command: 'addRowAfter'
-    },
-    {
-      icon: IconRowRemove,
-      title: 'Delete row',
-      command: 'deleteRow'
-    }
-  ],
-  [
-    {
-      icon: IconColumnInsertLeft,
-      title: 'Insert column to the left',
-      command: 'addColumnBefore'
-    },
-    {
-      icon: IconColumnInsertRight,
-      title: 'Insert column to the right',
-      command: 'addColumnAfter'
-    },
-    {
-      icon: IconColumnRemove,
-      title: 'Delete column',
-      command: 'deleteColumn'
-    }
-  ],
-  [
-    {
-      icon: IconTableRow,
-      title: 'Toggle Header Row',
-      command: 'toggleHeaderRow'
-    },
-    {
-      icon: IconTableColumn,
-      title: 'Toggle Header Column',
-      command: 'toggleHeaderColumn'
-    }
-  ]
-] satisfies ButtonOptions[][];
 
 export const tableMenuRefId = `table-menu-item`;
 
@@ -102,11 +35,12 @@ function getPos(node: Element | null) {
 // https://github.com/ueberdosis/tiptap/blob/main/packages/react/src/BubbleMenu.tsx
 // https://github.com/ueberdosis/tiptap/blob/main/packages/extension-bubble-menu/src/bubble-menu-plugin.ts
 export const TableBubbleMenu = ({ editor }: TableBubbleMenuProps) => {
-  const [rect, setRect] = useState<{ top: number; left: number }>();
-  const isDestroyed = editor.isDestroyed;
+  const [{ table, rect, cellSelected }, setState] = useState<State>({
+    cellSelected: false
+  });
 
   useEffect(() => {
-    const getTableNode = () => {
+    const getTableNode = ({ editor }: { editor: Editor }) => {
       const nearestTableParent = editor.isActive('table')
         ? findParentNodeClosestToPos(editor.state.selection.$anchor, node => node.type.name === 'table')
         : null;
@@ -114,20 +48,25 @@ export const TableBubbleMenu = ({ editor }: TableBubbleMenuProps) => {
       if (nearestTableParent) {
         const wrapperDomNode = editor.view.nodeDOM(nearestTableParent.pos) as HTMLElement | null | undefined;
         const tableDomNode = wrapperDomNode?.querySelector('table') || wrapperDomNode;
-        return tableDomNode ? getPos(tableDomNode) : undefined;
+        return { rect: tableDomNode ? getPos(tableDomNode) : undefined, table: nearestTableParent };
       }
     };
 
-    const onUpdate = () => {
-      const rect = getTableNode();
-      setRect(rect);
+    const onUpdate = ({ editor }: { editor: Editor }) => {
+      const { rect, table } = getTableNode({ editor }) || {};
+      setState(s => ({
+        ...s,
+        rect,
+        table,
+        cellSelected: editor.state.selection.$anchor.parent.type.name === 'tableCell'
+      }));
     };
 
     editor.on('selectionUpdate', onUpdate);
     return () => {
       editor.off('selectionUpdate', onUpdate);
     };
-  }, [editor, isDestroyed]);
+  }, [editor, editor.isDestroyed]);
 
   if (!rect) return null;
 
@@ -139,25 +78,11 @@ export const TableBubbleMenu = ({ editor }: TableBubbleMenuProps) => {
         withBorder
         style={{ position: 'absolute', top: rect.top + 5, right: rect.left, zIndex: 1 }}
       >
-        <Group gap={10}>
-          {options.map((group, i) => {
-            return (
-              <RichTextEditor.ControlsGroup key={i}>
-                {group.map(({ icon: Icon, title, command }) => (
-                  <RichTextEditor.Control
-                    key={title}
-                    title={title}
-                    aria-label={title}
-                    disabled={!editor.can()[command]()}
-                    onClick={() => editor.chain().focus()[command]().run()}
-                  >
-                    <Icon stroke={1.5} size="1rem" />
-                  </RichTextEditor.Control>
-                ))}
-              </RichTextEditor.ControlsGroup>
-            );
-          })}
-        </Group>
+        {cellSelected ? (
+          <TableCellControls editor={editor} />
+        ) : (
+          <TableControls editor={editor} initialTableOptions={table?.node.attrs} />
+        )}
       </Paper>
     </Portal>
   );

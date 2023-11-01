@@ -15,7 +15,7 @@
 .content {
   position: relative;
   padding-top: var(--padding-y);
-  padding-bottom: var(--padding-y);
+  padding-bottom: 200px;
   padding-left: var(--padding-x);
   padding-right: var(--padding-x);
   min-height: 100vh;

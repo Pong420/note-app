@@ -12,6 +12,7 @@ import './styles/table.css';
 import './styles/spotlight.css';
 import './styles/tasklist.css';
 import './styles/highlight.css';
+import './styles/mantine.css';
 
 export interface EditorProps {
   editor?: TipTapEditor | null;

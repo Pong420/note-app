@@ -31,26 +31,35 @@ export function VideoViewBubbleMenu({ width, height, ratio, update, ...props }: 
   return (
     <div className={classes.root}>
       <Paper p={5} shadow="md" withBorder>
-        <Group gap={2}>
+        <Group gap={5}>
           <RichTextEditor.Control
+            title="Auto Play"
+            active={props.autoPlay}
+            onClick={() => update({ autoPlay: !props.autoPlay })}
+          >
+            <IconPlayerPlayFilled stroke={1.5} size="1rem" />
+          </RichTextEditor.Control>
+
+          <RichTextEditor.Control title="Loop" active={props.loop} onClick={() => update({ loop: !props.loop })}>
+            <IconRepeat stroke={1.5} size="1rem" />
+          </RichTextEditor.Control>
+
+          <RichTextEditor.Control
+            title="Control Visibility"
+            active={props.controls}
+            onClick={() => update({ controls: !props.controls })}
+          >
+            <IconAdjustmentsHorizontal stroke={1.5} size="1rem" />
+          </RichTextEditor.Control>
+
+          <RichTextEditor.Control
+            title="Video Config"
             onClick={() => {
               form.setValues({ width, height });
               open();
             }}
           >
             <IconMovie stroke={1.5} size="1rem" />
-          </RichTextEditor.Control>
-
-          <RichTextEditor.Control active={props.autoPlay} onClick={() => update({ autoPlay: !props.autoPlay })}>
-            <IconPlayerPlayFilled stroke={1.5} size="1rem" />
-          </RichTextEditor.Control>
-
-          <RichTextEditor.Control active={props.loop} onClick={() => update({ loop: !props.loop })}>
-            <IconRepeat stroke={1.5} size="1rem" />
-          </RichTextEditor.Control>
-
-          <RichTextEditor.Control active={props.controls} onClick={() => update({ controls: !props.controls })}>
-            <IconAdjustmentsHorizontal stroke={1.5} size="1rem" />
           </RichTextEditor.Control>
         </Group>
       </Paper>
