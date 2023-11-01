@@ -3,7 +3,7 @@ import path from 'path';
 import crypto from 'crypto';
 import axios from 'axios';
 import fastGlob from 'fast-glob';
-import { BrowserWindow, app, dialog } from 'electron';
+import { BrowserWindow, app, dialog, shell } from 'electron';
 import { PDFDocument } from 'pdf-lib';
 import { createIpcHandlers } from './ipcCreator';
 import { storageDir } from '../constants';
@@ -137,7 +137,7 @@ export const filesBroadcasts = createIpcHandlers({
     const pathname = filesDir(id);
     if (file) {
       files.delete(id);
-      await fs.rm(pathname, { force: true, recursive: true });
+      await shell.trashItem(pathname);
     }
     return { id };
   }
