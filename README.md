@@ -67,3 +67,5 @@ npm run dev
 - [ ] Review Delete
 - [ ] Nested List Item
 - [ ] Admonition UI
+- [ ] Seperate data json into html
+- [ ] Directory name should include title
