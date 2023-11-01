@@ -1,7 +1,7 @@
 import { Args, RequestReply, RequestReceiver, BroadcastReceiver, BroadcastSender } from './ipcCreator';
 import { windowHandlers } from './window';
 import { filesHandlers, filesBroadcasts } from './files';
-import { systemHandlers, systemBroadcasts } from './system';
+import { systemHandlers } from './system';
 
 export type Handlers = {
   [K in keyof typeof handlers]: (
@@ -31,10 +31,7 @@ export const handlers = {
 };
 
 export const broadcasts = {
-  ...filesBroadcasts,
-  ...systemBroadcasts
+  ...filesBroadcasts
 };
 
-export const requests = {
-  ...gitRequestSchema
-};
+export const requests = {};
