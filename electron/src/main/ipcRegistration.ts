@@ -15,7 +15,9 @@ for (const name in broadcasts) {
     try {
       const handle = broadcasts[name as keyof typeof broadcasts] as (...args: unknown[]) => unknown;
       const resp = handle(event, ...args);
-      const replyName = `${name}Reply`;
+
+      // should be same in electron/src/preload/index.ts
+      const replyName = `${name}Broadcast`;
       if (resp instanceof Promise) {
         resp
           //
