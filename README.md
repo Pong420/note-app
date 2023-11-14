@@ -1,7 +1,7 @@
 # Notes
 
 <div align="center">
-  <img src="./assets/icon.png" />
+  <img src="./.internal/icon.png" />
 </div>
 
 <p align="center">Single Page Note App</p>
@@ -38,7 +38,7 @@ npm run dev
 - [x] Saving file
 - [ ] Code Block
   - [x] Basic Setup
-  - [ ] Bubble menu for configure title, line-highlights
+  - [ ] Bubble menu for configuring title, line highlights
   - [ ] Inside list item
   - [ ] Drag handler
 - [x] Task List
@@ -47,7 +47,7 @@ npm run dev
   - [x] Resizeable
   - [x] Drop to Upload
   - [ ] Review drop to upload
-  - [ ] Upload from url
+  - [ ] Upload from URL
   - [ ] Check Markdown patterns
   - [ ] Alignment, Flot, Center, Inline
 - [x] Highlight text -> Bubble Menu
@@ -57,8 +57,8 @@ npm run dev
   - [ ] all actions Spotlight
 - [x] Spotlight
 - [ ] Export static HTML
-- [ ] Table of content on the right hand side
-- [x] Prefernces
+- [ ] Table of contents on the right-hand side
+- [x] Preferences
 - [ ] Documentation
   - [x] Features
   - [ ] Shortcuts
@@ -67,5 +67,5 @@ npm run dev
 - [ ] Review Delete
 - [ ] Nested List Item
 - [ ] Admonition UI
-- [ ] Seperate data json into html
-- [ ] Directory name should include title
+- [ ] Separate data json into html
+- [ ] The directory name should include the title

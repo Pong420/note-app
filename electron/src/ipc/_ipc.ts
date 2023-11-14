@@ -113,7 +113,7 @@ export function createM2RWithReplyIpc<Definition extends Record<string, M2RWithR
         const action = (win: BrowserWindow) => {
           return new Promise(resolve => {
             win.webContents.send(name, payload);
-            ipcMain.once(name, (event, resp) => resolve(resp));
+            ipcMain.once(name, (_event, resp) => resolve(resp));
           });
         };
 
