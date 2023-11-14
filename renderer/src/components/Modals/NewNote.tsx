@@ -1,6 +1,7 @@
 import { Button, Stack, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconPlus } from '@tabler/icons-react';
+import { nanoid } from 'nanoid';
 import { Modal, ModalProps, ModalSection } from '@/components/Modal';
 import { createModalHandler } from '@/utils/modals';
 import { navigate } from '@/routes';
@@ -17,7 +18,7 @@ export function NewNote(props: NewNoteProps) {
   });
 
   const handleSubmit = form.onSubmit(values => {
-    navigate('/editor/new-page/:title', { title: values.title });
+    navigate('/editor/:title/:id', { title: values.title, id: nanoid() });
     props.onClose();
   });
 

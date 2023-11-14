@@ -4,6 +4,7 @@ import { IconTrash } from '@tabler/icons-react';
 import { Modal, ModalProps, ModalSection } from '@/components/Modal';
 import { createModalHandler } from '@/utils/modals';
 import { FileJSON } from '@/types';
+import { navigate } from '@/routes';
 
 export interface DeleteNoteProps extends ModalProps {
   file: FileJSON;
@@ -19,6 +20,7 @@ export function DeleteNote({ file, ...props }: DeleteNoteProps) {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     adapter.emitDeleteFile({ id: file.id });
+    navigate('/');
     props.onClose();
   };
 
