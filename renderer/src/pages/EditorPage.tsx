@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { EditorOptions, Extensions, ReactNodeViewRenderer, useEditor } from '@tiptap/react';
+import { EditorState } from '@tiptap/pm/state';
+import { EditorEvents, EditorOptions, Extensions, ReactNodeViewRenderer, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
 import Underline from '@tiptap/extension-underline';
@@ -79,19 +80,10 @@ export function EditorPage() {
   const { id, title } = useParams() as { id: string; title: string };
   const [loaded, setLoaded] = useState(false);
 
-  const onUpdate: EditorOptions['onUpdate'] = useCallback(
-    ({ editor, transaction }) => {
-      if (loaded && transaction.docChanged) {
-        adapter.emitFileChanged({ id, title, content: editor.getJSON() });
-      }
-    },
-    [id, title, loaded]
-  );
-
   const editor = useEditor({
     extensions,
     editorProps,
-    onUpdate,
+    // onUpdate,
     editable: false
   });
 
@@ -99,6 +91,7 @@ export function EditorPage() {
     const loadFile = async () => {
       let file = await adapter.getFile({ id });
 
+      // if file not found, create new one
       if (!file) {
         file = await new Promise<FileJSON>(resolve => {
           const unsubscribe = adapter.onFileChanged(file => {
@@ -107,13 +100,27 @@ export function EditorPage() {
               resolve(file);
             }
           });
+          // create new file
           adapter.emitFileChanged({ id, title });
         });
       }
 
-      editor?.commands.setContent(file.content || null);
-      // with delay ui without blinking when app at initial / refersh
-      await new Promise(resolve => setTimeout(resolve));
+      if (!editor) return false;
+
+      editor.commands.setContent(file.content || null);
+
+      // As content is loaded through the setContent function, it is considered a modification.
+      // This allows the user to trigger 'history.undo' and remove the content. If the user refreshes the page unexpectedly, the content cannot get back"
+      // So we need to reset the history record by reseting editor state.
+      // references:
+      // https://github.com/ueberdosis/tiptap/issues/491#issuecomment-1317578507
+      const newEditorState = EditorState.create({
+        doc: editor.state.doc,
+        plugins: editor.state.plugins,
+        schema: editor.state.schema,
+        storedMarks: editor.state.storedMarks
+      });
+      editor.view.updateState(newEditorState);
 
       if (!file.readOnly || import.meta.env.DEV) editor?.setEditable(true);
       editor?.commands.focus(null, { scrollIntoView: false });
@@ -121,9 +128,21 @@ export function EditorPage() {
       return true;
     };
 
+    const onUpdate = ({ editor, transaction }: EditorEvents['update']) => {
+      if (transaction.docChanged) {
+        adapter.emitFileChanged({ id, title, content: editor.getJSON() });
+      }
+    };
+
+    editor?.on('update', onUpdate);
+
     loadFile()
       .then(setLoaded)
       .catch(() => void 0);
+
+    return () => {
+      editor?.on('update', onUpdate);
+    };
   }, [editor, id, title]);
 
   if (!loaded) return null;

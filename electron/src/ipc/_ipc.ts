@@ -139,12 +139,8 @@ export function createR2RIpc<Definition extends Record<string, R2R<any[]>>>(defi
         const handle = definition[name as keyof typeof definition] as (...args: unknown[]) => unknown;
         const resp = handle(event, ...args);
 
-        const fromWindow = BrowserWindow.fromWebContents(event.sender);
-
         const broadcast = (event: string, payload: unknown) =>
-          BrowserWindow.getAllWindows().forEach(
-            win => win.id !== fromWindow?.id && win.webContents.send(event, payload)
-          );
+          BrowserWindow.getAllWindows().forEach(win => win.webContents.send(event, payload));
 
         // should be same in electron/src/preload/index.ts
         // const replyName = `${name}`;
