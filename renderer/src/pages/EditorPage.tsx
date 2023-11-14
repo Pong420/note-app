@@ -101,7 +101,7 @@ export function EditorPage() {
 
       if (!file) {
         file = await new Promise<FileJSON>(resolve => {
-          const unsubscribe = adapter.subscribeFileChanged(file => {
+          const unsubscribe = adapter.onFileChanged(file => {
             if (file.id === id) {
               unsubscribe();
               resolve(file);

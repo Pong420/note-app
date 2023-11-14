@@ -5,7 +5,7 @@ import axios from 'axios';
 import fastGlob from 'fast-glob';
 import { BrowserWindow, app, dialog, shell } from 'electron';
 import { PDFDocument } from 'pdf-lib';
-import { createIpcHandlers } from './ipcCreator';
+import { createR2MIpc, createR2RIpc } from './_ipc';
 import { storageDir } from '../constants';
 
 export interface FileJSON {
@@ -40,7 +40,7 @@ fastGlob.sync(['**/data.json'], { absolute: true, cwd: filesDir() }).forEach(fil
   }
 });
 
-export const filesHandlers = createIpcHandlers({
+export const filesR2MIpc = createR2MIpc({
   getFiles(_event) {
     return Array.from(files, ([, file]) => file);
   },
@@ -118,8 +118,8 @@ export const filesHandlers = createIpcHandlers({
   }
 });
 
-export const filesBroadcasts = createIpcHandlers({
-  async FileChanged(_event, changes: SaveChanges) {
+export const filesR2RIpc = createR2RIpc({
+  async fileChanged(_event, changes: SaveChanges) {
     const { id } = changes;
     const filepath = filesDir(id, 'data.json');
     const now = Date.now();
@@ -136,7 +136,7 @@ export const filesBroadcasts = createIpcHandlers({
 
     return file;
   },
-  async DeleteFile(_event, { id }: FileID) {
+  async deleteFile(_event, { id }: FileID) {
     const file = files.get(id);
     const pathname = filesDir(id);
     if (file) {

@@ -22,10 +22,15 @@ export const electronPreloadPlugin: NonNullable<Options['esbuildPlugins']>[numbe
         format: 'cjs'
       });
 
+      // should be same as the exports from electron/src/ipc/index.ts
       const contents = JSON.stringify({
-        handlers: Object.keys(mod.handlers).reduce<Object>((p, c) => ({ ...p, [c]: {} }), {}),
-        requests: Object.keys(mod.requests).reduce<Object>((p, c) => ({ ...p, [c]: {} }), {}),
-        broadcasts: Object.keys(mod.broadcasts).reduce<Object>((p, c) => ({ ...p, [c]: {} }), {})
+        r2mIpc: Object.keys(mod.r2mIpc).reduce<object>((p, c) => ({ ...p, [c]: {} }), {}),
+        r2rIpc: Object.keys(mod.r2rIpc).reduce<object>((p, c) => ({ ...p, [c]: {} }), {}),
+        m2rIpc: Object.keys(mod.m2rIpc).reduce<object>((p, c) => ({ ...p, [c]: {} }), {}),
+        m2rWithReplyDefinition: Object.keys(mod.m2rWithReplyDefinition).reduce<object>(
+          (p, c) => ({ ...p, [c]: {} }),
+          {}
+        )
       });
 
       return {

@@ -17,8 +17,8 @@ export class FileManager extends ExternalStore<Snapshot> {
     super();
 
     // TODO: try typescript disposed later
-    adapter.subscribeFileChanged(this.handleFileChanged);
-    adapter.subscribeDeleteFile(this.handleDeleteFile);
+    adapter.onFileChanged(this.handleFileChanged);
+    adapter.onDeleteFile(this.handleDeleteFile);
   }
 
   async load() {

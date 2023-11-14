@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { shell } from 'electron';
-import { createIpcHandlers } from './ipcCreator';
+import { createR2MIpc } from './_ipc';
 import { storageDir } from '../constants';
 import { deepMerge, DeepPartial } from '../utils/deepMerge';
 
@@ -21,7 +21,7 @@ export let systemData = deepMerge(
   (fs.readJSONSync(systemDataPath, { throws: false }) as SystemData) || {}
 );
 
-export const systemHandlers = createIpcHandlers({
+export const systemR2MIpc = createR2MIpc({
   async openPath(_event, pathname: string) {
     await shell.openPath(pathname);
   },

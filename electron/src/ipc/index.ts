@@ -1,37 +1,19 @@
-import { Args, RequestReply, RequestReceiver, BroadcastReceiver, BroadcastSender } from './ipcCreator';
-import { windowHandlers } from './window';
-import { filesHandlers, filesBroadcasts } from './files';
-import { systemHandlers } from './system';
+import { windowR2MIpc } from './window';
+import { systemR2MIpc } from './system';
+import { filesR2MIpc, filesR2RIpc } from './files';
 
-export type Handlers = {
-  [K in keyof typeof handlers]: (
-    ...args: Args<(typeof handlers)[K]>
-  ) => Promise<Awaited<ReturnType<(typeof handlers)[K]>>>;
+export * from './_ipc';
+
+export const r2mIpc = {
+  ...filesR2MIpc,
+  ...systemR2MIpc,
+  ...windowR2MIpc
 };
 
-export type { Args } from './ipcCreator';
-export type RequestReplies = RequestReply<typeof requests>;
-export type RequestReceivers = RequestReceiver<typeof requests>;
-export type BroadcastSenders = BroadcastSender<typeof broadcasts>;
-export type BroadcastReceivers = BroadcastReceiver<typeof broadcasts>;
-
-export interface ElectronIPC extends Handlers, BroadcastSenders, BroadcastReceivers {}
-
-declare global {
-  interface Window {
-    adapter: ElectronIPC;
-  }
-  const adapter: ElectronIPC;
-}
-
-export const handlers = {
-  ...windowHandlers,
-  ...filesHandlers,
-  ...systemHandlers
+export const r2rIpc = {
+  ...filesR2RIpc
 };
 
-export const broadcasts = {
-  ...filesBroadcasts
-};
+export const m2rWithReplyDefinition = {};
 
-export const requests = {};
+export const m2rIpc = {};

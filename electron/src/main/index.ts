@@ -3,7 +3,7 @@ import os from 'node:os';
 import { app, BrowserWindow } from 'electron';
 import { handleProtocols } from './handleProtocols';
 import { createMainWindow } from './window';
-import './ipcRegistration';
+import '../ipc';
 
 // Disable GPU Acceleration for Windows 7
 if (os.release().startsWith('6.1')) app.disableHardwareAcceleration();
