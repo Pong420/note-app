@@ -406,12 +406,6 @@
         ]
       },
       {
-        "type": "paragraph",
-        "attrs": {
-          "textAlign": "left"
-        }
-      },
-      {
         "type": "admonition",
         "attrs": {
           "type": "note"
@@ -531,7 +525,7 @@
         "type": "heading",
         "attrs": {
           "textAlign": "left",
-          "level": 1
+          "level": 2
         },
         "content": [
           {
@@ -702,7 +696,7 @@
         "content": [
           {
             "type": "text",
-            "text": "Select some text to see bubble menu"
+            "text": "Select some text to see bubble menu, you may configuring the buttons in preferences page."
           }
         ]
       },
@@ -951,7 +945,7 @@
                 "content": [
                   {
                     "type": "text",
-                    "text": "Highlight the cell you may configure the cell alignment, background color, width, height etc."
+                    "text": "You may configure the cell alignment, background color, width, height by highlight the cells."
                   }
                 ]
               }
@@ -1206,5 +1200,5 @@
       }
     ]
   },
-  "updatedAt": 1698871435380
+  "updatedAt": 1699961224370
 }

@@ -54,7 +54,7 @@ npm run dev
 - [x] Export PDF
   - [ ] Remove Extra Spacing
 - [ ] Context menu
-  - [ ] all actions Spotlight
+  - [ ] The same actions in Spotlight
 - [x] Spotlight
 - [ ] Export static HTML
 - [ ] Table of contents on the right-hand side
@@ -64,8 +64,5 @@ npm run dev
   - [ ] Shortcuts
 - [x] Admonition
 - [ ] Git Sync
-- [ ] Review Delete
 - [ ] Nested List Item
-- [ ] Admonition UI
-- [ ] Separate data json into html
 - [ ] The directory name should include the title
