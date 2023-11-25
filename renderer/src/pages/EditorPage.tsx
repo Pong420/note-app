@@ -141,7 +141,7 @@ export function EditorPage() {
       .catch(() => void 0);
 
     return () => {
-      editor?.on('update', onUpdate);
+      editor?.off('update', onUpdate);
     };
   }, [editor, id, title]);
 
