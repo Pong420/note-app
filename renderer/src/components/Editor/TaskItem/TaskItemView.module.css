@@ -5,8 +5,7 @@
 
   p {
     margin: 0;
-    height: calc(1.25rem * var(--mantine-scale));
-    line-height: calc(1.25rem * var(--mantine-scale));
+    line-height: calc(1.4rem * var(--mantine-scale));
   }
 
   & + &,
