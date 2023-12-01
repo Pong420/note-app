@@ -5,8 +5,8 @@ const app = 'electron';
 
 /** @type {import('electron-builder').Configuration} */
 module.exports = {
-  appId: 'com.notes.app',
-  productName: 'Notes',
+  appId: 'com.single-page-note.app',
+  productName: 'SingePageNote',
   // https://github.com/electron-userland/electron-builder/issues/3984
   electronVersion: pkg.devDependencies['electron'].replace(/^(~|\^)/, ''),
   asar: true,
