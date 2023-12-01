@@ -1,17 +1,17 @@
 /* mutliple class name to make sure styles will be overriden by */
 /* https//mantine.dev/core/typography-styles-provider/ */
 .tiptap.tiptap.tiptap {
-  .ProseMirror-gapcursorafter {
-    border-width: 2;
-    border-color: light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-4));
+  .ProseMirror-gapcursor:after {
+    border-width: 2px;
+    border-color: var(--mantine-color-text);
   }
 
   /* to avoid overlap with table or image */
-  .ProseMirror-gapcursorfirst-of-typeafter {
+  .ProseMirror-gapcursor:first-of-type:after {
     top: -5px;
   }
 
-  * + .ProseMirror-gapcursor.ProseMirror-gapcursorafter {
+  * + .ProseMirror-gapcursor.ProseMirror-gapcursor:after {
     top: 5px;
   }
 }
