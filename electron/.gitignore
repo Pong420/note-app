@@ -5,4 +5,6 @@ node_modules
 tsconfig.tsbuildinfo
 
 storage/*
-!storage/features
+!storage/files
+storage/files/*
+!storage/files/features

@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserWindow, IpcMainEvent, IpcMainInvokeEvent, ipcMain } from 'electron';
+import { saveLog } from './logs';
 
-export type Args<T extends (...args: any[]) => any> = Parameters<T> extends [infer F, ...infer R]
-  ? F extends BrowserWindow | IpcMainEvent | IpcMainInvokeEvent
-    ? [...R]
-    : [F, ...R]
-  : [];
+export type Args<T extends (...args: any[]) => any> =
+  Parameters<T> extends [infer F, ...infer R]
+    ? F extends BrowserWindow | IpcMainEvent | IpcMainInvokeEvent
+      ? [...R]
+      : [F, ...R]
+    : [];
 
 // renderer to main
 export type R2M<Args extends unknown[]> = (event: IpcMainInvokeEvent, ...args: Args) => unknown;
@@ -40,9 +42,12 @@ export type R2RSender<T extends Record<string, R2R<any[]>>> = {
 
 type ReceiverArgs<T> = T extends M2RWithReply
   ? T[0]
-  : T extends (...args: any[]) => any
-  ? Awaited<ReturnType<T>>
-  : never;
+  : T extends M2RFn<any>
+    ? NonNullable<Args<T>[0]>
+    : T extends (...args: any[]) => any
+      ? Awaited<ReturnType<T>>
+      : never;
+
 export type Receiver<T extends Record<string, (...args: any[]) => any> | Record<string, M2RWithReply>> = {
   [K in keyof T as K extends string ? `on${Capitalize<K>}` : never]: (
     callback: (args: ReceiverArgs<T[K]>) => void
@@ -57,7 +62,16 @@ export function createR2MIpc<Definition extends Record<string, R2M<any[]>>>(defi
   if (typeof ipcMain === 'undefined') return definition;
 
   for (const name in definition) {
-    ipcMain.handle(name, definition[name as keyof typeof definition]);
+    ipcMain.handle(name, async (event, ...args) => {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        const resp = definition[name as keyof typeof definition](event, ...args);
+        return await resp;
+      } catch (error) {
+        void saveLog(error);
+        throw error;
+      }
+    });
   }
 
   return definition;
@@ -113,7 +127,7 @@ export function createM2RWithReplyIpc<Definition extends Record<string, M2RWithR
         const action = (win: BrowserWindow) => {
           return new Promise(resolve => {
             win.webContents.send(name, payload);
-            ipcMain.once(name, (_event, resp) => resolve(resp));
+            ipcMain.once(name, (event, resp) => resolve(resp));
           });
         };
 
@@ -139,8 +153,12 @@ export function createR2RIpc<Definition extends Record<string, R2R<any[]>>>(defi
         const handle = definition[name as keyof typeof definition] as (...args: unknown[]) => unknown;
         const resp = handle(event, ...args);
 
+        const fromWindow = BrowserWindow.fromWebContents(event.sender);
+
         const broadcast = (event: string, payload: unknown) =>
-          BrowserWindow.getAllWindows().forEach(win => win.webContents.send(event, payload));
+          BrowserWindow.getAllWindows().forEach(
+            win => win.id !== fromWindow?.id && win.webContents.send(event, payload)
+          );
 
         // should be same in electron/src/preload/index.ts
         // const replyName = `${name}`;
@@ -148,12 +166,12 @@ export function createR2RIpc<Definition extends Record<string, R2R<any[]>>>(defi
           resp
             //
             .then(payload => broadcast(name, payload))
-            .catch(error => event.reply('error', error));
+            .catch(error => saveLog(error));
         } else {
           broadcast(name, resp);
         }
       } catch (error) {
-        event.reply('error', error);
+        void saveLog(error);
       }
     });
   }

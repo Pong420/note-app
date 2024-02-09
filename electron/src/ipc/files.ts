@@ -6,7 +6,7 @@ import fastGlob from 'fast-glob';
 import { BrowserWindow, app, dialog, shell } from 'electron';
 import { PDFDocument } from 'pdf-lib';
 import { createR2MIpc, createR2RIpc } from './_ipc';
-import { storageDir } from '../constants';
+import { filesRootDir } from '../constants';
 
 export interface FileJSON {
   id: string; // unique
@@ -29,7 +29,7 @@ export type FileID = {
 
 export interface ExportPDFOptions extends FileID {}
 
-export const filesDir = (...args: string[]) => path.join(storageDir, ...args);
+export const filesDir = (...args: string[]) => path.join(filesRootDir, ...args);
 
 export const files = new Map<string, FileJSON>();
 
@@ -64,7 +64,7 @@ export const filesR2MIpc = createR2MIpc({
           };
 
     const hash = crypto.createHash('sha256').update(image.buffer).digest('hex');
-    const filename = [image.name, hash, image.ext.replace(/^\./, '')].join('.');
+    const filename = [hash, image.ext.replace(/^\./, '')].join('.');
 
     const filepath = filesDir(id, 'assets', filename);
     await fs.outputFile(filepath, image.buffer);
