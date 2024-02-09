@@ -18,7 +18,7 @@
     "@mantine/notifications": "^7.5.2",
     "@mantine/spotlight": "^7.5.2",
     "@mantine/tiptap": "^7.5.2",
-    "@tabler/icons-react": "3.0.0-alpha.1",
+    "@tabler/icons-react": "2.47.0",
     "@tiptap/core": "^2.2.2",
     "@tiptap/extension-color": "^2.2.2",
     "@tiptap/extension-highlight": "^2.2.2",
