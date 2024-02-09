@@ -9,12 +9,12 @@
     "build:clean": "rm -rf electron/build && cp -r renderer/build/ electron/build",
     "package": "npm run build && rm -rf release && electron-builder",
     "pre-commit": "pnpm -r --workspace-concurrency=1  pre-commit",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "devDependencies": {
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
-    "prettier": "^3.0.3"
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
   },
   "engines": {
     "npm": "please-use-pnpm"
