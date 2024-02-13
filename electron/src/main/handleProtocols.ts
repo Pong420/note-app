@@ -1,7 +1,8 @@
 import path from 'node:path';
 import { format as URLFormat } from 'node:url';
 import { protocol, net } from 'electron';
-import { filesRootDir } from '../constants';
+import { filesRootDir, rendererDir } from '../constants';
+import { saveLog } from '../ipc/logs';
 
 // https://github.com/electron/electron/issues/19775#issuecomment-522289694
 // https://github.com/electron/electron/issues/19775#issuecomment-1001643667
@@ -17,11 +18,19 @@ const staticRegex = /^\/static/;
 // https://www.electronjs.org/docs/latest/api/net#netfetchinput-init
 async function serveLocalFiles(req: Request) {
   // eslint-disable-next-line prefer-const
-  let { pathname } = new URL(req.url);
+  let { protocol, hostname, pathname } = new URL(req.url);
 
   // decodeURIComponent is important if url contains whitespace
   // it not working with  new URL(decodeURIComponent(req.url));
   pathname = decodeURIComponent(pathname);
+
+  if (protocol === 'http:' && hostname === 'localhost') {
+    pathname = pathname.replace(/^\//, '');
+  } else if (protocol === 'file:' && pathname.startsWith(rendererDir)) {
+    pathname = pathname.slice(rendererDir.length);
+  }
+
+  void saveLog(new Error(JSON.stringify({ protocol, rendererDir, pathname }, null, 2)));
 
   if (staticRegex.test(pathname)) {
     const filepath = URLFormat({
