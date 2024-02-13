@@ -21,7 +21,12 @@ export interface EditorProps {
 export function Editor({ editor = null }: EditorProps) {
   return (
     <Container w="100%" className="__stretch">
-      <RichTextEditor className={classes.editor} editor={editor} withCodeHighlightStyles={false}>
+      <RichTextEditor
+        className={classes.editor}
+        editor={editor}
+        withCodeHighlightStyles={false}
+        withTypographyStyles={false}
+      >
         <RichTextEditor.Content className={classes.content}>
           <div id={tableMenuRefId}></div>
         </RichTextEditor.Content>
